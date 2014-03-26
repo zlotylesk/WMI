@@ -1,2 +1,27 @@
+#header {
+    height: 250px;
+}
 
+#top {
+    height: 50px;
+    background-color: #F36C68;
+}
 
+#pattern {
+    height: 200px;
+    background: url("../img/pattern.png");
+}
+#logo {
+    height: 200px;
+    background: url("../img/logo.png");
+}
+
+#search {
+    height: 50px;
+    background-color: #46CDF2;
+}
+
+#footer {
+    height: 40px;
+    background-color: #3F3A36;
+}
