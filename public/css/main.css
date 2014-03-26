@@ -1,10 +1,29 @@
 #header {
-    height: 250px;
+    height: 240px;
 }
 
 #top {
-    height: 50px;
+    height: 40px;
     background-color: #F36C68;
+}
+
+#top_menu a {
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+#top_menu a:hover {
+    color: yellow;
+}
+
+#top_menu ul li {
+   display: block;
+   float: right;
+   padding-left: 0;
+   margin: 10px 30px 10px 10px;
+   font-size: 15px;
+   font-weight: bold;
 }
 
 #pattern {
@@ -16,12 +35,44 @@
     background: url("../img/logo.png");
 }
 
-#search {
-    height: 50px;
-    background-color: #46CDF2;
+#navigation {
+    height: 40px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /*background-color: #46CDF2;*/
+}
+
+#navigation .col-md-4 {
+    padding: 3px 3px 3px 0;
 }
 
 #footer {
     height: 40px;
     background-color: #3F3A36;
 }
+
+/* Klasy */
+
+.footertext {
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-bottom: 0;
+    color: white;
+    font-size: 16px;
+}
+
+.white, .white a {
+  color: #fff;
+}
+
+.form-control {
+  padding-right: 30px;
+}
+
+.form-control + .glyphicon {
+  position: absolute;
+  right: 0;
+  padding: 11px 27px;
+}
+

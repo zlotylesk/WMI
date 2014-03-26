@@ -14,16 +14,33 @@
         <div class="container">
             <header id="header">
                 <div id="top">
-                    <div class="container"></div>
+                    <div class="row">
+                        <div id="top_menu" class="col-md-12">
+                            <ul>
+                                <li>
+                                    <i class="glyphicon glyphicon-off white"></i>
+                                    <a href="#">Zaloguj się</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div id="pattern">
                     <div id="logo">
                     </div>
                 </div>
             </header>
-            <div id="search"></div>
+            <div id="navigation">
+                <div class="col-md-4">
+                    <input class="form-control" type="search" placeholder="Wyszukaj..." />
+                    <i class="glyphicon glyphicon-search"></i>
+                </div>
+                <div class="col-md-8"></div>
+            </div>
             <?php echo $this->layout()->content; ?> 
-            <footer id="footer"></footer>
+            <footer id="footer">
+                <p class="footertext">TSI Projekt 2014 &copy; Wydziałowa tablica ogłoszeń</p>
+            </footer>
         </div>
     </body>
 </html>
