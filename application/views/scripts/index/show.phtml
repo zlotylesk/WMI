@@ -1,0 +1,11 @@
+<p>Temat: <strong><?php echo $this->object['topic'] ?></strong></p>
+<p><strong>Treść ogłoszenia:</strong></p>
+<p><strong>data utworzenia: <?php echo $this->object['datetime'] ?></strong></p>
+<p><?php echo $this->object['content'] ?></p>
+
+<div>
+    <a href="<?php echo $this->url(array('action' => 'index')) ?>"><button>Wstecz</button></a>
+    <a href="<?php echo $this->url(array('action' => 'edit')) ?>"><button>Edytuj</button></a>
+    <a href="<?php echo $this->url(array('action' => 'delete')) ?>"><button>Usuń</button></a>
+</div>
+
