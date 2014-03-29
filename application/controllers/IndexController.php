@@ -17,7 +17,7 @@ class IndexController extends Zend_Controller_Action
     public function createformAction()
     {
         $this->view->form = new Application_Form_Ads();
-        $url = $this->view->Url(array('action' => 'create'));
+        $url = $this->view->baseUrl(array('controller'=>'index', 'action' => 'create'));
         $this->view->form->setAction($url);
     }
 
@@ -25,7 +25,8 @@ class IndexController extends Zend_Controller_Action
     {
         if ($this->getRequest()->isPost()){
             $form = new Application_Form_Ads();
-            if ($form->isValid($this->getRequest()->getPost())){
+            if ($form->isValid($this->getRequest()->getPost()))
+            {
                 $data = $form->getValues();
                 $Ad = new Application_Model_DbTable_Ads();
                 $id = $Ad->insert($data);
@@ -76,18 +77,15 @@ class IndexController extends Zend_Controller_Action
         if(!$obj){
             throw new Zend_Controller_Action_Exception('Błędny adres', 404);
         }
-        
         if ($this->getRequest()->isPost()){
             $form = new Application_Form_Ads();
-            if ($form->isValid($this->getRequest()->getPost()))
-            {
+            if ($form->isValid($this->getRequest()->getPost())){
                 $data = $form->getValues();
                 $obj->setFromArray($data);
                 $obj->save();
                 return $this->_helper->redirector(
-                    'edit', 'index', NULL, array('id' => $id)                        
-                        );
-            }
+                    'edit', 'index', null, array('id' => $id)                        
+                        );}
             $this->view->form = $form;
         }
         else {

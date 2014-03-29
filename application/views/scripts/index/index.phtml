@@ -9,15 +9,12 @@
     <div><?php echo $ad['datetime'] ?></div> <!-- data zamieszczenia-->
     <!-- poniżej blok operacji -->
     <div>
-        <a href="<?php echo $this->baseUrl(
-                array('action' => 'show', 'id' => $ad['ad_id'])
-                ) ?>"><button>szczegóły</button></a>
-        <a href="<?php echo $this->baseUrl(
-                array('action' => 'edit', 'id' => $ad['ad_id'])
-                ) ?>"><button>edytuj</button></a>
-        <a href="<?php echo $this->baseUrl(
-                array('action' => 'delete', 'id' => $ad['ad_id'])
-                ) ?>"><button>usuń</button></a>
+        <a href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
+            <button>szczegóły</button></a>
+        <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">
+            <button>edytuj</button></a>
+        <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">
+            <button>usuń</button></a>
     </div>
 </div>
 <?php endforeach; ?>
