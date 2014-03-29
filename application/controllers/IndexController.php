@@ -17,7 +17,7 @@ class IndexController extends Zend_Controller_Action
     public function createformAction()
     {
         $this->view->form = new Application_Form_Ads();
-        $url = $this->view->baseUrl(array('controller'=>'index', 'action' => 'create'));
+        $url = $this->view->url(array('controller' => 'index', 'action' => 'create'));
         $this->view->form->setAction($url);
     }
 
@@ -30,9 +30,7 @@ class IndexController extends Zend_Controller_Action
                 $data = $form->getValues();
                 $Ad = new Application_Model_DbTable_Ads();
                 $id = $Ad->insert($data);
-                return $this->_helper->redirector(
-                        'edit', 'index', NULL, array('id' => $id
-                            ));
+                return $this->_helper->redirector('index');
             }
             $this->view->form = $form;
         }
@@ -46,7 +44,7 @@ class IndexController extends Zend_Controller_Action
         $id = $this->getRequest()->getParam('id');
         $Ad = new Application_Model_DbTable_Ads();
         $obj = $Ad->find($id)->current();
-        if ($obj) {
+        if (!$obj) {
             throw new Zend_Controller_Action_Exception('Błędny adres!', 404);
         }
         $obj->delete();
@@ -63,7 +61,7 @@ class IndexController extends Zend_Controller_Action
         }
         $this->view->form = new Application_Form_Ads();
         $this->view->form->populate($obj->toArray());
-        $url = $this->view->Url(array('action' => 'update', 'id' => $id));
+        $url = $this->view->url(array('action' => 'update', 'id' => $id));
         $this->view->form->setAction($url);
         $this->view->object = $obj;
         
@@ -83,9 +81,8 @@ class IndexController extends Zend_Controller_Action
                 $data = $form->getValues();
                 $obj->setFromArray($data);
                 $obj->save();
-                return $this->_helper->redirector(
-                    'edit', 'index', null, array('id' => $id)                        
-                        );}
+                return $this->_helper->redirector('index');
+            }
             $this->view->form = $form;
         }
         else {
@@ -104,16 +101,3 @@ class IndexController extends Zend_Controller_Action
         $this->view->object = $obj;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
