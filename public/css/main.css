@@ -7,6 +7,11 @@
     background-color: #F36C68;
 }
 
+#top_menu ul {
+    float: right;
+    margin: 0;
+}
+
 #top_menu a {
     color: #FFFFFF;
     text-decoration: none;
@@ -17,11 +22,15 @@
     color: yellow;
 }
 
+#top_menu ul:first-child {
+    float: left;
+}
+
 #top_menu ul li {
    display: block;
-   float: right;
+   float: left;
    padding-left: 0;
-   margin: 10px 30px 10px 10px;
+   margin: 10px 20px 10px 5px;
    font-size: 15px;
    font-weight: bold;
 }

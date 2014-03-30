@@ -16,12 +16,35 @@
                 <div id="top">
                     <div class="row">
                         <div id="top_menu" class="col-md-12">
+                            <ul style="padding-left: 5px">
+                                <li>
+                                    <a href="<?php echo $this->baseUrl(''); ?>">Strona główna</a>
+                                </li>
+                            </ul>
+                            <?php if($this->identity): ?>
+                            <ul>
+                                <li>
+                                    <p style="color:#FFA900"><i style="margin-right: 3px" class="icon-user icon-white"></i> 
+                                        Witaj, <?php echo $this->identity->username ?>
+                                    </p>
+                                </li>
+                                <li>
+                                    <i class="glyphicon glyphicon-plus white"></i>
+                                    <a href="<?php echo $this->url(array('action' => 'createaccount', 'controller' => 'admin')); ?>">Utwórz konto</a>
+                                </li>    
+                                <li>
+                                    <i class="glyphicon glyphicon-off white"></i>
+                                    <a href="<?php echo $this->url(array('action' => 'logout', 'controller' => 'auth')); ?>">Wyloguj się</a>
+                                </li>
+                            </ul>
+                            <?php else: ?>
                             <ul>
                                 <li>
                                     <i class="glyphicon glyphicon-off white"></i>
-                                    <a href="#">Zaloguj się</a>
+                                    <a href="<?php echo $this->url(array('action' => 'login', 'controller' => 'auth')); ?>">Zaloguj się</a>
                                 </li>
                             </ul>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
