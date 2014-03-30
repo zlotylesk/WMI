@@ -5,7 +5,12 @@ class IndexController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
+        $auth = Zend_Auth::getInstance();
+        $identity = $auth->getIdentity();
+
+        if ($identity) {
+            $this->view->identity = $identity;
+        }    
     }
 
     public function indexAction()
