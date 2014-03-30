@@ -1,0 +1,13 @@
+<?php /*<br /><br />
+<div id="view-content">
+	<p>View script for controller <b>Index</b> and script/action name <b>news</b></p>
+</div> */?>
+<?php foreach ($this->dane as $key => $value) {
+    ?>
+<div class="p-a h100 mw100 w100 mh100 slide id_<?php echo $key; ?> bg-c<?php echo $key; ?>">
+    <div class="s1"><h1><?php echo $value['topic']; ?></h1></div>
+    <p><?php echo $value['content']; ?></p>
+    <p><b><?php echo "autor"; ?></b><span class="marlr1"><?php echo $value['datetime']; ?></span></p>
+</div>
+<?php
+} 
