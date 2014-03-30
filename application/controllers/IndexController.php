@@ -100,4 +100,23 @@ class IndexController extends Zend_Controller_Action
         }
         $this->view->object = $obj;
     }
+
+    public function newsAction()
+    {
+        $this->_helper->layout()->setLayout('news');
+        $this->_helper->layout()->getView()->headLink()->offsetUnset(1);
+        $this->_helper->layout()->getView()->headLink()->offsetUnset(0);
+        $this->_helper->layout()->getView()->headLink()->appendStylesheet($this->_helper->layout()->getView()->baseUrl('/css/news.css')); 
+        $this->view->dane = $this->GetAds(7);
+    }
+    
+    function GetAds($range=5){
+        $r =  new Application_Model_DbTable_Ads();
+        return $r->fetchAll(null, null, $range);
+    }
+    
+    function GetAdsObject($range=5){
+        return (object) $this->GetAds($range); 
+    }
 }
+
