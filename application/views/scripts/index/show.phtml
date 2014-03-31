@@ -4,8 +4,16 @@
 <p><?php echo $this->object['content'] ?></p>
 
 <div>
-    <a href="<?php echo $this->url(array('action' => 'index')) ?>"><button>Wstecz</button></a>
-    <a href="<?php echo $this->url(array('action' => 'edit')) ?>"><button>Edytuj</button></a>
-    <a href="<?php echo $this->url(array('action' => 'delete')) ?>"><button>Usuń</button></a>
+    <a href="<?php echo $this->url(array('action' => 'index')) ?>">
+        <button>Wstecz</button>
+    </a>
+    <?php if($this->identity): ?>
+    <a href="<?php echo $this->url(array('action' => 'edit')) ?>">
+        <button>Edytuj</button>
+    </a>
+    <a href="<?php echo $this->url(array('action' => 'delete')) ?>">
+        <button>Usuń</button>
+    </a>
+    <?php endif; ?>
 </div>
 
