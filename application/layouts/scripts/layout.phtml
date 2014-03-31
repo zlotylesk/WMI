@@ -16,30 +16,30 @@
                 <div id="top">
                     <div class="row">
                         <div id="top_menu" class="col-md-12">
-                            <ul style="padding-left: 5px" class="clearCSS pad5p martb6p">
-                                <li class="padlr8p marlr6p">
+                            <ul style="padding-left: 5px">
+                                <li>
                                     <a href="<?php echo $this->baseUrl(''); ?>">Strona główna</a>
                                 </li>
                             </ul>
                             <?php if($this->identity): ?>
-                            <ul class="bg-c2 pad5p clearCSS mar6p br20">
-                                <li class="padlr8p marlr6p br20 bg-c6 fc-f">
-                                    <p><i style="margin-right: 3px" class="icon-user icon-white"></i>  <!-- <p style="color:#FFA900"> -->
+                            <ul>
+                                <li>
+                                    <p style="color:#FFA900"><i style="margin-right: 3px" class="icon-user icon-white"></i> 
                                         Witaj, <?php echo $this->identity->username ?>
                                     </p>
                                 </li>
-                                <li class="padlr8p marlr6p bg-c5 br20">
+                                <li>
                                     <i class="glyphicon glyphicon-plus white"></i>
                                     <a href="<?php echo $this->url(array('action' => 'createaccount', 'controller' => 'admin')); ?>">Utwórz konto</a>
                                 </li>    
-                                <li class="padlr8p marlr6p bg-c4 br20">
+                                <li>
                                     <i class="glyphicon glyphicon-off white"></i>
                                     <a href="<?php echo $this->url(array('action' => 'logout', 'controller' => 'auth')); ?>">Wyloguj się</a>
                                 </li>
                             </ul>
                             <?php else: ?>
-                            <ul class="bg-c2 pad5p clearCSS mar6p br20">
-                                <li class="padlr8p marlr6p bg-c5 br20">
+                            <ul>
+                                <li>
                                     <i class="glyphicon glyphicon-off white"></i>
                                     <a href="<?php echo $this->url(array('action' => 'login', 'controller' => 'auth')); ?>">Zaloguj się</a>
                                 </li>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div id="pattern" class="clf">
+                <div id="pattern">
                     <div id="logo">
                     </div>
                 </div>

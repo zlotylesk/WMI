@@ -3,7 +3,7 @@
 }
 
 #top {
-    /* height: 40px; kick it!*/
+    height: 40px;
     background-color: #F36C68;
 }
 
@@ -84,25 +84,15 @@
   right: 0;
   padding: 11px 27px;
 }
-.clearCSS *{margin: 0 !important; padding: 0 !important; border: 0 !important;}
-.fl{float: left;}
-.fr{float: right;}
-.clf{clear: both;}
+
 .br20{border-radius: 20px;}
 .br10{border-radius: 10px;}
 .pad20p{padding: 20px;}
 .pad10p{padding: 10px;}
-.pad5p{padding: 5px;}
-.pad3p{padding: 3px;}
-.pad2p{padding: 2px;}
 .padlr20p{padding: 0 20px;}
-.padlr8p{padding: 0 8px !important;}
-.mar6p{margin: 6px !important;}
 .mar10p{margin: 10px;}
 .mar20p{margin: 20px;}
 .martb10p{margin: 10px 0;}
-.martb6p{margin: 6px 0 !important;}
-.marlr6p{margin: 0 6px !important;}
 .fw-b{font-weight: bold;}
 .d-b{display: block;}
 .d-i{display: inline;}
@@ -119,6 +109,3 @@
 .bg-c6{background-color: #7392af;}
 .bs5{box-shadow: 1px 1px 5px #000;}
 .fs20p{font-size: 20px;}
-.fc-f{color: #fff;}
-.vam{vertical-align: middle;}
-.lhi{line-height: inherit;}
