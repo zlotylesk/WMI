@@ -16,11 +16,15 @@ class Application_Form_Login extends Zend_Form
                     'required' => true,
                     'filters' => array('StringTrim'),
                     'validators' => array(array('notEmpty', true,
-                            array('messages' => array('isEmpty' => 'Proszę wpisać login')
-                            ))),
+                        array('messages' => array('isEmpty' => 'Proszę wpisać login'))),
+                        array('StringLength', true, array('min' => 5, 'max' => 20)),
+                        ),
                  )
-                
-        );
+                );
+        $this->username->getValidator('StringLength')->setMessages(array(
+        Zend_Validate_StringLength::TOO_LONG => 'Login za długi',
+        Zend_Validate_StringLength::TOO_SHORT => 'Login za krótki',
+        ));
         
         //Hasło
         $this->addElement(
@@ -30,10 +34,15 @@ class Application_Form_Login extends Zend_Form
                     'label' => 'Hasło',
                     'required' => true,
                     'validators' => array(array('notEmpty', true,
-                            array('messages' => array('isEmpty' => 'Proszę wpisać hasło')
-                            ))),
+                        array('messages' => array('isEmpty' => 'Proszę wpisać hasło'))),
+                        array('StringLength', true, array('min' => 4, 'max' => 34)),
+                        ),
                 )
          );
+        $this->password->getValidator('StringLength')->setMessages(array(
+        Zend_Validate_StringLength::TOO_LONG => 'Hasło za długi',
+        Zend_Validate_StringLength::TOO_SHORT => 'Hasło za krótki',
+        ));
          
          //Przycisk logowania
         $this->addElement(
