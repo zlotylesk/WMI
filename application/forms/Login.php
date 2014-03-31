@@ -17,7 +17,7 @@ class Application_Form_Login extends Zend_Form
                     'filters' => array('StringTrim'),
                     'validators' => array(array('notEmpty', true,
                         array('messages' => array('isEmpty' => 'Proszę wpisać login'))),
-                        array('StringLength', true, array('min' => 5, 'max' => 20)),
+                        array('StringLength', true, array('min' => 3, 'max' => 20)),
                         ),
                  )
                 );
