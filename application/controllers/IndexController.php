@@ -24,6 +24,11 @@ class IndexController extends Zend_Controller_Action
         $this->view->form = new Application_Form_Ads();
         $url = $this->view->url(array('controller' => 'index', 'action' => 'create'));
         $this->view->form->setAction($url);
+        // datepicker begin
+        $this->_helper->layout()->getView()->headScript()->appendFile($this->_helper->layout()->getView()->baseUrl('/js/jquery-ui-1.10.4.custom.min.js'));
+        $this->_helper->layout()->getView()->headScript()->appendFile($this->_helper->layout()->getView()->baseUrl('/js/exp.js')); // datepicker dla id="exp"
+        $this->_helper->layout()->getView()->headLink()->appendStylesheet($this->_helper->layout()->getView()->baseUrl('/css/smoothness/jquery-ui-1.10.4.custom.min.css'));
+        // datepicker end
     }
 
     public function createAction()
@@ -113,6 +118,9 @@ class IndexController extends Zend_Controller_Action
         $this->_helper->layout()->getView()->headLink()->offsetUnset(0);
         $this->_helper->layout()->getView()->headLink()->appendStylesheet($this->_helper->layout()->getView()->baseUrl('/css/news.css')); 
         $this->view->dane = $this->GetAds(7);
+        //$ah = new Application_Model_NewsHelper_AnimationSetup();
+        //$this->view->style = $ah->GetAnimation($this->view->dane, 10, 1, "slide");
+        $this->view->delay=11;
     }
     function GetAds($range=5){
         $r =  new Application_Model_DbTable_Ads();
