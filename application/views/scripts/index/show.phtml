@@ -1,9 +1,13 @@
-<p>Temat: <strong><?php echo $this->object['topic'] ?></strong></p>
-<p><strong>Treść ogłoszenia:</strong></p>
-<p><strong>data utworzenia: <?php echo $this->object['datetime'] ?></strong></p>
+<div class="br20 bg-c4 pad10p martb10p ">
+    <!-- Poniższe jest kompletnie nie przemyślane pod względem struktury treści strony. -->
+<p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b">Temat: <strong><?php echo $this->object['topic'] ?></strong></p>
+<p class="pad20p mar10p  bg-c1 bs5 br10"><strong>Treść ogłoszenia:&nbsp;<br></strong><?php echo $this->object['content'] ?></p>
+<p class="padlr20p bg-c2 mar10p br10"><strong>data utworzenia: <?php echo $this->object['datetime'] ?></strong></p>
+<?php /* Przenoszę poniższe wyżej do treści ogłoszenia
 <p><?php echo $this->object['content'] ?></p>
+*/ ?>
 
-<div>
+<div class="mar10p">
     <a href="<?php echo $this->url(array('action' => 'index')) ?>">
         <button>Wstecz</button>
     </a>
@@ -15,5 +19,6 @@
         <button>Usuń</button>
     </a>
     <?php endif; ?>
+</div>
 </div>
 
