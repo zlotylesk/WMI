@@ -115,11 +115,14 @@ class IndexController extends Zend_Controller_Action
         $this->_helper->layout()->setLayout('news');
         $this->_helper->layout()->getView()->headLink()->offsetUnset(1);
         $this->_helper->layout()->getView()->headLink()->offsetUnset(0);
+        $this->AddJs('news');
         $this->AddCSS("news");
-        $this->view->dane = $this->GetAds(7);
-        //$ah = new Application_Model_NewsHelper_AnimationSetup();
-        //$this->view->style = $ah->GetAnimation($this->view->dane, 10, 1, "slide");
-        $this->view->delay=11;
+        $a = $this->_getAllParams();
+        if(is_numeric($a['nr'])){
+            $this->view->dane = $this->GetAds($a['nr']);
+        }else{
+            $this->view->dane = $this->GetAds(10);
+        }
     }
     function GetAds($range=5){
         $r =  new Application_Model_DbTable_Ads();
