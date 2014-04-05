@@ -25,9 +25,8 @@ class IndexController extends Zend_Controller_Action
         $url = $this->view->url(array('controller' => 'index', 'action' => 'create'));
         $this->view->form->setAction($url);
         // datepicker begin
-        $this->_helper->layout()->getView()->headScript()->appendFile($this->_helper->layout()->getView()->baseUrl('/js/jquery-ui-1.10.4.custom.min.js'));
-        $this->_helper->layout()->getView()->headScript()->appendFile($this->_helper->layout()->getView()->baseUrl('/js/exp.js')); // datepicker dla id="exp"
-        $this->_helper->layout()->getView()->headLink()->appendStylesheet($this->_helper->layout()->getView()->baseUrl('/css/smoothness/jquery-ui-1.10.4.custom.min.css'));
+        $this->Add_Js(array('jquery-ui-1.10.4.custom.min','exp'));
+        $this->AddCSS("jquery-ui-1.10.4.custom.min",'/smoothness');
         // datepicker end
     }
 
@@ -116,11 +115,14 @@ class IndexController extends Zend_Controller_Action
         $this->_helper->layout()->setLayout('news');
         $this->_helper->layout()->getView()->headLink()->offsetUnset(1);
         $this->_helper->layout()->getView()->headLink()->offsetUnset(0);
-        $this->_helper->layout()->getView()->headLink()->appendStylesheet($this->_helper->layout()->getView()->baseUrl('/css/news.css')); 
-        $this->view->dane = $this->GetAds(7);
-        //$ah = new Application_Model_NewsHelper_AnimationSetup();
-        //$this->view->style = $ah->GetAnimation($this->view->dane, 10, 1, "slide");
-        $this->view->delay=11;
+        $this->AddJs('news');
+        $this->AddCSS("news");
+        $a = $this->_getAllParams();
+        if(is_numeric($a['nr'])){
+            $this->view->dane = $this->GetAds($a['nr']);
+        }else{
+            $this->view->dane = $this->GetAds(10);
+        }
     }
     function GetAds($range=5){
         $r =  new Application_Model_DbTable_Ads();
@@ -129,5 +131,32 @@ class IndexController extends Zend_Controller_Action
     
     function GetAdsObject($range=5){
         return (object) $this->GetAds($range); 
+    }
+    function Add_CSS($css_array) {
+        if(is_array($css_array)){
+            foreach ($css_array as $css) {
+                $this->AddCSS($css, "");
+            }
+        }elseif (is_string($css_array)) {
+            $this->AddCSS($css_array, "");
+        }
+    }
+    
+    function AddCSS($css_name="",$sub_path="") {
+        $this->_helper->layout()->getView()->headLink()->appendStylesheet($this->_helper->layout()->getView()->baseUrl("/css$sub_path/$css_name.css")); 
+    }
+    
+    function AddJs($js_name="",$sub_path=""){
+        $this->_helper->layout()->getView()->headScript()->appendFile($this->_helper->layout()->getView()->baseUrl("/js$sub_path/$js_name.js"));
+    }
+    
+    function Add_Js($js_array) {
+        if(is_array($js_array)){
+            foreach ($js_array as $js) {
+                $this->AddJs($js,"");
+            }
+        }elseif(is_string($js_array)){
+            $this->AddJs($js_array,"");
+        }
     }
 }
