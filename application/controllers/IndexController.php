@@ -68,7 +68,7 @@ class IndexController extends Zend_Controller_Action
                     ->join(array('u' => 'users'), 'a.author = u.user_id')
                     ->group('a.ad_id')
                     ->order('a.ad_id ASC')
-                    ->where('LOWER(author) LIKE LOWER(?)', $query);
+                    ->where('LOWER(u.username) LIKE LOWER(?)', $query);
 
             $this->view->search = $db->fetchAll($search);
         }
@@ -113,11 +113,15 @@ class IndexController extends Zend_Controller_Action
 
     public function createAction()
     {
+        $auth = Zend_Auth::getInstance();
+        $identity = $auth->getIdentity();
+        
         if ($this->getRequest()->isPost()){
             $form = new Application_Form_Ads();
             if ($form->isValid($this->getRequest()->getPost()))
             {
                 $data = $form->getValues();
+                $data['author'] = $identity->user_id;
                 $Ad = new Application_Model_DbTable_Ads();
                 $id = $Ad->insert($data);
                 return $this->_helper->redirector('index');
