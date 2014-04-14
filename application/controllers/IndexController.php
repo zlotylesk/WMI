@@ -20,9 +20,9 @@ class IndexController extends Zend_Controller_Action
         // obiekt z filtrem na slideshow
         $this->view->slideshow = $Ad->fetchAll(null,null,10);
         // kategoria kadry
-        $this->view->faculty_ads = $this->GetAdsCat();
+        $this->view->faculty_ads = $this->GetAdsFor('employee','DESC',4);
         // kategoria studentów
-        $this->view->students_ads = $this->GetAdsCat(4, 1);
+        $this->view->students_ads = $this->GetAdsFor('user','DESC', 4);
     }
     
     public function searchAction()
@@ -80,28 +80,30 @@ class IndexController extends Zend_Controller_Action
     
     public function showemployeeadsAction()
     {
-        $db = Zend_Db_Table::getDefaultAdapter();
-        
-        $employee = 'employee';
-        $ads = $db->select()
-                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
-                ->join(array('u' => 'users'), 'a.author = u.user_id')
-                ->where('u.role = ?', $employee);
-            
-        $this->view->ads = $db->fetchAll($ads);
+//        $db = Zend_Db_Table::getDefaultAdapter();
+//        
+//        $employee = 'employee';
+//        $ads = $db->select()
+//                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+//                ->join(array('u' => 'users'), 'a.author = u.user_id')
+//                ->where('u.role = ?', $employee);
+//            
+//        $this->view->ads = $db->fetchAll($ads);
+        $this->view->ads = $this->GetAdsFor();
     }
     
     public function showstudentadsAction()
     {
-        $db = Zend_Db_Table::getDefaultAdapter();
-        
-        $student = 'user';
-        $ads = $db->select()
-                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
-                ->join(array('u' => 'users'), 'a.author = u.user_id')
-                ->where('u.role = ?', $student);
-            
-        $this->view->ads = $db->fetchAll($ads);
+//        $db = Zend_Db_Table::getDefaultAdapter();
+//        
+//        $student = 'user';
+//        $ads = $db->select()
+//                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+//                ->join(array('u' => 'users'), 'a.author = u.user_id')
+//                ->where('u.role = ?', $student);
+//            
+//        $this->view->ads = $db->fetchAll($ads);
+        $this->view->ads = $this->GetAdsFor('user');
     }
 
     public function createformAction()
@@ -249,14 +251,14 @@ class IndexController extends Zend_Controller_Action
         }
     }
     
-    function GetAdsCat($range = 4, $category = 0) {
-        $r =  new Application_Model_DbTable_Ads();
-        $ads = $r->fetchAll();
-        $output = array();
-        foreach ($ads as $k => $v) {
-            if($k == $range) { break;}
-            if($v["category"]==$category) $output[]=$v;
-        }
-        return $output;
+    function GetAdsFor($role="employee",$order='DESC', $range=null) {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $ads = $db->select()
+                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+                ->join(array('u' => 'users'), 'a.author = u.user_id')
+                ->where('u.role = ?', $role)
+                ->order("ad_id $order");
+        if($range) $ads->limit ($range);
+        return $db->fetchAll($ads);
     }
 }
