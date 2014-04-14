@@ -1,4 +1,39 @@
 <?php $this->headTitle('Strona główna'); ?>
+<?php /* --- bootstrap banner carousel --- */ ?>
+<div id="carousel-wmi-captions" class="carousel slide h540p" data-ride="carousel">
+  <!-- Indicators --><?php /* --- kropeczki, których Leszek nie chce ;) ---*/
+  /*
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-wmi-captions" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-wmi-captions" data-slide-to="1"></li>
+    <li data-target="#carousel-wmi-captions" data-slide-to="2"></li>
+  </ol>
+*/ 
+  ?>
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+      <?php        foreach ($this->slideshow as $k => $s){ ?>
+    <div class="item <?php if ($k==0) echo "active"; ?> bg-c<?php echo rand(1,6); ?>">
+        <?php /* --- tło w postaci grafiki --- */ ?>
+        <img class="" src="./img/overlay.png" alt="">
+      <div class="carousel-caption h540p">
+          <h1 class="mart120p"><?php echo $s['topic'] ?></h1>
+          <h3><?php echo $s['content'] ?></h3>
+      </div>
+    </div>
+      <?php } ?>
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-wmi-captions" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#carousel-wmi-captions" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+</div>
+
+<?php /* --- carousel stop ---*/?>
 
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
     <strong>Najnowsze ogłoszenia</strong>

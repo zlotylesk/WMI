@@ -17,6 +17,8 @@ class IndexController extends Zend_Controller_Action
     {
         $Ad = new Application_Model_DbTable_Ads();
         $this->view->ads = $Ad->fetchAll();
+        // obiekt z filtrem na slideshow
+        $this->view->slideshow = $Ad->fetchAll(null,null,10);
     }
 
     public function createformAction()
