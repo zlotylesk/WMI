@@ -49,18 +49,21 @@ class Application_Form_CreateAccount extends Zend_Form
                     'label' => 'Hasło',
                     'required' => true,    
                     'validators' => array(
-                        array('notEmpty', true,
-                        array('messages' => array('isEmpty'=>'Proszę wpisać hasło i je potwierdzić')
-                        )),
-                        array('stringLength', true, 
-                        array('min' => 3, 'max' => 20, 'messages'=>
-                        array('stringLengthTooShort' => 'Hasło musi składać się z co najmniej 3 znaków',
-                              'stringLengthTooLong' => 'Hasło musi składać się z maksymalnie 20 znaków',
+                        array('notEmpty', true),
+                        array('stringLength', true), 
+                        array('min' => 3, 'max' => 20)
                         )
-                        )),
-                     ),
                 )
          );
+        
+        $this->password->getValidator('notEmpty')->setMessages(array(
+        Zend_Validate_NotEmpty::IS_EMPTY => 'proszę wpisać hasło',
+        Zend_Validate_NotEmpty::INVALID => 'proszę wpisac poprawne hasło'
+        ));
+        $this->password->getValidator('stringLength')->setMessages(array(
+        Zend_Validate_StringLength::TOO_SHORT => 'Hasło musi składać się z co najmniej 3 znaków',
+        Zend_Validate_StringLength::TOO_LONG => 'Hasło musi składać sięz maksymalnie 20 znaków'
+        ));
          
          //Powtórz hasło
          $this->addElement(
