@@ -13,8 +13,9 @@ class Application_Form_Ads extends Zend_Form
                     'label' => 'Temat',
                     'required' => true,
                     'filters' => array('StringTrim'),
-                    'validators' => array(array('notEmpty', true,
-                        array('messages' => array('isEmpty' => 'Ogłoszenie musi mieć temat'))),
+                    'validators' => array(
+                        array('NotEmpty', true),
+                        array('Alnum', true),
                         array('StringLength', true, array('min' => 4, 'max' => 90)),
                         ),
                  )
@@ -23,6 +24,13 @@ class Application_Form_Ads extends Zend_Form
         Zend_Validate_StringLength::TOO_LONG => 'Temat za długi',
         Zend_Validate_StringLength::TOO_SHORT => 'Temat za krótki',
         ));
+        $this->topic->getValidator('NotEmpty')->setMessages(array(
+        Zend_Validate_NotEmpty::IS_EMPTY => 'Temat nie może być pusty' 
+        ));
+        $this->topic->getValidator('Alnum')->setMessages(array(
+        Zend_Validate_Alnum::NOT_ALNUM => 'Można używać tylko liter i cyfr'
+        ));
+        
         $this->addElement(
                 'text', 
                 'content', 
@@ -30,14 +38,24 @@ class Application_Form_Ads extends Zend_Form
                     'label' => 'Treść Ogłoszenia:',
                     'required' => true,
                     'filters' => array('StringTrim'),
-                    'validators' => array(array('notEmpty', true,
-                        array('messages' => array('isEmpty' => 'Ogłoszenie musi zawierać treść'))),
-                        array('StringLength', true, array('min' => 4)))
-  
+                    'validators' => array(
+                        array('NotEmpty',true),
+                        array('StringLength', true, array('min' => 4)),
+                        array('Alnum',true)
+                    )
                     ));
         $this->content->getValidator('StringLength')->setMessages(array(
-        Zend_Validate_StringLength::TOO_SHORT => 'Treść musi być dłuższa niź 4 znaki',
+        Zend_Validate_StringLength::TOO_SHORT => 'Treść musi być dłuższa niź 4 znaki'
         ));
+        $this->content->getValidator('NotEmpty')->setMessages(array(
+        Zend_Validate_NotEmpty::IS_EMPTY => 'Treść nie moze byc pusta',
+        Zend_Validate_NotEmpty::INVALID => 'Treść ogłoszenia jest niepoprawna'
+        ));
+        $this->cpntent->getValidator('Alnum')->setMessages(array(
+        Zend_Validate_Alnum::NOT_ALNUM => 'Treść zawiera niedopuszczalne znaki',
+        Zend_Validate_Alnum::INVALID => 'Treść zawiera niedopuszczalne znaki'
+        ));
+        
         $this->addElement(
                 'text', 
                 'exp', 
@@ -48,7 +66,6 @@ class Application_Form_Ads extends Zend_Form
                     array('NotEmpty', true),
                     array('Date', true),
                     array('Between', true, array('min' => '2014-01-01','max'=>'2099-01-01')))
-            
                     ));
         $this->exp->getValidator('Date')->setMessages(array(
             Zend_Validate_Date::FALSEFORMAT => 'Poprawny format daty to Rok-Miesiąc-Dzień',
@@ -62,4 +79,3 @@ class Application_Form_Ads extends Zend_Form
 
 
 }
-
