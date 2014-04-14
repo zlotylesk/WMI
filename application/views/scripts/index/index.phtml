@@ -33,8 +33,51 @@
   </a>
 </div>
 
-<?php /* --- carousel stop ---*/?>
-
+<?php /* --- carousel stop --- */ ?>
+<?php /* --- layout indexu --- */ ?>
+<hr>
+<h3>Ogłoszenia pracowników</h3>
+<hr>
+<?php foreach($this->faculty_ads as $ad): ?>
+<div class="h360p w40 fl p-r mar5 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
+    <a class="d-b w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
+        <div class="padlr20p"><?php /* --- topic & content --- */ ?>
+            <h4><?php echo $ad['topic'] ?></h4>
+            <p><?php echo $ad['content'] ?></p>
+        </div>
+    </a>
+    <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
+        <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
+    <?php if($this->identity): ?><?php /* --- edit & delete--- */ ?>
+        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
+        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
+    <?php endif; ?>
+    </div>
+</div>
+<?php endforeach; ?>
+<hr class="clf">
+<h3>Ogłoszenia studentów</h3>
+<hr>
+<?php foreach($this->students_ads as $ad): ?>
+<div class="h360p w40 fl p-r mar5 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
+    <a class="d-b w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
+        <div class="padlr20p"><?php /* --- topic & content --- */ ?>
+            <h4><?php echo $ad['topic'] ?></h4>
+            <p><?php echo $ad['content'] ?></p>
+        </div>
+    </a>
+    <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
+        <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
+    <?php if($this->identity): ?><?php /* --- edit & delete--- */ ?>
+        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
+        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
+    <?php endif; ?>
+    </div>
+</div>
+<?php endforeach; ?>
+<hr class="clf">
+<?php /*
+ * ---- OLD SHIT IS OLD ---- stary layout indexu!!!! ----
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
     <strong>Najnowsze ogłoszenia</strong>
 </p> 
@@ -71,3 +114,4 @@
     <button>Dodaj nowy rekord</button>
 </a>
 <?php endif; ?>
+ */ ?>

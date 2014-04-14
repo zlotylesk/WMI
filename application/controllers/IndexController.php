@@ -19,6 +19,10 @@ class IndexController extends Zend_Controller_Action
         $this->view->ads = $Ad->fetchAll();
         // obiekt z filtrem na slideshow
         $this->view->slideshow = $Ad->fetchAll(null,null,10);
+        // kategoria kadry
+        $this->view->faculty_ads = $this->GetAdsCat();
+        // kategoria studentów
+        $this->view->students_ads = $this->GetAdsCat(4, 1);
     }
 
     public function createformAction()
@@ -160,5 +164,16 @@ class IndexController extends Zend_Controller_Action
         }elseif(is_string($js_array)){
             $this->AddJs($js_array,"");
         }
+    }
+    
+    function GetAdsCat($range = 4, $category = 0) {
+        $r =  new Application_Model_DbTable_Ads();
+        $ads = $r->fetchAll();
+        $output = array();
+        foreach ($ads as $k => $v) {
+            if($k == $range) { break;}
+            if($v["category"]==$category) $output[]=$v;
+        }
+        return $output;
     }
 }
