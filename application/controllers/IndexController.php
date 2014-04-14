@@ -24,6 +24,85 @@ class IndexController extends Zend_Controller_Action
         // kategoria studentów
         $this->view->students_ads = $this->GetAdsCat(4, 1);
     }
+    
+    public function searchAction()
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+
+        $query = '';
+        $this->view->searchValue = $query;
+        
+        if (isset($_GET['searchValue'])) 
+        {
+            $searchValue = $_GET['searchValue'];
+            $tmp = explode(' ', $searchValue);
+            $query = '%'.implode('%', $tmp).'%';
+            
+            $this->view->searchValue = $searchValue;
+        }
+        
+        if ($_GET['filter'] == 'topic')
+        {   
+            $search = $db->select()
+                    ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+                    ->join(array('u' => 'users'), 'a.author = u.user_id')
+                    ->group('a.ad_id')
+                    ->order('a.ad_id ASC')
+                    ->where('LOWER(topic) LIKE LOWER(?)', $query);
+
+            $this->view->search = $db->fetchAll($search);
+        }
+        
+        elseif ($_GET['filter'] == 'content') 
+        {
+            $search = $db->select()
+                    ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+                    ->join(array('u' => 'users'), 'a.author = u.user_id')
+                    ->group('a.ad_id')
+                    ->order('a.ad_id ASC')
+                    ->where('LOWER(content) LIKE LOWER(?)', $query);
+
+            $this->view->search = $db->fetchAll($search);
+        }
+        
+        else
+        {
+            $search = $db->select()
+                    ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+                    ->join(array('u' => 'users'), 'a.author = u.user_id')
+                    ->group('a.ad_id')
+                    ->order('a.ad_id ASC')
+                    ->where('LOWER(u.username) LIKE LOWER(?)', $query);
+
+            $this->view->search = $db->fetchAll($search);
+        }
+    }
+    
+    public function showemployeeadsAction()
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        
+        $employee = 'employee';
+        $ads = $db->select()
+                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+                ->join(array('u' => 'users'), 'a.author = u.user_id')
+                ->where('u.role = ?', $employee);
+            
+        $this->view->ads = $db->fetchAll($ads);
+    }
+    
+    public function showstudentadsAction()
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        
+        $student = 'user';
+        $ads = $db->select()
+                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+                ->join(array('u' => 'users'), 'a.author = u.user_id')
+                ->where('u.role = ?', $student);
+            
+        $this->view->ads = $db->fetchAll($ads);
+    }
 
     public function createformAction()
     {
@@ -38,11 +117,15 @@ class IndexController extends Zend_Controller_Action
 
     public function createAction()
     {
+        $auth = Zend_Auth::getInstance();
+        $identity = $auth->getIdentity();
+        
         if ($this->getRequest()->isPost()){
             $form = new Application_Form_Ads();
             if ($form->isValid($this->getRequest()->getPost()))
             {
                 $data = $form->getValues();
+                $data['author'] = $identity->user_id;
                 $Ad = new Application_Model_DbTable_Ads();
                 $id = $Ad->insert($data);
                 return $this->_helper->redirector('index');

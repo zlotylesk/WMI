@@ -47,12 +47,30 @@
 #navigation {
     height: 40px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
     /*background-color: #46CDF2;*/
 }
 
 #navigation .col-md-4 {
     padding: 3px 3px 3px 0;
+}
+
+#navigation ul {
+    float: right;
+}
+
+#navigation ul li {
+    display: block;
+    float: left;
+    margin-right: 15px;
+    line-height: 40px;
+    color: #FFFFFF;
+}
+
+#navigation a {
+    font-weight: bold;
+    color: #2219B2;
+    text-decoration: none;
 }
 
 #footer {

@@ -55,10 +55,22 @@
             </header>
             <div id="navigation">
                 <div class="col-md-4">
-                    <input class="form-control" type="search" placeholder="Wyszukaj..." />
-                    <i class="glyphicon glyphicon-search"></i>
+                    <form action="<?php echo $this->url(array('action' => 'search', 'controller' => 'index')); ?>" method="GET">            
+                        <input name="searchValue" class="form-control" type="search" placeholder="Wyszukaj..." />
+                        <i class="glyphicon glyphicon-search"></i>
+                        <select name="filter">
+                            <option value="topic" selected="selected">Temat</option>
+                            <option value="content">Treść</option>
+                            <option value="author">Autor</option>
+                        </select> 
+                    </form>
                 </div>
-                <div class="col-md-8"></div>
+                <div class="col-md-8">
+                    <ul style="float: right">  
+                        <li><a href="<?php echo $this->url(array('action' => 'showemployeeads', 'controller' => 'index')); ?>">Ogłoszenia pracowników</a></li>
+                        <li><a href="<?php echo $this->url(array('action' => 'showstudentads', 'controller' => 'index')); ?>">Ogłoszenia studentów</a></li> 
+                    </ul>
+                </div>
             </div>
             <?php echo $this->layout()->content; ?> 
             <footer id="footer">

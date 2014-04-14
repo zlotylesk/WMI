@@ -15,11 +15,11 @@ class AdminController extends Zend_Controller_Action
 
     public function createaccountAction()
     {
-        $auth = Zend_Auth::getInstance();
+        /*$auth = Zend_Auth::getInstance();
         
         if ($auth->hasIdentity()) {
             $this->_helper->redirector->goToSimple('index', 'index');
-        }
+        }*/
         
         $this->view->headTitle('Utwórz konto');
 
@@ -30,7 +30,6 @@ class AdminController extends Zend_Controller_Action
             if ($form->isValid($post)) {
                 $post['salt'] = sha1(uniqid() + microtime());
                 $post['password'] = sha1($post['salt'].$post['password']);
-                $post['role'] = 'user';
                 
                 $users = new Application_Model_DbTable_Users();
                 $users->createRow()->setFromArray($post)->save();

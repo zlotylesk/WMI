@@ -1,0 +1,31 @@
+<br>
+<p class="lead" style="color: #3a87ad; text-decoration: underline">
+    <strong>Ogłoszenia studentów</strong>
+</p> 
+
+<?php foreach ($this->ads as $item): ?>
+<div class="br20 bg-c4 pad10p martb10p ">
+    <!-- Poniższe jest kompletnie nie przemyślane pod względem struktury treści strony. -->
+<p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b">Temat: <strong><?php echo $item['topic'] ?></strong></p>
+<p class="pad20p mar10p  bg-c1 bs5 br10"><strong>Treść ogłoszenia:&nbsp;<br></strong><?php echo $item['content'] ?></p>
+<p class="padlr20p bg-c2 mar10p br10"><strong>data utworzenia: <?php echo $item['datetime'] ?></strong></p>
+<?php /* Przenoszę poniższe wyżej do treści ogłoszenia
+<p><?php echo $this->object['content'] ?></p>
+*/ ?>
+
+<div class="mar10p">
+    <a href="<?php echo $this->url(array('action' => 'index')) ?>">
+        <button>Wstecz</button>
+    </a>
+    <?php if($this->identity): ?>
+    <a href="<?php echo $this->url(array('action' => 'edit')) ?>">
+        <button>Edytuj</button>
+    </a>
+    <a href="<?php echo $this->url(array('action' => 'delete')) ?>">
+        <button>Usuń</button>
+    </a>
+    <?php endif; ?>
+</div>
+</div>
+<?php endforeach; ?>
+
