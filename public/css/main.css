@@ -55,6 +55,24 @@
     padding: 3px 3px 3px 0;
 }
 
+#navigation ul {
+    float: right;
+}
+
+#navigation ul li {
+    display: block;
+    float: left;
+    margin-right: 15px;
+    line-height: 40px;
+    color: #FFFFFF;
+}
+
+#navigation a {
+    font-weight: bold;
+    color: #2219B2;
+    text-decoration: none;
+}
+
 #footer {
     height: 40px;
     background-color: #3F3A36;

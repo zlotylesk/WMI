@@ -105,6 +105,18 @@ class Application_Form_CreateAccount extends Zend_Form
                 )
                 
         );
+        
+        $this->addElement(
+                'select', 
+                'role',
+                array(
+                    'label' => 'Wybierz rolę',
+                    'multiOptions' => array(
+                        'user' => 'Student',
+                        'employee' => 'Pracownik'
+                    )
+                ));
+
             
         //Przycisk tworzenia konta
         $this->addElement(
