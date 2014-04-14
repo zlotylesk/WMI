@@ -20,6 +20,59 @@ class IndexController extends Zend_Controller_Action
         // obiekt z filtrem na slideshow
         $this->view->slideshow = $Ad->fetchAll(null,null,10);
     }
+    
+    public function searchAction()
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+
+        $query = '';
+        $this->view->searchValue = $query;
+        
+        if (isset($_GET['searchValue'])) 
+        {
+            $searchValue = $_GET['searchValue'];
+            $tmp = explode(' ', $searchValue);
+            $query = '%'.implode('%', $tmp).'%';
+            
+            $this->view->searchValue = $searchValue;
+        }
+        
+        if ($_GET['filter'] == 'topic')
+        {   
+            $search = $db->select()
+                    ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+                    ->join(array('u' => 'users'), 'a.author = u.user_id')
+                    ->group('a.ad_id')
+                    ->order('a.ad_id ASC')
+                    ->where('LOWER(topic) LIKE LOWER(?)', $query);
+
+            $this->view->search = $db->fetchAll($search);
+        }
+        
+        elseif ($_GET['filter'] == 'content') 
+        {
+            $search = $db->select()
+                    ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+                    ->join(array('u' => 'users'), 'a.author = u.user_id')
+                    ->group('a.ad_id')
+                    ->order('a.ad_id ASC')
+                    ->where('LOWER(content) LIKE LOWER(?)', $query);
+
+            $this->view->search = $db->fetchAll($search);
+        }
+        
+        else
+        {
+            $search = $db->select()
+                    ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+                    ->join(array('u' => 'users'), 'a.author = u.user_id')
+                    ->group('a.ad_id')
+                    ->order('a.ad_id ASC')
+                    ->where('LOWER(author) LIKE LOWER(?)', $query);
+
+            $this->view->search = $db->fetchAll($search);
+        }
+    }
 
     public function createformAction()
     {
