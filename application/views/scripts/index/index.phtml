@@ -49,9 +49,11 @@
     <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
         <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
         <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
-    <?php if($this->identity): ?><?php /* --- edit & delete--- */ ?>
+    <?php if($this->identity): ?>
+        <?php if($this->identity->user_id == $ad['author']): ?>
         <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
         <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
+        <?php endif; ?>
     <?php endif; ?>
     </div>
 </div>
@@ -98,10 +100,12 @@
     <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
         <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
         <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
-    <?php if($this->identity): ?><?php /* --- edit & delete--- */ ?>
+    <?php if($this->identity): ?>
+        <?php if($this->identity->user_id == $ad['author']): ?>
         <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
         <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
-    <?php endif; ?>
+        <?php endif; ?>
+    <?php endif; ?>      
     </div>
 </div>
 <?php endforeach; ?>

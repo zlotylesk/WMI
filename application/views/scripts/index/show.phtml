@@ -3,6 +3,7 @@
 <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b">Temat: <strong><?php echo $this->object['topic'] ?></strong></p>
 <p class="pad20p mar10p  bg-c1 bs5 br10"><strong>Treść ogłoszenia:&nbsp;<br></strong><?php echo $this->object['content'] ?></p>
 <p class="padlr20p bg-c2 mar10p br10"><strong>data utworzenia: <?php echo $this->object['datetime'] ?></strong></p>
+<p class="padlr20p bg-c2 mar10p br10"><strong>autor: <?php echo $this->author['username'] ?></strong></p>
 <?php /* Przenoszę poniższe wyżej do treści ogłoszenia
 <p><?php echo $this->object['content'] ?></p>
 */ ?>
@@ -12,12 +13,14 @@
         <button>Wstecz</button>
     </a>
     <?php if($this->identity): ?>
+    <?php if($this->identity->user_id == $this->object['author']): ?>
     <a href="<?php echo $this->url(array('action' => 'edit')) ?>">
         <button>Edytuj</button>
     </a>
     <a href="<?php echo $this->url(array('action' => 'delete')) ?>">
         <button>Usuń</button>
     </a>
+    <?php endif; ?>
     <?php endif; ?>
 </div>
 </div>
