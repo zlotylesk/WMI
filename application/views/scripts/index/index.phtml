@@ -15,7 +15,7 @@
       <?php        foreach ($this->slideshow as $k => $s){ ?>
     <div class="item <?php if ($k==0) echo "active"; ?> bg-c<?php echo rand(1,6); ?>">
         <?php /* --- tło w postaci grafiki --- */ ?>
-        <img class="" src="./img/overlay.png" alt="">
+        <img class="" src="<?php echo $this->baseUrl(); ?>/img/overlay.png" alt="">
       <div class="carousel-caption h540p">
           <h1 class="mart120p"><?php echo $s['topic'] ?></h1>
           <h3><?php echo $s['content'] ?></h3>
@@ -47,6 +47,7 @@
         </div>
     </a>
     <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
+        <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
         <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
     <?php if($this->identity): ?><?php /* --- edit & delete--- */ ?>
         <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
@@ -55,7 +56,35 @@
     </div>
 </div>
 <?php endforeach; ?>
+<?php if($this->faculty_nr_per_page<$this->faculty_count){ ?>
+<div class="clf ta-c">
+    <p class="padlr30p b3psr3 clearDeco d-ib bg-r3 fc-f fw-b">
+    <?php 
+    if(intval($this->students_page)>1) $url_array['up']=$this->students_page;
+    if ($this->faculty_page!=1){
+    ?>
+        <a class="fc-f marlr6p" href="<?php $url_array['ep']=$this->faculty_page-1; echo $this->url($url_array); ?>" >&lt;&lt;</a>
+    <?php
+    }
+    for ($index = 1; $index <= $this->faculty_pages; $index++) { 
+        if($index==$this->faculty_page){ ?>
+        <span class="fc-f padlr6p bg-r3"><?php echo $index; ?></span>
+        <?php }else{
+       $url_array['ep']=$index;
+        ?>
+    <a class="fc-f marlr6p" href="<?php echo $this->url($url_array); ?>"><?php echo $index; ?></a>
+        <?php }
+        } if ($this->faculty_page!=$this->faculty_pages){
+    ?>
+    <a class="fc-f marlr6p" href="<?php $url_array['ep']=$this->faculty_page+1; echo $this->url($url_array); ?>" >&gt;&gt;</a>
+    <?php
+    } ?>
+    </p>
+</div>
+<hr>
+<?php }else{ ?>
 <hr class="clf">
+<?php }?>
 <h3>Ogłoszenia studentów</h3>
 <hr>
 <?php foreach($this->students_ads as $ad): ?>
@@ -67,6 +96,7 @@
         </div>
     </a>
     <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
+        <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
         <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
     <?php if($this->identity): ?><?php /* --- edit & delete--- */ ?>
         <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
@@ -75,7 +105,35 @@
     </div>
 </div>
 <?php endforeach; ?>
+<?php if($this->students_nr_per_page<$this->students_count){ ?>
+<div class="clf ta-c">
+    <p class="padlr30p b3psr3 clearDeco d-ib bg-r3 fc-f fw-b">
+    <?php 
+    if(intval($this->faculty_page)>1) $url_array['ep']=$this->faculty_page;
+    if ($this->students_page!=1){
+    ?>
+        <a class="fc-f marlr6p" href="<?php $url_array['up']=$this->students_page-1; echo $this->url($url_array); ?>" >&lt;&lt;</a>
+    <?php
+    }
+    for ($index = 1; $index <= $this->students_pages; $index++) { 
+        if($index==$this->students_page){ ?>
+        <span class="fc-f padlr6p bg-r3"><?php echo $index; ?></span>
+        <?php }else{
+       $url_array['up']=$index;
+        ?>
+    <a class="fc-f marlr6p" href="<?php echo $this->url($url_array); ?>"><?php echo $index; ?></a>
+        <?php }
+        } if ($this->students_page!=$this->students_pages){
+    ?>
+    <a class="fc-f marlr6p" href="<?php $url_array['up']=$this->students_page+1; echo $this->url($url_array); ?>" >&gt;&gt;</a>
+    <?php
+    } ?>
+    </p>
+</div>
+<hr>
+<?php }else{ ?>
 <hr class="clf">
+<?php }?>
 <?php /*
  * ---- OLD SHIT IS OLD ---- stary layout indexu!!!! ----
 <p class="lead" style="color: #3a87ad; text-decoration: underline">

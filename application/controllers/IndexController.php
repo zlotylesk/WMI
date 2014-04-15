@@ -19,10 +19,23 @@ class IndexController extends Zend_Controller_Action
         $this->view->ads = $Ad->fetchAll();
         // obiekt z filtrem na slideshow
         $this->view->slideshow = $Ad->fetchAll(null,'ad_id DESC',10);
+        
+        $e_page=1;
+        if($this->getRequest()->getParam('ep')!=null) $e_page = $this->getRequest()->getParam('ep');
+        $u_page = 1; 
+        if($this->getRequest()->getParam('up')!=null) $u_page = $this->getRequest()->getParam('up');
         // kategoria kadry
-        $this->view->faculty_ads = $this->GetAdsFor('employee','DESC',4);
+        $this->view->faculty_nr_per_page = 4;
+        $this->view->faculty_ads = $this->GetAdsFor('employee', 'DESC', $this->view->faculty_nr_per_page, $e_page);
+        $this->view->faculty_page = $e_page;
+        $this->view->faculty_count = $this->GetCount();
+        $this->view->faculty_pages = ceil($this->view->faculty_count/$this->view->faculty_nr_per_page);
         // kategoria studentów
-        $this->view->students_ads = $this->GetAdsFor('user','DESC', 4);
+        $this->view->students_nr_per_page = 4;
+        $this->view->students_ads = $this->GetAdsFor('user', 'DESC', $this->view->students_nr_per_page, $u_page);
+        $this->view->students_page = $u_page;
+        $this->view->students_count = $this->GetCount('user');
+        $this->view->students_pages= ceil($this->view->students_count/$this->view->students_nr_per_page);
     }
     
     public function searchAction()
@@ -251,14 +264,19 @@ class IndexController extends Zend_Controller_Action
         }
     }
     
-    function GetAdsFor($role="employee",$order='DESC', $range=null) {
+    function GetAdsFor($role="employee",$order='DESC', $range=null, $page = 1) {
         $db = Zend_Db_Table::getDefaultAdapter();
         $ads = $db->select()
                 ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
                 ->join(array('u' => 'users'), 'a.author = u.user_id')
                 ->where('u.role = ?', $role)
                 ->order("ad_id $order");
-        if($range) $ads->limit ($range);
+        if($range) $ads->limit ($range,($page-1)*$range);
         return $db->fetchAll($ads);
+    }
+    
+    function GetCount($role='employee') {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        return $db->fetchOne("SELECT COUNT(*) AS count FROM ads JOIN users ON ads.author = users.user_id WHERE users.role = '$role'");
     }
 }

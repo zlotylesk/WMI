@@ -117,6 +117,8 @@
 .pad3p{padding: 3px;}
 .pad2p{padding: 2px;}
 .padlr20p{padding: 0 20px;}
+.padlr30p{padding: 0 30px;}
+.padlr6p{padding: 0 6px;}
 .padlr8p{padding: 0 8px !important;}
 .mar5{margin:5%;}
 .mar10{margin: 10%;}
@@ -161,3 +163,4 @@
 .b0{bottom: 0;}
 .b3psr3{border:3px solid rgba(0,0,0,.3);}
 .an{transition:bottom .35s; -o-transition:bottom .35s; -ms-transition:bottom .35s; -moz-transition:bottom .35s; -webkit-transition:bottom .35s;}
+.ta-c{text-align: center;}
