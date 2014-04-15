@@ -223,9 +223,9 @@ class IndexController extends Zend_Controller_Action
         $this->AddCSS("news");
         $a = $this->_getAllParams();
         if(is_numeric($a['nr'])){
-            $this->view->dane = $this->GetAds($a['nr']);
+            $this->view->dane = $this->GetAdsFor(null,'DESC',$a['nr']);
         }else{
-            $this->view->dane = $this->GetAds(10);
+            $this->view->dane = $this->GetAdsFor(null,'DESC',10);
         }
     }
     function GetAds($range=5){
@@ -269,9 +269,9 @@ class IndexController extends Zend_Controller_Action
         $ads = $db->select()
                 ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
                 ->join(array('u' => 'users'), 'a.author = u.user_id')
-                ->where('u.role = ?', $role)
                 ->order("ad_id $order");
         if($range) $ads->limit ($range,($page-1)*$range);
+        if($role) $ads->where ('u.role = ?', $role);
         return $db->fetchAll($ads);
     }
     
