@@ -207,11 +207,18 @@ class IndexController extends Zend_Controller_Action
     {
         $id = $this->getRequest()->getParam('id');
         $Ad = new Application_Model_DbTable_Ads();
+        $db = Zend_Db_Table::getDefaultAdapter();
+        
+        $author = $db->select()
+               ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
+               ->join(array('u' => 'users'), 'a.author = u.user_id');
+        
         $obj = $Ad->find($id)->current();
         if (!$obj){
             throw new Zend_Controller_Action_Exception('Błędny adres', 404);
         }
         $this->view->object = $obj;
+        $this->view->author = $db->fetchRow($author);
     }
     
     public function newsAction()
