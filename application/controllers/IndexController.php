@@ -24,18 +24,28 @@ class IndexController extends Zend_Controller_Action
         if($this->getRequest()->getParam('ep')!=null) $e_page = $this->getRequest()->getParam('ep');
         $u_page = 1; 
         if($this->getRequest()->getParam('up')!=null) $u_page = $this->getRequest()->getParam('up');
-        // kategoria kadry
-        $this->view->faculty_nr_per_page = 4;
-        $this->view->faculty_ads = $this->GetAdsFor('employee', 'DESC', $this->view->faculty_nr_per_page, $e_page);
-        $this->view->faculty_page = $e_page;
-        $this->view->faculty_count = $this->GetCount();
-        $this->view->faculty_pages = ceil($this->view->faculty_count/$this->view->faculty_nr_per_page);
-        // kategoria studentów
-        $this->view->students_nr_per_page = 4;
-        $this->view->students_ads = $this->GetAdsFor('user', 'DESC', $this->view->students_nr_per_page, $u_page);
-        $this->view->students_page = $u_page;
-        $this->view->students_count = $this->GetCount('user');
-        $this->view->students_pages= ceil($this->view->students_count/$this->view->students_nr_per_page);
+        $e_ad_count=4;
+        $u_ad_count=4;
+        $data = array(
+            'ep' => array(
+                'section_name' => 'Ogłoszenia pracowników',
+                'nr_per_page' => $e_ad_count,
+                'ads' => $this->GetAdsFor('employee','DESC',$e_ad_count,$e_page),
+                'page' => $e_page,
+                'count' => $this->GetCount(),
+                
+            ),
+            'up' => array(
+                'section_name' => 'Ogłoszenia studentów',
+                'nr_per_page' => $u_ad_count,
+                'ads' => $this->GetAdsFor('user','DESC',$u_ad_count,$u_page),
+                'page' => $u_page,
+                'count' => $this->GetCount('user'),
+            )
+        );
+        $data['ep']['pages']=ceil($data['ep']['count']/$e_ad_count);
+        $data['up']['pages']=ceil($data['up']['count']/$u_ad_count);
+        $this->view->ad_sections = $data;
     }
     
     public function searchAction()

@@ -36,19 +36,20 @@
 <?php /* --- carousel stop --- */ ?>
 <?php /* --- layout indexu --- */ ?>
 <hr>
+<?php /* --- przestarzałe ---
 <h3>Ogłoszenia pracowników</h3>
 <hr>
 <?php foreach($this->faculty_ads as $ad): ?>
 <div class="h360p w40 fl p-r mar5 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
     <a class="d-b w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
-        <div class="padlr20p"><?php /* --- topic & content --- */ ?>
+        <div class="padlr20p">
             <h4><?php echo $ad['topic'] ?></h4>
             <p><?php echo $ad['content'] ?></p>
         </div>
     </a>
     <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
         <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
-        <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
+        <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span>
     <?php if($this->identity): ?>
         <?php if($this->identity->user_id == $ad['author']): ?>
         <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
@@ -92,14 +93,14 @@
 <?php foreach($this->students_ads as $ad): ?>
 <div class="h360p w40 fl p-r mar5 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
     <a class="d-b w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
-        <div class="padlr20p"><?php /* --- topic & content --- */ ?>
+        <div class="padlr20p">
             <h4><?php echo $ad['topic'] ?></h4>
             <p><?php echo $ad['content'] ?></p>
         </div>
     </a>
     <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
         <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
-        <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
+        <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span>
     <?php if($this->identity): ?>
         <?php if($this->identity->user_id == $ad['author']): ?>
         <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
@@ -138,6 +139,77 @@
 <?php }else{ ?>
 <hr class="clf">
 <?php }?>
+*/ ?>
+
+<?php 
+$urls = array('action'=>'index');
+foreach ($this->ad_sections as $k => $v) {
+    if($v['page']>1 && $v['nr_per_page']<$v['count']){
+        $urls[$k]=$v['page'];
+    }
+}
+
+foreach ($this->ad_sections as $k => $data) { ?>
+<h3><?php echo $data['section_name']; ?></h3>
+<hr>
+<?php foreach($data['ads'] as $ad): ?>
+<div class="h360p w40 fl p-r mar5 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
+    <a class="d-b w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
+        <div class="padlr20p"><?php /* --- topic & content --- */ ?>
+            <h4><?php echo $ad['topic'] ?></h4>
+            <p><?php echo $ad['content'] ?></p>
+        </div>
+    </a>
+    <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
+        <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
+        <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
+    <?php if($this->identity): ?>
+        <?php if($this->identity->user_id == $ad['author']): ?>
+        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
+        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
+        <?php endif; ?>
+    <?php endif; ?>
+    </div>
+</div>
+<?php endforeach; ?>
+<?php if($data['nr_per_page']<$data['count']){ ?>
+<div class="clf ta-c">
+    <p class="padlr30p b3psr3 clearDeco d-ib bg-r3 fc-f fw-b">
+    <?php 
+    if ($data['page']!=1){
+    ?>
+        <a class="fc-f marlr6p" href="<?php $urls[$k]=$data['page']-1; echo $this->url($urls); ?>" >&lt;&lt;</a>
+    <?php
+    }
+    for ($index = 1; $index <= $data['pages']; $index++) { 
+        if($index==$data['page']){ ?>
+        <span class="fc-f padlr6p bg-r3"><?php echo $index; ?></span>
+        <?php }else{
+       $urls[$k]=$index;
+        ?>
+    <a class="fc-f marlr6p" href="<?php echo $this->url($urls); ?>"><?php echo $index; ?></a>
+        <?php }
+        } if ($data['page']!=$data['pages']){
+    ?>
+    <a class="fc-f marlr6p" href="<?php $urls[$k]=$data['page']+1; echo $this->url($urls); ?>" >&gt;&gt;</a>
+    <?php
+    } ?>
+    </p>
+</div>
+<hr>
+<?php }else{ ?>
+<hr class="clf">
+<?php }?>
+<?php } ?>
+<?php if($this->identity): ?>
+<div class="p-f fl l0 t10 fw-b bg-0 o2 clearDeco wnw">
+    <a class="fl fs50p padlr30p fc-f c-a0" href="<?php echo $this->url(array('action' => 'createform'))?>">+</a>
+    <a class="fc-f oh w0 d-ib h100 p-r" href="<?php echo $this->url(array('action' => 'createform'))?>">
+        <span class="fl fs30p pad10p p-r wnw">Dodaj ogłoszenie</span>
+    </a>
+    <div class="d-n clf"></div>
+</div>
+<?php endif; ?>
 <?php /*
  * ---- OLD SHIT IS OLD ---- stary layout indexu!!!! ----
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
