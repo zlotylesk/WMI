@@ -20,10 +20,10 @@
     </a>
     <?php if($this->identity): ?>
     <?php if($this->identity->user_id == $item['author']): ?>
-    <a href="<?php echo $this->url(array('action' => 'edit')) ?>">
+    <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $item['ad_id'])) ?>">
         <button>Edytuj</button>
     </a>
-    <a href="<?php echo $this->url(array('action' => 'delete')) ?>">
+    <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $item['ad_id'])) ?>">
         <button>Usuń</button>
     </a>
     <?php endif; ?>

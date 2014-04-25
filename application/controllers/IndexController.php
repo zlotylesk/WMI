@@ -128,6 +128,26 @@ class IndexController extends Zend_Controller_Action
 //        $this->view->ads = $db->fetchAll($ads);
         $this->view->ads = $this->GetAdsFor('user');
     }
+    
+    public function showuseradsAction()
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        
+        $auth = Zend_Auth::getInstance();
+        $identity = $auth->getIdentity();
+        
+        if($identity)
+        {      
+            $ads = $db->select()
+                    ->from(array('a' => 'ads'))
+                    ->where('a.author = ?', $identity->user_id)
+                    ->join(array('u' => 'users'), 'a.author = u.user_id')
+                    ->group('a.ad_id')
+                    ->order('a.datetime DESC'); 
+           
+            $this->view->ads = $db->fetchAll($ads);
+        }
+    }
 
     public function createformAction()
     {

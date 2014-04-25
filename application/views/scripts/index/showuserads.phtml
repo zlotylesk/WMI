@@ -1,6 +1,6 @@
 <br>
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
-    <strong>Ogłoszenia pracowników</strong>
+    <strong>Moje ogłoszenia</strong>
 </p> 
 
 <?php foreach ($this->ads as $item): ?>
@@ -15,7 +15,7 @@
 */ ?>
 
 <div class="mar10p">
-    <a href="<?php echo $this->url(array('action' => 'index')) ?>">
+    <a href="<?php echo $this->url(array('action' => 'index', 'controller' => 'index')) ?>">
         <button>Wstecz</button>
     </a>
     <?php if($this->identity): ?>
@@ -23,7 +23,7 @@
     <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $item['ad_id'])) ?>">
         <button>Edytuj</button>
     </a>
-    <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $item['ad_id'])) ?>">
+    <a href="<?php echo $this->url(array('action' => 'delete', 'controller' => 'index')) ?>">
         <button>Usuń</button>
     </a>
     <?php endif; ?>

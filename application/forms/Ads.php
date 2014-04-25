@@ -51,7 +51,7 @@ class Application_Form_Ads extends Zend_Form
         Zend_Validate_NotEmpty::IS_EMPTY => 'Treść nie moze byc pusta',
         Zend_Validate_NotEmpty::INVALID => 'Treść ogłoszenia jest niepoprawna'
         ));
-        $this->cpntent->getValidator('Alnum')->setMessages(array(
+        $this->content->getValidator('Alnum')->setMessages(array(
         Zend_Validate_Alnum::NOT_ALNUM => 'Treść zawiera niedopuszczalne znaki',
         Zend_Validate_Alnum::INVALID => 'Treść zawiera niedopuszczalne znaki'
         ));
