@@ -4,6 +4,7 @@
 </p> 
 
 <?php foreach ($this->ads as $item): ?>
+<?php if ($item['status'] != 0): ?>
 <div class="br20 bg-c4 pad10p martb10p ">
     <!-- Poniższe jest kompletnie nie przemyślane pod względem struktury treści strony. -->
 <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b">Temat: <strong><?php echo $item['topic'] ?></strong></p>
@@ -56,5 +57,8 @@
     <?php endif; ?>
 </div>
 </div>
+<?php else: ?>
+    <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b"><strong>Ogłoszenie wygasło</strong></p>
+<?php endif; ?>
 <?php endforeach; ?>
 

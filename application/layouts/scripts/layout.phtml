@@ -69,7 +69,9 @@
                     <ul style="float: right">  
                         <li><a href="<?php echo $this->url(array('action' => 'showemployeeads', 'controller' => 'index')); ?>">Ogłoszenia pracowników</a></li>
                         <li><a href="<?php echo $this->url(array('action' => 'showstudentads', 'controller' => 'index')); ?>">Ogłoszenia studentów</a></li>
-                        <li><a href="<?php echo $this->url(array('action' => 'showuserads', 'controller' => 'index')); ?>">Moje ogłoszenia</a></li>
+                        <?php if($this->identity): ?>
+                            <li><a href="<?php echo $this->url(array('action' => 'showuserads', 'controller' => 'index')); ?>">Moje ogłoszenia</a></li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
