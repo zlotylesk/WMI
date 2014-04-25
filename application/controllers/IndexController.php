@@ -164,13 +164,16 @@ class IndexController extends Zend_Controller_Action
     {
         $auth = Zend_Auth::getInstance();
         $identity = $auth->getIdentity();
-        
+    
         if ($this->getRequest()->isPost()){
             $form = new Application_Form_Ads();
             if ($form->isValid($this->getRequest()->getPost()))
             {
                 $data = $form->getValues();
                 $data['author'] = $identity->user_id;
+                $data['exp'] = substr(''.$form->getValue('exp'),0,-8).date('H:i:s');
+                $data['exp'] = $form->getValue('exp')." ".date('H:i:s');
+                $data['status'] = 1;
                 $Ad = new Application_Model_DbTable_Ads();
                 $id = $Ad->insert($data);
                 return $this->_helper->redirector('index');

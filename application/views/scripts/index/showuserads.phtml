@@ -4,12 +4,39 @@
 </p> 
 
 <?php foreach ($this->ads as $item): ?>
+<?php if ($item['status'] != 0): ?>
 <div class="br20 bg-c4 pad10p martb10p ">
     <!-- Poniższe jest kompletnie nie przemyślane pod względem struktury treści strony. -->
 <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b">Temat: <strong><?php echo $item['topic'] ?></strong></p>
 <p class="pad20p mar10p  bg-c1 bs5 br10"><strong>Treść ogłoszenia:&nbsp;<br></strong><?php echo $item['content'] ?></p>
 <p class="padlr20p bg-c2 mar10p br10"><strong>data utworzenia: <?php echo $item['datetime'] ?></strong></p>
 <p class="padlr20p bg-c2 mar10p br10"><strong>autor: <?php echo $item['username'] ?></strong></p>
+<p class="padlr20p bg-c2 mar10p br10">
+    <strong>
+        <?php 
+        $now =  strtotime("now");
+        $exp = strtotime($item['exp']);
+        $result = $exp - $now;
+        if ($result > 0)
+        {
+            echo $result . " sekund pozostało. status: " . $item['status'];
+        }
+        else
+        {
+            $result = 0;
+            echo $result . " - koniec. status: " . $item['status'];
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $item['status'] = 0;           
+            $data = array(
+                'status' => '0'
+            );
+            $where = $db->quoteInto('ad_id = ?', $item['ad_id']);
+            $ads = new Application_Model_DbTable_Ads();
+            $ads->update($data, $where); 
+        }    
+        ?>
+    </strong>
+</p>
 <?php /* Przenoszę poniższe wyżej do treści ogłoszenia
 <p><?php echo $this->object['content'] ?></p>
 */ ?>
@@ -23,12 +50,15 @@
     <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $item['ad_id'])) ?>">
         <button>Edytuj</button>
     </a>
-    <a href="<?php echo $this->url(array('action' => 'delete', 'controller' => 'index')) ?>">
+    <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $item['ad_id'])) ?>">
         <button>Usuń</button>
     </a>
     <?php endif; ?>
     <?php endif; ?>
 </div>
 </div>
+<?php else: ?>
+    <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b"><strong>Ogłoszenie wygasło</strong></p>
+<?php endif; ?>
 <?php endforeach; ?>
 

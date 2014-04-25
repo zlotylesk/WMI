@@ -1,9 +1,36 @@
+<?php if ($this->object['status'] != 0): ?>
 <div class="br20 bg-c4 pad10p martb10p ">
     <!-- Poniższe jest kompletnie nie przemyślane pod względem struktury treści strony. -->
 <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b">Temat: <strong><?php echo $this->object['topic'] ?></strong></p>
 <p class="pad20p mar10p  bg-c1 bs5 br10"><strong>Treść ogłoszenia:&nbsp;<br></strong><?php echo $this->object['content'] ?></p>
 <p class="padlr20p bg-c2 mar10p br10"><strong>data utworzenia: <?php echo $this->object['datetime'] ?></strong></p>
 <p class="padlr20p bg-c2 mar10p br10"><strong>autor: <?php echo $this->author['username'] ?></strong></p>
+<p class="padlr20p bg-c2 mar10p br10">
+    <strong>
+        <?php 
+        $now =  strtotime("now");
+        $exp = strtotime($this->object['exp']);
+        $result = $exp - $now;
+        if ($result > 0)
+        {
+            echo $result . " sekund pozostało. status: " . $this->object['status'];
+        }
+        else
+        {
+            $result = 0;
+            echo $result . " - koniec. status: " . $this->object['status'];
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $this->object['status'] = 0;           
+            $data = array(
+                'status' => '0'
+            );
+            $where = $db->quoteInto('ad_id = ?', $this->object['ad_id']);
+            $ads = new Application_Model_DbTable_Ads();
+            $ads->update($data, $where); 
+        }    
+        ?>
+    </strong>
+</p>
 <?php /* Przenoszę poniższe wyżej do treści ogłoszenia
 <p><?php echo $this->object['content'] ?></p>
 */ ?>
@@ -24,4 +51,7 @@
     <?php endif; ?>
 </div>
 </div>
+<?php else: ?>
+    <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b"><strong>Ogłoszenie wygasło</strong></p>
+<?php endif; ?>
 

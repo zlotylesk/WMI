@@ -10,6 +10,32 @@
 <p class="pad20p mar10p  bg-c1 bs5 br10"><strong>Treść ogłoszenia:&nbsp;<br></strong><?php echo $item['content'] ?></p>
 <p class="padlr20p bg-c2 mar10p br10"><strong>data utworzenia: <?php echo $item['datetime'] ?></strong></p>
 <p class="padlr20p bg-c2 mar10p br10"><strong>autor: <?php echo $item['username'] ?></strong></p>
+<p class="padlr20p bg-c2 mar10p br10">
+    <strong>
+        <?php 
+        $now =  strtotime("now");
+        $exp = strtotime($item['exp']);
+        $result = $exp - $now;
+        if ($result > 0)
+        {
+            echo $result . " sekund pozostało. status: " . $item['status'];
+        }
+        else
+        {
+            $result = 0;
+            echo $result . " - koniec. status: " . $item['status'];
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $item['status'] = 0;           
+            $data = array(
+                'status' => '0'
+            );
+            $where = $db->quoteInto('ad_id = ?', $item['ad_id']);
+            $ads = new Application_Model_DbTable_Ads();
+            $ads->update($data, $where); 
+        }    
+        ?>
+    </strong>
+</p>
 <?php /* Przenoszę poniższe wyżej do treści ogłoszenia
 <p><?php echo $this->object['content'] ?></p>
 */ ?>
