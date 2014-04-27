@@ -1,6 +1,6 @@
 <?php
 
-class AuthController extends Zend_Controller_Action
+class AuthController extends Application_My_Controller
 {
 
     public function loginAction()
@@ -39,7 +39,49 @@ class AuthController extends Zend_Controller_Action
         }
        $this->view->form = $form; 
     }
-
+    
+    /*public function loginAction()
+    {       
+        $this->view->form = new Application_Form_Login();
+        
+        $auth = Zend_Auth::getInstance();
+        
+        $username = $this->_request->getParam('username');
+        $password = $this->_request->getParam('password');
+        
+        $config = new Zend_Config_Ini('../application/configs/application.ini',
+                'production');
+        $log_path = $config->ldap->log_path;
+        $options = $config->ldap->toArray();
+        unset($options['log_path']);
+        
+        $adapter = new Zend_Auth_Adapter_Ldap($options, $username, $password);
+        $result = $auth->authenticate($adapter);
+        echo var_dump($result);
+        if($log_path){
+            $messages = $result->getMessages();
+            $logger = new Zend_Log();
+            $logger->addWriter(new Zend_Log_Writer_Stream($log_path));
+            $filter = new Zend_Log_Filter_Priority(Zend_Log::DEBUG);
+            $logger->addFilter($filter);
+            
+            foreach ($messages as $i => $message){
+                if ($i-- > 1){
+                    $message = str_replace("/n", "/n ", $message);
+                    $logger->log("LDAP: $i: $message", Zend_Log::DEBUG);
+                }
+            }
+        }
+        
+        $identity = $auth->getIdentity();
+        if ($identity) {
+            echo 'działa';
+        }
+        else {
+            echo 'dupa wołowa';
+        }
+    }
+    */
     public function logoutAction()
     {
         $auth = Zend_Auth::getInstance();

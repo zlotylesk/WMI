@@ -1,6 +1,10 @@
+<?php if($this->object['status'] != 0): ?>
 <?php echo $this->form ?>
 <p>
     <a href="<?php echo $this->baseUrl(
             array('action' => 'delete', 'id' => $this->ads['ad_id'])
             ) ?>"><button>usuń</button></a>
 </p>
+<?php else: ?>
+    <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b"><strong>Ogłoszenie wygasło</strong></p>
+<?php endif; ?>

@@ -17,18 +17,26 @@ class Application_Form_CreateAccount extends Zend_Form
                     'required' => true,
                     'filters' => array('StringTrim'),
                     'validators' => array(
-                            array('Db_RecordExists', true),
-                            array('NotEmpty', true),
+                            array('Db_NoRecordExists', true,
+                            array('table' => 'users', 'field' => 'username', 'messages' => array('recordFound' => 'Ten login jest już zajęty'))
+                            ),
+                            array('notEmpty', true,
+                            array('messages' => array('isEmpty' => 'Proszę wpisać login')
+                            )),
                             array('stringLength', true,
-                            array('min'=>3, 'max'=>12),
+                            array('min'=>3, 'max'=>12, 'messages'=>
+                            array('stringLengthTooShort' => 'Login musi składać się z co najmniej 3 znaków',
+                                  'stringLengthTooLong' => 'Login musi składać się z maksymalnie 12 znaków',
+                            )
+                            )),
                             array ('Regex', true, 
                             array ('pattern' => '/^[a-zA-Z0-9_\-]+$/', 
                             'messages'=>array('regexNotMatch' => 'Użyto niedozwolone znaki')
                             )),
                      ),
                  )
-        ));
-        $this->username->getValidator('Db_RecordExists')->setMessages(array(
+        );
+        /*$this->username->getValidator('Db_RecordExists')->setMessages(array(
         Zend_Validate_Db_RecordExists::ERROR_RECORD_FOUND => 'Login jest już zajęty'
         ));
         $this->username->getValidator('NotEmpty')->setMessages(array(
@@ -39,9 +47,8 @@ class Application_Form_CreateAccount extends Zend_Form
         Zend_Validate_StringLength::TOO_SHORT => 'proszę podać dłuższy login',
         Zend_Validate_StringLength::TOO_LONG => 'login jest za długi'
         ));
+        */
         
-        
-        //Hasło
         $this->addElement(
                 'password',
                 'password',
@@ -49,21 +56,27 @@ class Application_Form_CreateAccount extends Zend_Form
                     'label' => 'Hasło',
                     'required' => true,    
                     'validators' => array(
-                        array('notEmpty', true),
-                        array('stringLength', true), 
-                        array('min' => 3, 'max' => 20)
+                        array('notEmpty', true,
+                        array('messages' => array('isEmpty'=>'Proszę wpisać hasło i je potwierdzić')
+                        )),
+                        array('stringLength', true, 
+                        array('min' => 3, 'max' => 20, 'messages'=>
+                        array('stringLengthTooShort' => 'Hasło musi składać się z co najmniej 3 znaków',
+                              'stringLengthTooLong' => 'Hasło musi składać się z maksymalnie 20 znaków',
                         )
+                        )),
+                     ),
                 )
          );
         
-        $this->password->getValidator('notEmpty')->setMessages(array(
+        /*$this->password->getValidator('notEmpty')->setMessages(array(
         Zend_Validate_NotEmpty::IS_EMPTY => 'proszę wpisać hasło',
         Zend_Validate_NotEmpty::INVALID => 'proszę wpisac poprawne hasło'
         ));
         $this->password->getValidator('stringLength')->setMessages(array(
         Zend_Validate_StringLength::TOO_SHORT => 'Hasło musi składać się z co najmniej 3 znaków',
         Zend_Validate_StringLength::TOO_LONG => 'Hasło musi składać sięz maksymalnie 20 znaków'
-        ));
+        ));*/
          
          //Powtórz hasło
          $this->addElement(
@@ -84,7 +97,7 @@ class Application_Form_CreateAccount extends Zend_Form
                  )
         );
         
-        //E-mail
+         //E-mail
         $this->addElement(
                 'text', 
                 'email', 
@@ -100,14 +113,19 @@ class Application_Form_CreateAccount extends Zend_Form
                     'validators' => array(
                         array('Db_NoRecordExists', true,
                         array('table' => 'users', 'field' => 'email', 'messages' => array('recordFound' => 'Ten e-mail jest już zajęty'))),
-                        array('NotEmpty', true),
-                        array('EmailAddress', true),
+                        array('notEmpty', true, 
+                        array('messages' => array('isEmpty' => 'Proszę wpisać adres e-mail')
+                        )),
+                        array('EmailAddress', true, 
+                        array('messages' => 
+                        array(Zend_Validate_EmailAddress::INVALID => 'Wpisany adres e-mail jest niepoprawny', Zend_Validate_EmailAddress::INVALID_FORMAT => 'Wpisany adres e-mail jest niepoprawny'
+                        ))),
                         ),  
                 
                 )
                 
         );
-        $this->email->getValidator('Db_NoRecordExists')->setMessages(array(
+        /*$this->email->getValidator('Db_NoRecordExists')->setMessages(array(
         Zend_Validate_Db_NoRecordExists::ERROR_NO_RECORD_FOUND => "Niem ma takiego adresu w bazie"
         ));
         $this->email->getValidator('NotEmpty')->setMessages(array(
@@ -118,7 +136,7 @@ class Application_Form_CreateAccount extends Zend_Form
         Zend_Validate_EmailAddress::INVALID => 'Niepoprawny adress email',
         Zend_Validate_EmailAddress::INVALID_FORMAT => 'Niepoprawny format email'
         ));
-        
+        */
         
         $this->addElement(
                 'select', 

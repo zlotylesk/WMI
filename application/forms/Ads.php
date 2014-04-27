@@ -15,12 +15,12 @@ class Application_Form_Ads extends Zend_Form
                     'filters' => array('StringTrim'),
                     'validators' => array(
                         array('NotEmpty', true),
-                        array('Alnum', true),
                         array('StringLength', true, array('min' => 4, 'max' => 90)),
-                        ),
+                        array('Regex', true, array ('pattern' => '/[0-9a-zA-Z\s\'.;-]+/', 'messages '=> array('regexNotMatch' => 'Użyto niedozwolone znaki')))
+                        )
                  )
                 );
-        $this->topic->getValidator('StringLength')->setMessages(array(
+        /*$this->topic->getValidator('StringLength')->setMessages(array(
         Zend_Validate_StringLength::TOO_LONG => 'Temat za długi',
         Zend_Validate_StringLength::TOO_SHORT => 'Temat za krótki',
         ));
@@ -29,7 +29,7 @@ class Application_Form_Ads extends Zend_Form
         ));
         $this->topic->getValidator('Alnum')->setMessages(array(
         Zend_Validate_Alnum::NOT_ALNUM => 'Można używać tylko liter i cyfr'
-        ));
+        ));*/
         
         $this->addElement(
                 'text', 

@@ -46,7 +46,7 @@
         <button>Wstecz</button>
     </a>
     <?php if($this->identity): ?>
-    <?php if($this->identity->user_id == $item['author']): ?>
+    <?php if($this->identity->user_id == $item['author'] || $this->identity->role == 'admin'): ?>
     <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $item['ad_id'])) ?>">
         <button>Edytuj</button>
     </a>
@@ -57,8 +57,6 @@
     <?php endif; ?>
 </div>
 </div>
-<?php else: ?>
-    <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b"><strong>Ogłoszenie wygasło</strong></p>
 <?php endif; ?>
 <?php endforeach; ?>
 

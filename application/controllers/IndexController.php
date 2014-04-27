@@ -1,6 +1,6 @@
 <?php
 
-class IndexController extends Zend_Controller_Action
+class IndexController extends Application_My_Controller
 {
 
     public function init()
@@ -187,24 +187,42 @@ class IndexController extends Zend_Controller_Action
 
     public function deleteAction()
     {
+        $users = new Application_Model_DbTable_Users();
+        $auth = Zend_Auth::getInstance();
+        $identity = $auth->getIdentity();
+        $select = $users->select()
+                ->where('username = ?', $identity->username);
+            $username = $users->fetchRow($select);
         $id = $this->getRequest()->getParam('id');
         $Ad = new Application_Model_DbTable_Ads();
         $obj = $Ad->find($id)->current();
         if (!$obj) {
             throw new Zend_Controller_Action_Exception('Błędny adres!', 404);
         }
+        if ($username->user_id != $obj->author && $username->role != 'admin') {
+                return $this->_helper->redirector('accessrequired', 'index');
+            }
         $obj->delete();
         return $this->_helper->redirector('index');
     }
 
     public function editAction()
     {
+        $users = new Application_Model_DbTable_Users();
+        $auth = Zend_Auth::getInstance();
+        $identity = $auth->getIdentity();
+        $select = $users->select()
+                ->where('username = ?', $identity->username);
+            $username = $users->fetchRow($select);
         $id = $this->getRequest()->getParam('id');
         $Ad = new Application_Model_DbTable_Ads();
         $obj = $Ad->find($id)->current();
         if (!$obj){
             throw new Zend_Controller_Action_Exception('Błędny adres', 404);
         }
+        if ($username->user_id != $obj->author && $username->role != 'admin') {
+                return $this->_helper->redirector('accessrequired', 'index');
+            }
         $this->view->form = new Application_Form_Ads();
         $this->view->form->populate($obj->toArray());
         $url = $this->view->url(array('action' => 'update', 'id' => $id));
@@ -254,6 +272,11 @@ class IndexController extends Zend_Controller_Action
         $this->view->author = $db->fetchRow($author);
     }
     
+    public function accessrequiredAction()
+    {
+        
+    }
+     
     public function newsAction()
     {
         $this->_helper->layout()->setLayout('news');

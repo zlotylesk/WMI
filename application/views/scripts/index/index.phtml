@@ -152,6 +152,7 @@ foreach ($this->ad_sections as $k => $data) { ?>
 <h3><?php echo $data['section_name']; ?></h3>
 <hr>
 <?php foreach($data['ads'] as $ad): ?>
+<?php if($ad['status'] != 0): ?>
 <div class="h360p w40 fl p-r mar5 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
     <a class="d-b w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
         <div class="padlr20p"><?php /* --- topic & content --- */ ?>
@@ -163,13 +164,14 @@ foreach ($this->ad_sections as $k => $data) { ?>
         <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
         <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
     <?php if($this->identity): ?>
-        <?php if($this->identity->user_id == $ad['author']): ?>
+        <?php if($this->identity->user_id == $ad['author'] || $this->identity->role == 'admin'): ?>
         <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
         <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
         <?php endif; ?>
     <?php endif; ?>
     </div>
 </div>
+<?php endif; ?>
 <?php endforeach; ?>
 <?php if($data['nr_per_page']<$data['count']){ ?>
 <div class="clf ta-c">

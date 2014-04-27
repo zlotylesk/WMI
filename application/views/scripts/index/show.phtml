@@ -40,7 +40,7 @@
         <button>Wstecz</button>
     </a>
     <?php if($this->identity): ?>
-    <?php if($this->identity->user_id == $this->object['author']): ?>
+    <?php if($this->identity->user_id == $this->object['author'] || $this->identity->role == 'admin'): ?>
     <a href="<?php echo $this->url(array('action' => 'edit')) ?>">
         <button>Edytuj</button>
     </a>

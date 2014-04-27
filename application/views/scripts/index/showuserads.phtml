@@ -9,7 +9,8 @@
     <!-- Poniższe jest kompletnie nie przemyślane pod względem struktury treści strony. -->
 <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b">Temat: <strong><?php echo $item['topic'] ?></strong></p>
 <p class="pad20p mar10p  bg-c1 bs5 br10"><strong>Treść ogłoszenia:&nbsp;<br></strong><?php echo $item['content'] ?></p>
-<p class="padlr20p bg-c2 mar10p br10"><strong>data utworzenia: <?php echo $item['datetime'] ?></strong></p>
+<p class="padlr20p bg-c2 mar10p br10"><strong>data utworzenia: <?php echo $item['datetime'] ?></strong></p> 
+<p class="padlr20p bg-c2 mar10p br10"><strong>data wygaśnięcia: <?php echo $item['exp'] ?></strong></p> 
 <p class="padlr20p bg-c2 mar10p br10"><strong>autor: <?php echo $item['username'] ?></strong></p>
 <p class="padlr20p bg-c2 mar10p br10">
     <strong>
@@ -58,7 +59,7 @@
 </div>
 </div>
 <?php else: ?>
-    <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b"><strong>Ogłoszenie wygasło</strong></p>
+    <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b"><strong>Ogłoszenie <?php echo "\"" . $item['topic'] . "\"" ?> wygasło</strong></p>
 <?php endif; ?>
 <?php endforeach; ?>
 

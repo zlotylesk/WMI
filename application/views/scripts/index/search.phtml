@@ -2,7 +2,6 @@
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
     <strong>Wyniki wyszukiwania</strong>
 </p> 
-
 <?php foreach ($this->search as $item): ?>
 <?php if($item['status'] != 0): ?>
 <div class="br20 bg-c4 pad10p martb10p ">
@@ -57,8 +56,6 @@
     <?php endif; ?>
 </div>
 </div>
-<?php else: ?>
-    <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b"><strong>Szukane ogłoszenie już nie istnieje</strong></p>
 <?php endif; ?>
 <?php endforeach; ?>
 
