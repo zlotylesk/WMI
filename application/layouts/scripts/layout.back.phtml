@@ -1,0 +1,84 @@
+<?php echo $this->doctype(); ?>
+
+<html>
+    <head>
+        <?php
+        echo $this->headMeta();
+        echo $this->headTitle();
+        echo $this->headLink();
+        echo $this->headScript();
+        ?>
+    </head>
+    
+    <body>
+        <div class="container">
+            <header id="header">
+                <div id="top">
+                    <div class="row">
+                        <div id="top_menu" class="col-md-12">
+                            <ul style="padding-left: 5px" class="clearCSS pad5p martb6p">
+                                <li class="padlr8p marlr6p">
+                                    <a href="<?php echo $this->baseUrl(''); ?>">Strona główna</a>
+                                </li>
+                            </ul>
+                            <?php if($this->identity): ?>
+                            <ul class="bg-c2 pad5p clearCSS mar6p br20">
+                                <li class="padlr8p marlr6p br20 bg-c6 fc-f">
+                                    <p><i style="margin-right: 3px" class="icon-user icon-white"></i>  <!-- <p style="color:#FFA900"> -->
+                                        Witaj, <?php echo $this->identity->username ?>
+                                    </p>
+                                </li>
+                                <li class="padlr8p marlr6p bg-c5 br20">
+                                    <i class="glyphicon glyphicon-plus white"></i>
+                                    <a href="<?php echo $this->url(array('action' => 'createaccount', 'controller' => 'admin')); ?>">Utwórz konto</a>
+                                </li>    
+                                <li class="padlr8p marlr6p bg-c4 br20">
+                                    <i class="glyphicon glyphicon-off white"></i>
+                                    <a href="<?php echo $this->url(array('action' => 'logout', 'controller' => 'auth')); ?>">Wyloguj się</a>
+                                </li>
+                            </ul>
+                            <?php else: ?>
+                            <ul class="bg-c2 pad5p clearCSS mar6p br20">
+                                <li class="padlr8p marlr6p bg-c5 br20">
+                                    <i class="glyphicon glyphicon-off white"></i>
+                                    <a href="<?php echo $this->url(array('action' => 'login', 'controller' => 'auth')); ?>">Zaloguj się</a>
+                                </li>
+                            </ul>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                <div id="pattern" class="clf">
+                    <div id="logo">
+                    </div>
+                </div>
+            </header>
+            <div id="navigation">
+                <div class="col-md-4">
+                    <form action="<?php echo $this->url(array('action' => 'search', 'controller' => 'index')); ?>" method="GET">            
+                        <input name="searchValue" class="form-control" type="search" placeholder="Wyszukaj..." />
+                        <i class="glyphicon glyphicon-search"></i>
+                        <select name="filter">
+                            <option value="topic" selected="selected">Temat</option>
+                            <option value="content">Treść</option>
+                            <option value="author">Autor</option>
+                        </select> 
+                    </form>
+                </div>
+                <div class="col-md-8">
+                    <ul style="float: right">  
+                        <li><a href="<?php echo $this->url(array('action' => 'showemployeeads', 'controller' => 'index')); ?>">Ogłoszenia pracowników</a></li>
+                        <li><a href="<?php echo $this->url(array('action' => 'showstudentads', 'controller' => 'index')); ?>">Ogłoszenia studentów</a></li>
+                        <?php if($this->identity): ?>
+                            <li><a href="<?php echo $this->url(array('action' => 'showuserads', 'controller' => 'index')); ?>">Moje ogłoszenia</a></li>
+                        <?php endif; ?>
+                    </ul>
+                </div>
+            </div>
+            <?php echo $this->layout()->content; ?> 
+            <footer id="footer">
+                <p class="footertext">TSI Projekt 2014 &copy; Wydziałowa tablica ogłoszeń</p>
+            </footer>
+        </div>
+    </body>
+</html>

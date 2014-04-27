@@ -14,8 +14,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $view->headTitle()->setSeparator(' - ')->prepend('Tablica WMI');
         $view->headLink()->appendStylesheet($front->getBaseUrl().'css/bootstrap.css');
         $view->headLink()->appendStylesheet($front->getBaseUrl().'css/main.css');
+        $view->headLink()->appendStylesheet($front->getBaseUrl().'css/s.css');
         $view->headScript()->appendFile($front->getBaseUrl(). 'js/jquery-2.1.0.min.js');
         $view->headScript()->appendFile($front->getBaseUrl(). 'js/bootstrap.min.js');
+        $view->headScript()->appendFile($front->getBaseUrl(). 'js/s.js');
         
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
         $viewRenderer->setView($view);

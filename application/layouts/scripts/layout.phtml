@@ -11,74 +11,88 @@
     </head>
     
     <body>
-        <div class="container">
-            <header id="header">
-                <div id="top">
-                    <div class="row">
-                        <div id="top_menu" class="col-md-12">
-                            <ul style="padding-left: 5px" class="clearCSS pad5p martb6p">
-                                <li class="padlr8p marlr6p">
-                                    <a href="<?php echo $this->baseUrl(''); ?>">Strona główna</a>
-                                </li>
-                            </ul>
-                            <?php if($this->identity): ?>
-                            <ul class="bg-c2 pad5p clearCSS mar6p br20">
-                                <li class="padlr8p marlr6p br20 bg-c6 fc-f">
-                                    <p><i style="margin-right: 3px" class="icon-user icon-white"></i>  <!-- <p style="color:#FFA900"> -->
-                                        Witaj, <?php echo $this->identity->username ?>
-                                    </p>
-                                </li>
-                                <li class="padlr8p marlr6p bg-c5 br20">
-                                    <i class="glyphicon glyphicon-plus white"></i>
-                                    <a href="<?php echo $this->url(array('action' => 'createaccount', 'controller' => 'admin')); ?>">Utwórz konto</a>
-                                </li>    
-                                <li class="padlr8p marlr6p bg-c4 br20">
-                                    <i class="glyphicon glyphicon-off white"></i>
-                                    <a href="<?php echo $this->url(array('action' => 'logout', 'controller' => 'auth')); ?>">Wyloguj się</a>
-                                </li>
-                            </ul>
-                            <?php else: ?>
-                            <ul class="bg-c2 pad5p clearCSS mar6p br20">
-                                <li class="padlr8p marlr6p bg-c5 br20">
-                                    <i class="glyphicon glyphicon-off white"></i>
-                                    <a href="<?php echo $this->url(array('action' => 'login', 'controller' => 'auth')); ?>">Zaloguj się</a>
-                                </li>
-                            </ul>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-                </div>
-                <div id="pattern" class="clf">
-                    <div id="logo">
-                    </div>
-                </div>
-            </header>
-            <div id="navigation">
-                <div class="col-md-4">
-                    <form action="<?php echo $this->url(array('action' => 'search', 'controller' => 'index')); ?>" method="GET">            
-                        <input name="searchValue" class="form-control" type="search" placeholder="Wyszukaj..." />
-                        <i class="glyphicon glyphicon-search"></i>
-                        <select name="filter">
-                            <option value="topic" selected="selected">Temat</option>
-                            <option value="content">Treść</option>
-                            <option value="author">Autor</option>
-                        </select> 
-                    </form>
-                </div>
-                <div class="col-md-8">
-                    <ul style="float: right">  
-                        <li><a href="<?php echo $this->url(array('action' => 'showemployeeads', 'controller' => 'index')); ?>">Ogłoszenia pracowników</a></li>
-                        <li><a href="<?php echo $this->url(array('action' => 'showstudentads', 'controller' => 'index')); ?>">Ogłoszenia studentów</a></li>
-                        <?php if($this->identity): ?>
-                            <li><a href="<?php echo $this->url(array('action' => 'showuserads', 'controller' => 'index')); ?>">Moje ogłoszenia</a></li>
-                        <?php endif; ?>
-                    </ul>
+        <body class="ta-c h100">
+            <div class="pad20p p-r w1140p mara ta-l minh100" style="padding-bottom: 0;">
+           
+            <!-- HEAD -->
+            <div class="clf ">
+                <!-- LOGO -->
+                <a href="<?php echo $this->baseUrl(''); ?>" class="fl"><img src="<?php echo $this->baseUrl(''); ?>img/logo-panda.png" class="w190p h150p padlr20p bor0" title="WMI Koala" alt="WMI Koala"></a>
+                <!-- NAVIGATION -->
+                <div>
+                    <a href="<?php echo $this->url(array('action' => 'showemployeeads', 'controller' => 'index')); ?>" class="fl marlr10p">
+                        <p class="padlr20p ta-c">Ogłoszenia pracowników</p>
+                        <p class="bg-0 pad0 lh0 miw200p h5p"><span class="d-ib w20p h5p bg-g1 vat"></span></p>
+                    </a>
+                    <a href="<?php echo $this->url(array('action' => 'showstudentads', 'controller' => 'index')); ?>" class="fl marlr5p">
+                        <p class="padlr20p ta-c">Ogłoszenia studentów</p>
+                        <p class="bg-0 pad0 lh0 miw200p h5p"><span class="d-ib w20p h5p bg-g1 vat"></span></p>
+                    </a>
+                    <?php if($this->identity): ?>
+                    <a href="<?php echo $this->url(array('action' => 'showuserads', 'controller' => 'index')); ?>" class="fl marlr5p">
+                        <p class="padlr20p ta-c">Moje ogłoszenia</p>
+                        <p class="bg-0 pad0 lh0 miw200p h5p"><span class="d-ib w20p h5p bg-g1 vat"></span></p>
+                    </a>
+                    <?php endif; ?>
                 </div>
             </div>
+            <div class="clf"></div>
+            <!-- CONTENT -->
+            <!--
+            <div class="b-cont mar40p">
+            -->
+                <!-- POST TITLE -->
+                <!--
+                <h1 class="d-ib"><span class="d-b padr70p">{TYTUŁ WPISU}</span>
+                    <span class="d-b h3p bg-g2 marb4p"></span>
+                    <span class="d-b h3p bg-g1 marr25p marb4p"></span>
+                    <span class="d-b h3p bg-g2 marr50p marb4p"></span>
+                </h1>-->
+                <!-- POST CONTENT -->
+                <!--
+                <p class="">Shut the shizzle up its fo rizzle dolizzle sit amizzle, mammasay mammasa mamma oo sa adipiscing elizzle. Nullizzle fo shizzle my nizzle velizzle, nizzle volutpizzle, suscipizzle ma nizzle, fo shizzle my nizzle tellivizzle, arcu. Pellentesque for sure tortor. Sed ass. Rizzle izzle fizzle dapibizzle nizzle tempizzle ma nizzle. Mauris pellentesque shut the shizzle up phat turpizzle. The bizzle izzle gangster. Cool eleifend rhoncizzle we gonna chung. Yippiyo uhuh ... yih! habitasse platea dictumst. I saw beyonces tizzles and my pizzle went crizzle dapibizzle. Nizzle tellizzle urna, izzle boom shackalack, mattizzle ac, eleifend vitae, nunc. Fo suscipizzle. You son of a bizzle sempizzle shiznit sizzle break it down.
+
+Etiam yo urna fo shizzle nisl. Shut the shizzle up quizzle arcu. Yippiyo phat, ipsizzle malesuada malesuada sizzle, fo shizzle purizzle euismod that's the shizzle, izzle luctus my shizz nulla et yo. Vivamizzle ullamcorper, tortor izzle varius sizzle, nibh nunc ultricizzle mammasay mammasa mamma oo sa, izzle crackalackin leo elizzle check out this dolor. Maurizzle fo, orci vizzle volutpizzle consectetuer, sizzle augue luctus nisi, izzle crazy hizzle shiznit yo mamma boom shackalack. Nullam a velizzle ac orci eleifend dizzle. The bizzle nizzle daahng dawg. Curabitizzle nizzle pizzle vizzle pede sodales facilisis. Brizzle funky fresh hizzle, iaculis yo mamma, sizzle sed, away a, erizzle. Nulla vitae turpis quizzle nibh pizzle daahng dawg. Nizzle pulvinizzle consectetizzle my shizz. Aliquizzle erat volutpizzle. Nunc ut rizzle izzle my shizz crazy i saw beyonces tizzles and my pizzle went crizzle. Cras go to hizzle lacizzle sed dui condimentum ultricies. Ut nisl. Uhuh ... yih! izzle urna. Tellivizzle sure ipsizzle fo shizzle mah nizzle fo rizzle, mah home g-dizzle mi. Donizzle izzle bling bling.
+                </p>-->
+                
+                
+            <!--
+            </div>
+            -->
             <?php echo $this->layout()->content; ?> 
-            <footer id="footer">
-                <p class="footertext">TSI Projekt 2014 &copy; Wydziałowa tablica ogłoszeń</p>
-            </footer>
+            <!-- FOOTER -->
+            <div class="p-r b0 l0 w100" id="f">
+                <p class="footertext bg-g2">TSI Projekt 2014 &copy; Wydziałowa tablica ogłoszeń</p>
+            </div>
+             <!-- USER MENU -->
+            <div class="p-f b10p pad10p bg-f5 lh0 user-menu">
+                <?php if($this->identity): ?>
+                <a href="<?php echo $this->url(array('action' => 'createaccount', 'controller' => 'admin')); ?>" class="d-ib ha">
+                    <span class="b100 p-a bg-g1 pad fc-f l0 d-n"><b class="pad20p fc-f nw">Ustawienia kont</b></span>
+                    <img src="<?php echo $this->baseUrl(''); ?>img/ustawienia.png" class="bor0 h25p w25p marlr5p" alt="Ustawienia" title="Ustawienia">
+                </a>
+                <a href="<?php echo $this->url(array('action' => 'login', 'controller' => 'auth')); ?>" class="d-ib p-r ha">
+                    <span class="b100 p-a bg-g1 pad fc-f l0 d-n"><b class="pad20p fc-f nw">Wyloguj <?php echo $this->identity->username ?></b></span>
+                    <img src="<?php echo $this->baseUrl(''); ?>img/logowanie.png" class="bor0 h25p w25p marlr5p" alt="Wyloguj" title="Wyloguj">
+                </a>
+                <?php else: ?>
+                <a href="<?php echo $this->url(array('action' => 'login', 'controller' => 'auth')); ?>" class="d-ib p-r ha">
+                    <span class="b100 p-a bg-g1 pad fc-f l0 d-n"><b class="pad20p fc-f">Logowanie</b></span>
+                    <img src="<?php echo $this->baseUrl(''); ?>img/logowanie.png" class="bor0 h25p w25p marlr5p" alt="Logowanie" title="Logowanie">
+                </a>
+                <?php endif; ?>
+                <a href="" class="d-ib szukaj"><img src="<?php echo $this->baseUrl(''); ?>img/szukaj.png" class="bor0 h25p w25p marlr5p" alt="Szukaj" title="Szukaj"></a>
+                <!-- SEARCH FORM -->
+                <form class="d-n" action="<?php echo $this->url(array('action' => 'search', 'controller' => 'index')); ?>" method="GET">            
+                    <input name="searchValue" class="marlr5p" type="search" placeholder="Wyszukaj..." />
+                    <select name="filter" class="fl">
+                        <option value="topic" selected="selected">Temat</option>
+                        <option value="content">Treść</option>
+                        <option value="author">Autor</option>
+                    </select> 
+                </form>
+            </div>
+             <div class="clf"></div>
         </div>
     </body>
 </html>
