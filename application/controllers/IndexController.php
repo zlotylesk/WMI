@@ -24,8 +24,8 @@ class IndexController extends Application_My_Controller
         if($this->getRequest()->getParam('ep')!=null) $e_page = $this->getRequest()->getParam('ep');
         $u_page = 1; 
         if($this->getRequest()->getParam('up')!=null) $u_page = $this->getRequest()->getParam('up');
-        $e_ad_count=4;
-        $u_ad_count=4;
+        $e_ad_count=9;
+        $u_ad_count=9;
         $data = array(
             'ep' => array(
                 'section_name' => 'Ogłoszenia pracowników',
