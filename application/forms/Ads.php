@@ -41,10 +41,10 @@ class Application_Form_Ads extends Zend_Form
                     'validators' => array(
                         array('NotEmpty',true),
                         array('StringLength', true, array('min' => 4)),
-                        array('Alnum',true)
+                        array('Regex', true, array ('pattern' => '/[0-9a-zA-Z\s\'.;-]+/', 'messages '=> array('regexNotMatch' => 'Użyto niedozwolone znaki')))
                     )
                     ));
-        $this->content->getValidator('StringLength')->setMessages(array(
+        /*$this->content->getValidator('StringLength')->setMessages(array(
         Zend_Validate_StringLength::TOO_SHORT => 'Treść musi być dłuższa niź 4 znaki'
         ));
         $this->content->getValidator('NotEmpty')->setMessages(array(
@@ -54,7 +54,7 @@ class Application_Form_Ads extends Zend_Form
         $this->content->getValidator('Alnum')->setMessages(array(
         Zend_Validate_Alnum::NOT_ALNUM => 'Treść zawiera niedopuszczalne znaki',
         Zend_Validate_Alnum::INVALID => 'Treść zawiera niedopuszczalne znaki'
-        ));
+        ));*/
         
         $this->addElement(
                 'text', 
