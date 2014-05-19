@@ -12,20 +12,20 @@
 <p class="padlr20p bg-c2 mar10p br10"><strong>data utworzenia: <?php echo $item['datetime'] ?></strong></p> 
 <p class="padlr20p bg-c2 mar10p br10"><strong>data wygaśnięcia: <?php echo $item['exp'] ?></strong></p> 
 <p class="padlr20p bg-c2 mar10p br10"><strong>autor: <?php echo $item['username'] ?></strong></p>
-<p class="padlr20p bg-c2 mar10p br10">
-    <strong>
+<!--<p class="padlr20p bg-c2 mar10p br10">
+    <strong>-->
         <?php 
         $now =  strtotime("now");
         $exp = strtotime($item['exp']);
         $result = $exp - $now;
-        if ($result > 0)
+        /*if ($result > 0)
         {
             echo $result . " sekund pozostało. status: " . $item['status'];
-        }
-        else
+        }*/
+        if ($result <= 0)
         {
             $result = 0;
-            echo $result . " - koniec. status: " . $item['status'];
+            //echo $result . " - koniec. status: " . $item['status'];
             $db = Zend_Db_Table::getDefaultAdapter();
             $item['status'] = 0;           
             $data = array(
@@ -36,8 +36,8 @@
             $ads->update($data, $where); 
         }    
         ?>
-    </strong>
-</p>
+    <!--</strong>
+</p>-->
 <?php /* Przenoszę poniższe wyżej do treści ogłoszenia
 <p><?php echo $this->object['content'] ?></p>
 */ ?>
@@ -58,8 +58,8 @@
     <?php endif; ?>
 </div>
 </div>
-<?php else: ?>
-    <p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b"><strong>Ogłoszenie <?php echo "\"" . $item['topic'] . "\"" ?> wygasło</strong></p>
+<?php //else: ?>
+    <!--<p class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b"><strong>Ogłoszenie <?php //echo "\"" . $item['topic'] . "\"" ?> wygasło</strong></p>-->
 <?php endif; ?>
 <?php endforeach; ?>
 

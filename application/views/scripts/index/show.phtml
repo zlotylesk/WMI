@@ -5,20 +5,20 @@
 <p class="pad20p mar10p  bg-c1 bs5 br10"><strong>Treść ogłoszenia:&nbsp;<br></strong><?php echo $this->object['content'] ?></p>
 <p class="padlr20p bg-c2 mar10p br10"><strong>data utworzenia: <?php echo $this->object['datetime'] ?></strong></p>
 <p class="padlr20p bg-c2 mar10p br10"><strong>autor: <?php echo $this->author['username'] ?></strong></p>
-<p class="padlr20p bg-c2 mar10p br10">
-    <strong>
+<!--<p class="padlr20p bg-c2 mar10p br10">
+    <strong>-->
         <?php 
         $now =  strtotime("now");
         $exp = strtotime($this->object['exp']);
         $result = $exp - $now;
-        if ($result > 0)
+        /*if ($result > 0)
         {
             echo $result . " sekund pozostało. status: " . $this->object['status'];
-        }
-        else
+        }*/
+        if ($result <= 0)
         {
             $result = 0;
-            echo $result . " - koniec. status: " . $this->object['status'];
+            //echo $result . " - koniec. status: " . $this->object['status'];
             $db = Zend_Db_Table::getDefaultAdapter();
             $this->object['status'] = 0;           
             $data = array(
@@ -29,8 +29,8 @@
             $ads->update($data, $where); 
         }    
         ?>
-    </strong>
-</p>
+    <!--</strong>
+</p>-->
 <?php /* Przenoszę poniższe wyżej do treści ogłoszenia
 <p><?php echo $this->object['content'] ?></p>
 */ ?>
