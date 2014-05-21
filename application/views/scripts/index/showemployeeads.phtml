@@ -12,17 +12,30 @@
 
                 <!-- POST TITLE -->
            
-                <h1 class="d-ib"><span class="d-b padr70p"><?php echo $item['topic'] ?></span>
+                <h1 class="d-ib"><span class="d-b padl40p padr70p"><?php echo $item['topic'] ?></span>
                     <span class="d-b h3p bg-g2 marb4p"></span>
                     <span class="d-b h3p bg-g1 marr25p marb4p"></span>
                     <span class="d-b h3p bg-g2 marr50p marb4p"></span>
                 </h1>
                 <!-- POST CONTENT -->
-
-                <p class=""><?php echo $item['content'] ?> </p>
+                
+                <p class="padl40p"><?php echo $item['content'] ?> </p>
                 <span class="d-b h3p bg-g2 marb4p"></span>
-                <p class="">Autor:<?php echo $item['username'] ?></p>
-                <p class=""><?php echo $item['datetime'] ?></p>
+                <div class="mar10p fr">
+                    <?php if($this->identity): ?>
+    <?php if($this->identity->user_id == $item['author'] || $this->identity->role == 'admin'): ?>
+    <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $item['ad_id'])) ?>">
+        <button class="btn btn-success">Edytuj</button>
+    </a>
+    <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $item['ad_id'])) ?>">
+        <button class="btn btn-danger">Usuń</button>
+    </a>
+    <?php endif; ?>
+    <?php endif; ?>
+                    </div>
+                <p class="padl40p">Autor: <?php echo $item['username'] ?></p>
+                <p class="padl40p">Data dodania: <?php echo $item['datetime'] ?></p>
+                <p class="padl40p">Data wygaśnięcia: <?php echo $item['exp'] ?></p>
             </div>
 
         <?php 
@@ -52,19 +65,6 @@
 <?php /* Przenoszę poniższe wyżej do treści ogłoszenia
 <p><?php echo $this->object['content'] ?></p>
 */ ?>
-
-<div class="mar10p">
-    <?php if($this->identity): ?>
-    <?php if($this->identity->user_id == $item['author'] || $this->identity->role == 'admin'): ?>
-    <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $item['ad_id'])) ?>">
-        <button>Edytuj</button>
-    </a>
-    <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $item['ad_id'])) ?>">
-        <button>Usuń</button>
-    </a>
-    <?php endif; ?>
-    <?php endif; ?>
-</div>
 </div>
 <?php endif; ?>
 <?php endforeach; ?>
