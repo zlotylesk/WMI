@@ -18,7 +18,7 @@
     <?php if($this->identity): ?>
     <?php if($this->identity->user_id == $this->object['author'] || $this->identity->role == 'admin'): ?>
     <a href="<?php echo $this->url(array('action' => 'edit')) ?>">
-        <button class="btn btn-success">Edytuj</button>
+        <button class="btn btn-success bg-g2">Edytuj</button>
     </a>
     <a href="<?php echo $this->url(array('action' => 'delete')) ?>">
         <button class="btn btn-danger">Usuń</button>
