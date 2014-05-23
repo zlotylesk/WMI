@@ -1,6 +1,6 @@
 <?php
 
-class AuthController extends Application_My_Controller
+class AuthController extends Zend_Controller_Action //extends Application_My_Controller
 {
 
     public function loginAction()
@@ -18,17 +18,24 @@ class AuthController extends Application_My_Controller
         
         if ($post) {
             if ($form->isValid($post)) {
-                $adapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter(), 'users', 'username', 'password', 'SHA1(CONCAT(salt, ?))');
-
+                /*$adapter = new Zend_Auth_Adapter_DbTable(Zend_Db_Table::getDefaultAdapter(), 'users', 'username', 'password', 'SHA1(CONCAT(salt, ?))');
                 $adapter->setIdentity($form->getValue('username'));
-                $adapter->setCredential($form->getValue('password'));
+                $adapter->setCredential($form->getValue('password'));*/
+                
+                $username = $this->_request->getParam('username');
+                $password = $this->_request->getParam('password');
+                $config = new Zend_Config_Ini('../application/configs/config.ini','production');
+                $options = $config->ldap->toArray();
+                unset($options['ldap_path']);
+        
+                $adapter = new Zend_Auth_Adapter_Ldap($options, $username, $password);
 
                 $result = $auth->authenticate($adapter);
 
                 if ($result->isValid()) {
-                    $data = $adapter->getResultRowObject(null, array('password', 'salt'));
-                    $auth->getStorage()->write($data);
-                    
+                    //$data = $adapter->getResultRowObject(null, array('password', 'salt'));
+                    //$auth->getStorage()->write($data);
+                    $auth->getIdentity();
                     $this->_helper->redirector->goToSimple('index', 'index');
                 }
                 else {

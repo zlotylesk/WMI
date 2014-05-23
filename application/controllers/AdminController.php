@@ -1,6 +1,6 @@
 <?php
 
-class AdminController extends Application_My_Controller
+class AdminController extends Zend_Controller_Action//extends Application_My_Controller
 {
 
     public function init()

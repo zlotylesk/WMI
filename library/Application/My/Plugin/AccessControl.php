@@ -36,7 +36,8 @@ class Application_My_Plugin_AccessControl extends Zend_Controller_Plugin_Abstrac
 
         $auth = Zend_Auth::getInstance();
         if ($auth->hasIdentity()) {
-            $users = new Application_Model_DbTable_Users();
+            //$users = new Application_Model_DbTable_Users();
+            
             $user = $auth->getIdentity();
             $username = $user->username;
             $select = $users->select()

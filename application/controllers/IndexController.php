@@ -1,6 +1,6 @@
 <?php
 
-class IndexController extends Application_My_Controller
+class IndexController extends Zend_Controller_Action//extends Application_My_Controller
 {
 
     public function init()
