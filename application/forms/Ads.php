@@ -11,6 +11,7 @@ class Application_Form_Ads extends Zend_Form
                 'topic',
                 array(
                     'label' => 'Temat',
+                    'class' => 'w930p',
                     'required' => true,
                     'filters' => array('StringTrim'),
                     'validators' => array(
@@ -32,10 +33,11 @@ class Application_Form_Ads extends Zend_Form
         ));*/
         
         $this->addElement(
-                'text', 
+                'textarea', 
                 'content', 
                 array(
                     'label' => 'Treść Ogłoszenia:',
+                    'class' => 'w930p h500p',
                     'required' => true,
                     'filters' => array('StringTrim'),
                     'validators' => array(
@@ -74,7 +76,7 @@ class Application_Form_Ads extends Zend_Form
             $this->exp->getValidator('Between')->setMessages(array(
             Zend_Validate_Between::NOT_BETWEEN => 'Możliwe dodanie daty po 2014-01-01', 
             ));
-        $this->addElement('submit', 'submit', array('label' => 'Zatwierdź'));
+        $this->addElement('submit', 'submit', array('label' => 'Zatwierdź', 'class'=>'btn btn-success bg-g2 h35p',));
     }
 
 

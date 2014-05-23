@@ -14,7 +14,7 @@ class Application_Form_Delete extends Zend_Form
                 'submit', 
                 array(
                     'label' => 'Tak',
-                    'class' => 'btn btn-primary'
+                    'class' => 'btn btn-success bg-g2'
                 )
         );
         $this->submit->setDecorators(array('ViewHelper'));
@@ -25,7 +25,7 @@ class Application_Form_Delete extends Zend_Form
                 'cancel', 
                 array(
                     'label' => 'Nie',
-                    'class' => 'btn'
+                    'class' => 'btn btn-danger'
                     
                 )
         );

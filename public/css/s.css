@@ -28,9 +28,11 @@ a{text-decoration: none;}
 .w10p{width: 10px;}
 .w20p{width: 20px;}
 .w25p{width: 25px;}
+.w87p{width: 87px;}
 .w100p{width: 100px;}
 .w150p{width: 150px;}
 .w150p{width: 190px;}
+.w930p{width: 930px;}
 .w1140p{width: 1140px;}
 .w1100p{width: 1100px;}
 .miw150p{min-width: 150px;}
@@ -40,9 +42,12 @@ a{text-decoration: none;}
 .h4p{height: 4px;}
 .h5p{height: 5px;}
 .h25p{height: 25px;}
+.h35p{height: 35px;}
+.h25p{height: 25px;}
 .h100p{height: 100px;}
 .h150p{height: 150px;}
 .h200p{height: 200px;}
+.h500p{height: 500px;}
 .minh100{min-height: 100%;}
 
 .l10p{left:10px;}
@@ -77,6 +82,7 @@ a{text-decoration: none;}
 .marr30p{margin-right: 30px;}
 .marr50p{margin-right: 50px;}
 .marb4p{margin-bottom: 4px;}
+.marb10p{margin-bottom: 10px;}
 .marl40p{margin-left: 40px}
 
 .pad0{padding: 0;}
