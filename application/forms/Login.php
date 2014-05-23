@@ -15,6 +15,7 @@ class Application_Form_Login extends Zend_Form
                     'label' => 'Login',
                     'required' => true,
                     'filters' => array('StringTrim'),
+                    'class' => 'marb10p',
                     'validators' => array(array('notEmpty', true,
                         array('messages' => array('isEmpty' => 'Proszę wpisać login'))),
                         array('StringLength', true, array('min' => 3, 'max' => 20)),
@@ -32,6 +33,7 @@ class Application_Form_Login extends Zend_Form
                 'password',
                 array(
                     'label' => 'Hasło',
+                    'class' => 'marb10p',
                     'required' => true,
                     'validators' => array(array('notEmpty', true,
                         array('messages' => array('isEmpty' => 'Proszę wpisać hasło'))),
@@ -50,7 +52,7 @@ class Application_Form_Login extends Zend_Form
                 'submit', 
                 array(
                     'label' => 'Zaloguj się',
-                    'class' => 'btn btn-primary'
+                    'class' => 'btn btn-success bg-g2 h35p'
                 )
         );
         $this->submit->setDecorators(array('ViewHelper'));
