@@ -127,12 +127,6 @@ a{text-decoration: none;}
 
 /* footer fun */
 
-html, 
-body,
-body > div{
-    height: 100%;
-}
-body > div{ height: auto; min-height: 100%; }
 
 #f {
  clear: both;
