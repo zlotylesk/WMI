@@ -176,7 +176,10 @@ class IndexController extends Application_My_Controller
                 $data['status'] = 1;
                 $Ad = new Application_Model_DbTable_Ads();
                 $id = $Ad->insert($data);
-                return $this->_helper->redirector('index');
+                //return $this->_helper->redirector('index');
+                $this -> getHelper('viewRenderer') -> setNoRender(true);
+                echo $this -> view -> render('index/_createSuccess.phtml');
+                return; 
             }
             $this->view->form = $form;
         }
@@ -202,8 +205,17 @@ class IndexController extends Application_My_Controller
         if ($username->user_id != $obj->author && $username->role != 'admin') {
                 return $this->_helper->redirector('accessrequired', 'index');
             }
-        $obj->delete();
-        return $this->_helper->redirector('index');
+        $post = $this->getRequest()->getPost();  
+        $form = new Application_Form_Delete();
+        if ($post && $form->isValid($post)) 
+        {
+            $obj->delete(); 
+            //$this->_helper->redirector->goToSimple('index', 'index');
+            $this -> getHelper('viewRenderer') -> setNoRender(true);
+            echo $this -> view -> render('index/_deleteSuccess.phtml');
+            return; 
+        }
+        $this->view->Delete = $form;
     }
 
     public function editAction()
@@ -247,7 +259,10 @@ class IndexController extends Application_My_Controller
                 $data = $form->getValues();
                 $obj->setFromArray($data);
                 $obj->save();
-                return $this->_helper->redirector('index');
+                //return $this->_helper->redirector('index');
+                $this -> getHelper('viewRenderer') -> setNoRender(true);
+                echo $this -> view -> render('index/_editSuccess.phtml');
+                return; 
             }
             $this->view->form = $form;
         }

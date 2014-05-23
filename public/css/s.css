@@ -32,6 +32,7 @@ a{text-decoration: none;}
 .w150p{width: 150px;}
 .w150p{width: 190px;}
 .w1140p{width: 1140px;}
+.w1100p{width: 1100px;}
 .miw150p{min-width: 150px;}
 .miw200p{min-width: 200px;}
 
@@ -41,6 +42,7 @@ a{text-decoration: none;}
 .h25p{height: 25px;}
 .h100p{height: 100px;}
 .h150p{height: 150px;}
+.h200p{height: 200px;}
 .minh100{min-height: 100%;}
 
 .l10p{left:10px;}

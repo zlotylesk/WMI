@@ -18,6 +18,7 @@ class Application_My_Plugin_AccessControl extends Zend_Controller_Plugin_Abstrac
         $control->allow('user', 'index', 'create');
         $control->allow('user', 'index', 'createform');
         $control->allow('user', 'index', 'edit');
+        $control->allow('user', 'index', 'delete');
         $control->allow('user', 'index', 'showuserads');
         $control->allow('user', 'index', 'update');
 
