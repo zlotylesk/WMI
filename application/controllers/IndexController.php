@@ -154,6 +154,10 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $this->view->form = new Application_Form_Ads();
         $url = $this->view->url(array('controller' => 'index', 'action' => 'create'));
         $this->view->form->setAction($url);
+        // tinymce begin
+        $this->Add_Js(array('tinymce/tinymce.min','tinymce.init'));
+        $this->AddCSS("skin.min",'/lightgray');
+        // tinymce end
         // datepicker begin
         $this->Add_Js(array('jquery-ui-1.10.4.custom.min','exp'));
         $this->AddCSS("jquery-ui-1.10.4.custom.min",'/smoothness');
@@ -239,6 +243,8 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $this->view->form->populate($obj->toArray());
         $url = $this->view->url(array('action' => 'update', 'id' => $id));
         $this->view->form->setAction($url);
+                $this->Add_Js(array('tinymce/tinymce.min','tinymce.init'));
+                $this->AddCSS("skin.min",'/lightgray');
 		$this->Add_Js(array('jquery-ui-1.10.4.custom.min','exp'));
 		$this->AddCSS("jquery-ui-1.10.4.custom.min",'/smoothness');
         $this->view->object = $obj;
@@ -265,6 +271,10 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                 return; 
             }
             $this->view->form = $form;
+            $this->Add_Js(array('tinymce/tinymce.min','tinymce.init'));
+            $this->AddCSS("skin.min",'/lightgray');
+            $this->Add_Js(array('jquery-ui-1.10.4.custom.min','exp'));
+            $this->AddCSS("jquery-ui-1.10.4.custom.min",'/smoothness');
         }
         else {
             throw new Zend_Controller_Action_Exception('Błędny adres', 404);
