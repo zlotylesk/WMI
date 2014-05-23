@@ -18,7 +18,7 @@
         <?php /* --- tło w postaci grafiki --- */ ?>
         <img class="" src="<?php echo $this->baseUrl(); ?>/img/overlay.png" alt="">
       <div class="carousel-caption t0">
-          <h1 class="mart120p"><?php echo $s['topic'] ?></h1>
+          <h1 class="mart120p"><a class="d-b w100 h100 p-a fc-f hov" href="<?php echo $this->url(array('action' => 'show', 'id' => $s['ad_id'])) ?>"><?php echo $s['topic'] ?></a></h1>
       </div>
     </div>
       <?php } ?>
