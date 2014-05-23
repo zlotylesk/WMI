@@ -11,7 +11,7 @@ class Application_Form_Ads extends Zend_Form
                 'topic',
                 array(
                     'label' => 'Temat',
-                    'class' => 'w930p',
+                    'class' => 'w930p marb10p',
                     'required' => true,
                     'filters' => array('StringTrim'),
                     'validators' => array(
