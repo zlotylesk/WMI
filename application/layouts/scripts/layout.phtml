@@ -35,7 +35,7 @@
                     </a>
                     <?php endif; ?>
                 </div>
-            </div>
+            </div>	
             <div class="clf"></div>
             <!-- CONTENT -->
             <!--
@@ -93,6 +93,15 @@ Etiam yo urna fo shizzle nisl. Shut the shizzle up quizzle arcu. Yippiyo phat, i
                 </form>
             </div>
              <div class="clf"></div>
+             			<?php if($this->identity): ?>
+			<div class="p-f fl l0 t10 fw-b bg-0 o2 clearDeco wnw">
+			    <a class="fl fs50p padlr30p fc-f c-a0" href="<?php echo $this->url(array('action' => 'createform'))?>">+</a>
+			    <a class="fc-f oh w0 d-ib h100 p-r" href="<?php echo $this->url(array('action' => 'createform'))?>">
+			        <span class="fl fs30p pad10p p-r wnw">Dodaj ogłoszenie</span>
+			    </a>
+			    <div class="d-n clf"></div>
+			</div>
+			<?php endif; ?>
         </div>
     </body>
 </html>

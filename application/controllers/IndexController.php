@@ -227,6 +227,8 @@ class IndexController extends Application_My_Controller
         $this->view->form->populate($obj->toArray());
         $url = $this->view->url(array('action' => 'update', 'id' => $id));
         $this->view->form->setAction($url);
+		$this->Add_Js(array('jquery-ui-1.10.4.custom.min','exp'));
+		$this->AddCSS("jquery-ui-1.10.4.custom.min",'/smoothness');
         $this->view->object = $obj;
         
     }

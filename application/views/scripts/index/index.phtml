@@ -19,7 +19,6 @@
         <img class="" src="<?php echo $this->baseUrl(); ?>/img/overlay.png" alt="">
       <div class="carousel-caption t0">
           <h1 class="mart120p"><?php echo $s['topic'] ?></h1>
-          <h3><?php echo $s['content'] ?></h3>
       </div>
     </div>
       <?php } ?>
@@ -158,7 +157,11 @@ foreach ($this->ad_sections as $k => $data) { ?>
     <a class="d-b w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
         <div class="padlr20p"><?php /* --- topic & content --- */ ?>
             <h4><?php echo $ad['topic'] ?></h4>
-            <p><?php echo $ad['content'] ?></p>
+            <p><?php if (strlen($ad['content']) <=300){
+                   echo $ad['content'];
+                }else {
+                   echo $string2 = substr($ad['content'], 0, 300);echo'(...)';
+                } ?></p>
         </div>
     </a>
     <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
@@ -203,15 +206,6 @@ foreach ($this->ad_sections as $k => $data) { ?>
 <hr class="clf">
 <?php }?>
 <?php } ?>
-<?php if($this->identity): ?>
-<div class="p-f fl l0 t10 fw-b bg-0 o2 clearDeco wnw">
-    <a class="fl fs50p padlr30p fc-f c-a0" href="<?php echo $this->url(array('action' => 'createform'))?>">+</a>
-    <a class="fc-f oh w0 d-ib h100 p-r" href="<?php echo $this->url(array('action' => 'createform'))?>">
-        <span class="fl fs30p pad10p p-r wnw">Dodaj ogłoszenie</span>
-    </a>
-    <div class="d-n clf"></div>
-</div>
-<?php endif; ?>
 <?php /*
  * ---- OLD SHIT IS OLD ---- stary layout indexu!!!! ----
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
