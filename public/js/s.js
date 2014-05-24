@@ -7,4 +7,5 @@ $( document ).ready(function() {
         e.preventDefault();
         $(' + form',this).toggle();
     });
+	$('#exp').val($('#exp').val().substring(0, 10));
 });

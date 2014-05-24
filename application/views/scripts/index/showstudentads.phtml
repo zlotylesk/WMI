@@ -21,11 +21,13 @@
                     </a>
                 <!-- POST CONTENT -->
             
-                <p class="padl40p"><?php if (strlen($item['content']) <=200){
+                <div class="padl40p">
+                <?php if (strlen($item['content']) <=200){
                    echo $item['content'];
                 }else {
                    echo $string2 = substr($item['content'], 0, 200);echo'(...)';
-                } ?></p>
+                } ?>
+                </div>
                 <span class="d-b h3p bg-g2 marb4p"></span>
                 <div class="mar10p fr">
 

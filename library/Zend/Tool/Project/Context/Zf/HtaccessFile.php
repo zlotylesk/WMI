@@ -69,6 +69,8 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -s [OR]
 RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteRule ^.*$ - [NC,L]
 # The following rewrites all other queries to index.php. The 
 # condition ensures that if you are using Apache aliases to do
@@ -79,6 +81,7 @@ RewriteRule ^.*$ - [NC,L]
 RewriteCond %{REQUEST_URI}::$1 ^(/.+)(.+)::\2$
 RewriteRule ^(.*)$ - [E=BASE:%1]
 RewriteRule ^(.*)$ %{ENV:BASE}index.php [NC,L]
+RewriteRule ^(.*)$ index.php/$1
 
 EOS;
         return $output;
