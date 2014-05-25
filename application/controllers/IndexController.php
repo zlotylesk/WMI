@@ -103,29 +103,11 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
 
     public function showemployeeadsAction()
     {
-//        $db = Zend_Db_Table::getDefaultAdapter();
-//
-//        $employee = 'employee';
-//        $ads = $db->select()
-//                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
-//                ->join(array('u' => 'users'), 'a.author = u.user_id')
-//                ->where('u.role = ?', $employee);
-//
-//        $this->view->ads = $db->fetchAll($ads);
         $this->view->ads = $this->GetAdsFor();
     }
 
     public function showstudentadsAction()
     {
-//        $db = Zend_Db_Table::getDefaultAdapter();
-//
-//        $student = 'user';
-//        $ads = $db->select()
-//                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
-//                ->join(array('u' => 'users'), 'a.author = u.user_id')
-//                ->where('u.role = ?', $student);
-//
-//        $this->view->ads = $db->fetchAll($ads);
         $this->view->ads = $this->GetAdsFor('user');
     }
 
