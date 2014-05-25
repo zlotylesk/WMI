@@ -17,13 +17,13 @@ a{text-decoration: none;}
 .user-menu *{float: left; vertical-align: top;}
 
 .b-cont{
+    word-wrap: break-word;
     border-width: 0 0 0 0;
     border-style: solid;
     border-color: #231f20;
     padding: 10px 30px 10px 0;
     box-shadow: 10px 10px 25px rgba(0,0,0,.2);
 }
-
 
 .w10p{width: 10px;}
 .w20p{width: 20px;}

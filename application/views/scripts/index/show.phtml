@@ -1,7 +1,7 @@
 <?php if ($this->object['status'] != 0): ?>
 <div>
             <!-- CONTENT -->
-            <div class="b-cont mar40p">
+            <div class="b-cont mar40p ">
 
                 <!-- POST TITLE -->
            
@@ -11,8 +11,11 @@
                     <span class="d-b h3p bg-g2 marr50p marb4p"></span>
                 </h1>
                 <!-- POST CONTENT -->
-                
-                <p class="padl40p"><?php echo $this->object['content'] ?> </p>
+                <div class="padl40p">
+
+                    <?php echo $this->object['content']?> 
+
+                </div>
                 <span class="d-b h3p bg-g2 marb4p"></span>
                 <div class="mar10p fr">
     <?php if($this->identity): ?>
