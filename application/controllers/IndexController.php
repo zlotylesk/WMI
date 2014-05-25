@@ -10,7 +10,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
 
         if ($identity) {
             $this->view->identity = $identity;
-        }    
+        }
     }
 
     public function indexAction()
@@ -19,10 +19,10 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $this->view->ads = $Ad->fetchAll();
         // obiekt z filtrem na slideshow
         $this->view->slideshow = $Ad->fetchAll(null,'ad_id DESC',10);
-        
+
         $e_page=1;
         if($this->getRequest()->getParam('ep')!=null) $e_page = $this->getRequest()->getParam('ep');
-        $u_page = 1; 
+        $u_page = 1;
         if($this->getRequest()->getParam('up')!=null) $u_page = $this->getRequest()->getParam('up');
         $e_ad_count=9;
         $u_ad_count=9;
@@ -33,7 +33,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                 'ads' => $this->GetAdsFor('employee','DESC',$e_ad_count,$e_page),
                 'page' => $e_page,
                 'count' => $this->GetCount(),
-                
+
             ),
             'up' => array(
                 'section_name' => 'Ogłoszenia studentów',
@@ -47,25 +47,25 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $data['up']['pages']=ceil($data['up']['count']/$u_ad_count);
         $this->view->ad_sections = $data;
     }
-    
+
     public function searchAction()
     {
         $db = Zend_Db_Table::getDefaultAdapter();
 
         $query = '';
         $this->view->searchValue = $query;
-        
-        if (isset($_GET['searchValue'])) 
+
+        if (isset($_GET['searchValue']))
         {
             $searchValue = $_GET['searchValue'];
             $tmp = explode(' ', $searchValue);
             $query = '%'.implode('%', $tmp).'%';
-            
+
             $this->view->searchValue = $searchValue;
         }
-        
+
         if ($_GET['filter'] == 'topic')
-        {   
+        {
             $search = $db->select()
                     ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
                     ->join(array('u' => 'users'), 'a.author = u.user_id')
@@ -75,8 +75,8 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
 
             $this->view->search = $db->fetchAll($search);
         }
-        
-        elseif ($_GET['filter'] == 'content') 
+
+        elseif ($_GET['filter'] == 'content')
         {
             $search = $db->select()
                     ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
@@ -87,7 +87,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
 
             $this->view->search = $db->fetchAll($search);
         }
-        
+
         else
         {
             $search = $db->select()
@@ -100,51 +100,51 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
             $this->view->search = $db->fetchAll($search);
         }
     }
-    
+
     public function showemployeeadsAction()
     {
 //        $db = Zend_Db_Table::getDefaultAdapter();
-//        
+//
 //        $employee = 'employee';
 //        $ads = $db->select()
 //                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
 //                ->join(array('u' => 'users'), 'a.author = u.user_id')
 //                ->where('u.role = ?', $employee);
-//            
+//
 //        $this->view->ads = $db->fetchAll($ads);
         $this->view->ads = $this->GetAdsFor();
     }
-    
+
     public function showstudentadsAction()
     {
 //        $db = Zend_Db_Table::getDefaultAdapter();
-//        
+//
 //        $student = 'user';
 //        $ads = $db->select()
 //                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
 //                ->join(array('u' => 'users'), 'a.author = u.user_id')
 //                ->where('u.role = ?', $student);
-//            
+//
 //        $this->view->ads = $db->fetchAll($ads);
         $this->view->ads = $this->GetAdsFor('user');
     }
-    
+
     public function showuseradsAction()
     {
         $db = Zend_Db_Table::getDefaultAdapter();
-        
+
         $auth = Zend_Auth::getInstance();
         $identity = $auth->getIdentity();
-        
+
         if($identity)
-        {      
+        {
             $ads = $db->select()
                     ->from(array('a' => 'ads'))
                     ->where('a.author = ?', $identity->user_id)
                     ->join(array('u' => 'users'), 'a.author = u.user_id')
                     ->group('a.ad_id')
-                    ->order('a.datetime DESC'); 
-           
+                    ->order('a.datetime DESC');
+
             $this->view->ads = $db->fetchAll($ads);
         }
     }
@@ -168,7 +168,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
     {
         $auth = Zend_Auth::getInstance();
         $identity = $auth->getIdentity();
-    
+
         if ($this->getRequest()->isPost()){
             $form = new Application_Form_Ads();
             if ($form->isValid($this->getRequest()->getPost()))
@@ -183,7 +183,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                 //return $this->_helper->redirector('index');
                 $this -> getHelper('viewRenderer') -> setNoRender(true);
                 echo $this -> view -> render('index/_createSuccess.phtml');
-                return; 
+                return;
             }
             $this->view->form = $form;
         }
@@ -209,15 +209,15 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         if ($username->user_id != $obj->author && $username->role != 'admin') {
                 return $this->_helper->redirector('accessrequired', 'index');
             }
-        $post = $this->getRequest()->getPost();  
+        $post = $this->getRequest()->getPost();
         $form = new Application_Form_Delete();
-        if ($post && $form->isValid($post)) 
+        if ($post && $form->isValid($post))
         {
-            $obj->delete(); 
+            $obj->delete();
             //$this->_helper->redirector->goToSimple('index', 'index');
             $this -> getHelper('viewRenderer') -> setNoRender(true);
             echo $this -> view -> render('index/_deleteSuccess.phtml');
-            return; 
+            return;
         }
         $this->view->Delete = $form;
     }
@@ -248,7 +248,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
 		$this->Add_Js(array('jquery-ui-1.10.4.custom.min','exp'));
 		$this->AddCSS("jquery-ui-1.10.4.custom.min",'/smoothness');
         $this->view->object = $obj;
-        
+
     }
 
     public function updateAction()
@@ -268,7 +268,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                 //return $this->_helper->redirector('index');
                 $this -> getHelper('viewRenderer') -> setNoRender(true);
                 echo $this -> view -> render('index/_editSuccess.phtml');
-                return; 
+                return;
             }
             $this->view->form = $form;
             $this->Add_Js(array('tinymce/tinymce.min','tinymce.init'));
@@ -286,11 +286,11 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $id = $this->getRequest()->getParam('id');
         $Ad = new Application_Model_DbTable_Ads();
         $db = Zend_Db_Table::getDefaultAdapter();
-        
+
         $author = $db->select()
                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
                ->join(array('u' => 'users'), 'a.author = u.user_id');
-        
+
         $obj = $Ad->find($id)->current();
         if (!$obj){
             throw new Zend_Controller_Action_Exception('Błędny adres', 404);
@@ -298,12 +298,12 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $this->view->object = $obj;
         $this->view->author = $db->fetchRow($author);
     }
-    
+
     public function accessrequiredAction()
     {
-        
+
     }
-     
+
     public function newsAction()
     {
         $this->_helper->layout()->setLayout('news');
@@ -322,9 +322,9 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $r =  new Application_Model_DbTable_Ads();
         return $r->fetchAll(null, null, $range);
     }
-    
+
     function GetAdsObject($range=5){
-        return (object) $this->GetAds($range); 
+        return (object) $this->GetAds($range);
     }
     function Add_CSS($css_array) {
         if(is_array($css_array)){
@@ -335,15 +335,15 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
             $this->AddCSS($css_array, "");
         }
     }
-    
+
     function AddCSS($css_name="",$sub_path="") {
-        $this->_helper->layout()->getView()->headLink()->appendStylesheet($this->_helper->layout()->getView()->baseUrl("/css$sub_path/$css_name.css")); 
+        $this->_helper->layout()->getView()->headLink()->appendStylesheet($this->_helper->layout()->getView()->baseUrl("/css$sub_path/$css_name.css"));
     }
-    
+
     function AddJs($js_name="",$sub_path=""){
         $this->_helper->layout()->getView()->headScript()->appendFile($this->_helper->layout()->getView()->baseUrl("/js$sub_path/$js_name.js"));
     }
-    
+
     function Add_Js($js_array) {
         if(is_array($js_array)){
             foreach ($js_array as $js) {
@@ -353,7 +353,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
             $this->AddJs($js_array,"");
         }
     }
-    
+
     function GetAdsFor($role="employee",$order='DESC', $range=null, $page = 1) {
         $db = Zend_Db_Table::getDefaultAdapter();
         $ads = $db->select()
@@ -364,9 +364,9 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         if($role) $ads->where ('u.role = ?', $role);
         return $db->fetchAll($ads);
     }
-    
+
     function GetCount($role='employee') {
         $db = Zend_Db_Table::getDefaultAdapter();
-        return $db->fetchOne("SELECT COUNT(*) AS count FROM ads JOIN users ON ads.author = users.user_id WHERE users.role = '$role'");
+        return $db->fetchOne("SELECT COUNT(*) AS count FROM ads JOIN users ON ads.author = users.user_id WHERE users.role = '$role' AND ads.status = 1");
     }
 }
