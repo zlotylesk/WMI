@@ -27,21 +27,8 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $e_ad_count=9;
         $u_ad_count=9;
         $data = array(
-            'ep' => array(
-                'section_name' => 'Ogłoszenia pracowników',
-                'nr_per_page' => $e_ad_count,
-                'ads' => $this->GetAdsFor('employee','DESC',$e_ad_count,$e_page),
-                'page' => $e_page,
-                'count' => $this->GetCount(),
-
-            ),
-            'up' => array(
-                'section_name' => 'Ogłoszenia studentów',
-                'nr_per_page' => $u_ad_count,
-                'ads' => $this->GetAdsFor('user','DESC',$u_ad_count,$u_page),
-                'page' => $u_page,
-                'count' => $this->GetCount('user'),
-            )
+            'ep' => $this->getAddsArray($e_ad_count, 'employee', $e_page,'Ogłoszenia pracowników'),
+            'up' => $this->getAddsArray($u_ad_count, 'user', $u_page,'Ogłoszenia studentów')
         );
         $data['ep']['pages']=ceil($data['ep']['count']/$e_ad_count);
         $data['up']['pages']=ceil($data['up']['count']/$u_ad_count);
@@ -103,12 +90,22 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
 
     public function showemployeeadsAction()
     {
-        $this->view->ads = $this->GetAdsFor();
+        $e_page=1;
+        if($this->getRequest()->getParam('page')!=null) $e_page = $this->getRequest()->getParam('page');
+        $e_ad_count=25;
+        $data =  $this->getAddsArray($e_ad_count, 'employee', $e_page);
+        $data['pages']=ceil($data['count']/$e_ad_count);
+        $this->view->ads = $data;
     }
 
     public function showstudentadsAction()
     {
-        $this->view->ads = $this->GetAdsFor('user');
+        $e_page=1;
+        if($this->getRequest()->getParam('page')!=null) $e_page = $this->getRequest()->getParam('page');
+        $e_ad_count=25;
+        $data =  $this->getAddsArray($e_ad_count, 'user', $e_page);
+        $data['pages']=ceil($data['count']/$e_ad_count);
+        $this->view->ads = $data;
     }
 
     public function showuseradsAction()
@@ -336,7 +333,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         }
     }
 
-    function GetAdsFor($role="employee",$order='DESC', $range=null, $page = 1) {
+    function GetAdsFor($role="employee",$order='DESC', $range=null, $page = 1,$status=1,$user_id=false) {
         $db = Zend_Db_Table::getDefaultAdapter();
         $ads = $db->select()
                 ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
@@ -344,11 +341,26 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                 ->order("ad_id $order");
         if($range) $ads->limit ($range,($page-1)*$range);
         if($role) $ads->where ('u.role = ?', $role);
+        if($status) {$ads->where('a.status = ?',$status);}
+        else {$ads->where('a.status = ?',1)->where('a.status = ?',0);}
+        if($user_id) $ads->where('u.user_id = ?',$user_id);
         return $db->fetchAll($ads);
     }
 
-    function GetCount($role='employee') {
+    function GetCount($role='employee',$status=1) {
         $db = Zend_Db_Table::getDefaultAdapter();
-        return $db->fetchOne("SELECT COUNT(*) AS count FROM ads JOIN users ON ads.author = users.user_id WHERE users.role = '$role' AND ads.status = 1");
+        $str ="SELECT COUNT(*) AS count FROM ads JOIN users ON ads.author = users.user_id WHERE users.role = '$role'";
+        if($status) $str.=" AND ads.status = $status";
+        return $db->fetchOne($str);
+    }
+    
+    private function getAddsArray($nr_per_page, $role, $page_number, $section_name='Ogłoszenia', $sort = 'DESC', $status=1) {
+        return array(
+                'section_name' => $section_name,
+                'nr_per_page' => $nr_per_page,
+                'ads' => $this->GetAdsFor($role,$sort,$nr_per_page,$page_number,$status),
+                'page' => $page_number,
+                'count' => $this->GetCount($role,$status),
+            );
     }
 }
