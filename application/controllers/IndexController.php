@@ -342,7 +342,6 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         if($range) $ads->limit ($range,($page-1)*$range);
         if($role) $ads->where ('u.role = ?', $role);
         if($status) {$ads->where('a.status = ?',$status);}
-        else {$ads->where('a.status = ?',1)->where('a.status = ?',0);}
         if($user_id) $ads->where('u.user_id = ?',$user_id);
         return $db->fetchAll($ads);
     }
