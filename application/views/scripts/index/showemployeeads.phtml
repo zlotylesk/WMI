@@ -3,7 +3,7 @@
     <strong>Ogłoszenia pracowników</strong>
 </p> 
 
-<?php foreach ($this->ads['ads'] as $item): ?>
+<?php foreach ($this->ads as $item): ?>
 <?php if ($item['status'] != 0): ?>
 <div>
             <!-- CONTENT -->
@@ -77,41 +77,3 @@
 </div>
 <?php endif; ?>
 <?php endforeach; ?>
-<?php $data = $this->ads;
-$base = array('controller'=>'index','action'=>'showemployeeads');
-if($data['nr_per_page']<$data['count']){ ?>
-<div class="clf ta-c">
-    <p class="padlr30p b3psr3 clearDeco d-ib bg-r3 fc-f fw-b">
-    <?php 
-    if ($data['page']!=1){
-    ?>
-        <a class="fc-f marlr6p" href="<?php echo $this->url($base,null,true).'/page/'.($data['page']-1); ?>" >&lt;&lt;</a>
-    <?php
-    }
-    for ($index = 1; $index <= $data['pages']; $index++) { 
-        if($index==$data['page']){ ?>
-        <span class="fc-f padlr6p bg-r3"><?php echo $index; ?></span>
-        <?php }else{
-        ?>
-    <a class="fc-f marlr6p" href="<?php echo $this->url($base,null,true).'/page/'.$index; ?>"><?php echo $index; ?></a>
-        <?php }
-        } if ($data['page']!=$data['pages']){
-    ?>
-    <a class="fc-f marlr6p" href="<?php echo $this->url($base,null,true).'/page/'.($data['page']+1); ?>" >&gt;&gt;</a>
-    <?php
-    } ?>
-    </p>
-</div>
-<hr>
-<?php } /*
-<?php if($this->ads['pages']>1){ ?>
-
-<div class="clf ta-c">
-    <p class="padlr30p b3psr3 clearDeco d-ib bg-r3 fc-f fw-b">
-            <span class="fc-f padlr6p bg-r3">1</span>
-            <a class="fc-f marlr6p" href="/WMI/public/index/index/ep/2">2</a>
-            <a class="fc-f marlr6p" href="/WMI/public/index/index/ep/2" >&gt;&gt;</a>
-        </p>
-</div>
-<?php }
-echo var_dump($this->ads);

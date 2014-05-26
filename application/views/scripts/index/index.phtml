@@ -37,6 +37,111 @@
 <?php /* --- carousel stop --- */ ?>
 <?php /* --- layout indexu --- */ ?>
 <hr>
+<?php /* --- przestarzałe ---
+<h3>Ogłoszenia pracowników</h3>
+<hr>
+<?php foreach($this->faculty_ads as $ad): ?>
+<div class="h360p w40 fl p-r mar5 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
+    <a class="d-b w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
+        <div class="padlr20p">
+            <h4><?php echo $ad['topic'] ?></h4>
+            <p><?php echo $ad['content'] ?></p>
+        </div>
+    </a>
+    <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
+        <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
+        <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span>
+    <?php if($this->identity): ?>
+        <?php if($this->identity->user_id == $ad['author']): ?>
+        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
+        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
+        <?php endif; ?>
+    <?php endif; ?>
+    </div>
+</div>
+<?php endforeach; ?>
+<?php if($this->faculty_nr_per_page<$this->faculty_count){ ?>
+<div class="clf ta-c">
+    <p class="padlr30p b3psr3 clearDeco d-ib bg-r3 fc-f fw-b">
+    <?php 
+    if(intval($this->students_page)>1) $url_array['up']=$this->students_page;
+    if ($this->faculty_page!=1){
+    ?>
+        <a class="fc-f marlr6p" href="<?php $url_array['ep']=$this->faculty_page-1; echo $this->url($url_array); ?>" >&lt;&lt;</a>
+    <?php
+    }
+    for ($index = 1; $index <= $this->faculty_pages; $index++) { 
+        if($index==$this->faculty_page){ ?>
+        <span class="fc-f padlr6p bg-r3"><?php echo $index; ?></span>
+        <?php }else{
+       $url_array['ep']=$index;
+        ?>
+    <a class="fc-f marlr6p" href="<?php echo $this->url($url_array); ?>"><?php echo $index; ?></a>
+        <?php }
+        } if ($this->faculty_page!=$this->faculty_pages){
+    ?>
+    <a class="fc-f marlr6p" href="<?php $url_array['ep']=$this->faculty_page+1; echo $this->url($url_array); ?>" >&gt;&gt;</a>
+    <?php
+    } ?>
+    </p>
+</div>
+<hr>
+<?php }else{ ?>
+<hr class="clf">
+<?php }?>
+<h3>Ogłoszenia studentów</h3>
+<hr>
+<?php foreach($this->students_ads as $ad): ?>
+<div class="h360p w40 fl p-r mar5 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
+    <a class="d-b w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
+        <div class="padlr20p">
+            <h4><?php echo $ad['topic'] ?></h4>
+            <p><?php echo $ad['content'] ?></p>
+        </div>
+    </a>
+    <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
+        <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
+        <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span>
+    <?php if($this->identity): ?>
+        <?php if($this->identity->user_id == $ad['author']): ?>
+        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
+        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
+        <?php endif; ?>
+    <?php endif; ?>      
+    </div>
+</div>
+<?php endforeach; ?>
+<?php if($this->students_nr_per_page<$this->students_count){ ?>
+<div class="clf ta-c">
+    <p class="padlr30p b3psr3 clearDeco d-ib bg-r3 fc-f fw-b">
+    <?php 
+    if(intval($this->faculty_page)>1) $url_array['ep']=$this->faculty_page;
+    if ($this->students_page!=1){
+    ?>
+        <a class="fc-f marlr6p" href="<?php $url_array['up']=$this->students_page-1; echo $this->url($url_array); ?>" >&lt;&lt;</a>
+    <?php
+    }
+    for ($index = 1; $index <= $this->students_pages; $index++) { 
+        if($index==$this->students_page){ ?>
+        <span class="fc-f padlr6p bg-r3"><?php echo $index; ?></span>
+        <?php }else{
+       $url_array['up']=$index;
+        ?>
+    <a class="fc-f marlr6p" href="<?php echo $this->url($url_array); ?>"><?php echo $index; ?></a>
+        <?php }
+        } if ($this->students_page!=$this->students_pages){
+    ?>
+    <a class="fc-f marlr6p" href="<?php $url_array['up']=$this->students_page+1; echo $this->url($url_array); ?>" >&gt;&gt;</a>
+    <?php
+    } ?>
+    </p>
+</div>
+<hr>
+<?php }else{ ?>
+<hr class="clf">
+<?php }?>
+*/ ?>
+
 <?php 
 $urls = array('action'=>'index');
 foreach ($this->ad_sections as $k => $v) {
@@ -101,4 +206,43 @@ foreach ($this->ad_sections as $k => $data) { ?>
 <?php }else{ ?>
 <hr class="clf">
 <?php }?>
-<?php } 
+<?php } ?>
+<?php /*
+ * ---- OLD SHIT IS OLD ---- stary layout indexu!!!! ----
+<p class="lead" style="color: #3a87ad; text-decoration: underline">
+    <strong>Najnowsze ogłoszenia</strong>
+</p> 
+<?php foreach($this->ads as $ad): ?>
+<div class="br20 bg-c4 pad10p martb10p ">
+    <div class="bg-c2 mar10p fs20p pad20p bs5 br20 fw-b">
+        <a href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>"><?php echo $ad['topic'] ?></a>
+    </div>
+    <div class="pad20p mar10p  bg-c1 bs5 br10"> <!-- treść ogłoszenia -->
+        <?php echo $ad['content'] ?>
+    </div> 
+    <div class="padlr20p bg-c2 mar10p br10"> <!-- data zamieszczenia-->
+        <?php echo $ad['datetime'] ?>
+    </div> 
+    <!-- poniżej blok operacji -->
+    <div class="mar10p">
+        <a href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
+            <button>Szczegóły</button>
+        </a>
+        <?php if($this->identity): ?>
+        <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">
+            <button>Edytuj</button>
+        </a>
+        <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">
+            <button>Usuń</button>
+        </a>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endforeach; ?>
+
+<?php if($this->identity): ?>
+<a href="<?php echo $this->url(array('action' => 'createform'))?>">
+    <button>Dodaj nowy rekord</button>
+</a>
+<?php endif; ?>
+ */ ?>
