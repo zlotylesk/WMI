@@ -31,7 +31,7 @@
                 <div class="mar10p fr">
 
                     <?php if($this->identity): ?>
-                        <?php if($this->identity->user_id == $item['author'] || $this->identity->role == 'admin'): ?>
+                        <?php if($this->identity == $item['author'] || $this->identity == 'admin'): ?>
                             <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $item['ad_id'])) ?>">
                                 <button class="btn btn-success bg-g2">Edytuj</button>
                             </a>

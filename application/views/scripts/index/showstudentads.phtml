@@ -2,8 +2,7 @@
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
     <strong>Ogłoszenia studentów</strong>
 </p> 
-
-<?php foreach ($this->ads['ads'] as $item): ?>
+<?php foreach ($this->ads as $item): ?>
 <?php if ($item['status'] != 0): ?>
 <div>
             <!-- CONTENT -->
@@ -76,32 +75,5 @@
 */ ?>
 </div>
 <?php endif; ?>
-<?php endforeach;
-$data = $this->ads;
-$base = array('controller'=>'index','action'=>'showstudentads');
-if($data['nr_per_page']<$data['count']){ ?>
-<div class="clf ta-c">
-    <p class="padlr30p b3psr3 clearDeco d-ib bg-r3 fc-f fw-b">
-    <?php 
-    if ($data['page']!=1){
-    ?>
-        <a class="fc-f marlr6p" href="<?php echo $this->url($base,null,true).'/page/'.($data['page']-1); ?>" >&lt;&lt;</a>
-    <?php
-    }
-    for ($index = 1; $index <= $data['pages']; $index++) { 
-        if($index==$data['page']){ ?>
-        <span class="fc-f padlr6p bg-r3"><?php echo $index; ?></span>
-        <?php }else{
-        ?>
-    <a class="fc-f marlr6p" href="<?php echo $this->url($base,null,true).'/page/'.$index; ?>"><?php echo $index; ?></a>
-        <?php }
-        } if ($data['page']!=$data['pages']){
-    ?>
-    <a class="fc-f marlr6p" href="<?php echo $this->url($base,null,true).'/page/'.($data['page']+1); ?>" >&gt;&gt;</a>
-    <?php
-    } ?>
-    </p>
-</div>
-<hr>
-<?php }
+<?php endforeach; ?>
 

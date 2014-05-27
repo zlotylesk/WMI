@@ -32,6 +32,7 @@
                         <p class="padlr20p ta-c">Moje ogłoszenia</p>
                         <p class="bg-0 pad0 lh0 miw200p h5p"><span class="d-ib w20p h5p bg-g1 vat"></span></p>
                     </a>
+					<span><b>Zalogowano:</b> <?php $username = explode('\\', $this->identity); echo $username[1]; ?></span>
                     <?php endif; ?>
                 </div>
             </div>	
@@ -66,7 +67,7 @@ Etiam yo urna fo shizzle nisl. Shut the shizzle up quizzle arcu. Yippiyo phat, i
              <!-- USER MENU -->
             <div class="p-f b10p pad10p bg-f5 lh0 user-menu">
                 <?php if($this->identity): ?>
-                <a href="<?php echo $this->url(array('action' => 'createaccount', 'controller' => 'admin')); ?>" class="d-ib ha">
+				<a href="<?php echo $this->url(array('action' => 'createaccount', 'controller' => 'admin')); ?>" class="d-ib ha">
                     <span class="b100 p-a bg-g1 pad fc-f l0 d-n"><b class="pad20p fc-f nw">Ustawienia kont</b></span>
                     <img src="<?php echo $this->baseUrl(''); ?>img/ustawienia.png" class="bor0 h25p w25p marlr5p" alt="Ustawienia" title="Ustawienia">
                 </a>

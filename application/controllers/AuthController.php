@@ -29,14 +29,38 @@ class AuthController extends Zend_Controller_Action //extends Application_My_Con
                 unset($options['ldap_path']);
                 echo var_dump($options);
                 $adapter = new Zend_Auth_Adapter_Ldap($options, $username, $password);
-
-                $result = $auth->authenticate($adapter);
+                
+				$result = $auth->authenticate($adapter);
 
                 if ($result->isValid()) {
                     //$data = $adapter->getResultRowObject(null, array('password', 'salt'));
                     //$auth->getStorage()->write($data);
-                    $auth->getIdentity();
-                    $this->_helper->redirector->goToSimple('index', 'index');
+                $user = new Zend_Auth_Adapter_DbTable (null, 'users', 'username');
+
+                $user->setIdentity($username);
+                $users = new Application_Model_DbTable_Users();
+                $row = $users->select()
+                        ->from('users')
+                        ->where('username = ?', $username);
+                $fetch = $users->fetchRow($row);
+                if (!$fetch)
+                {
+                        $ldap = $adapter->getOptions();
+                        $baseDn = $ldap[server2][baseDn];
+                        $split = split(',', $baseDn);
+                        $group = split('=', $split[0]);
+                        $dane = array(
+                                'username'   => $username,
+                                'role'	=>	$group[1]
+                        );  
+                        $obj = $users->createRow($dane);  
+                        $obj->save();  		
+                }
+                //$identity = $auth->getIdentity();
+                //$splitter = explode('\\', $identity);
+                //$user = $splitter[1];
+
+                $this->_helper->redirector->goToSimple('index', 'index');
                 }
                 else {
                     $form->password->addError('Login lub hasło jest nieprawidłowe');
