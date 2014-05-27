@@ -7,7 +7,15 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
     {
         $auth = Zend_Auth::getInstance();
         $identity = $auth->getIdentity();
-
+        if($auth->getIdentity()){
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $query = $db->select()
+                    ->from(array('u' => 'users', array('user_id' => 'id')))
+                    ->where('u.username = ?',substr(strrchr($auth->getIdentity(),'\\'),1));
+            $o = new stdClass();
+            $o->user_id = $db->fetchOne($query);
+            $identity = $o;
+        }
         if ($identity) {
             $this->view->identity = $identity;
         }
