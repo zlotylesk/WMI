@@ -27,8 +27,8 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $e_ad_count=9;
         $u_ad_count=9;
         $data = array(
-            'ep' => $this->getAddsArray($e_ad_count, 'employee', $e_page,'Ogłoszenia pracowników'),
-            'up' => $this->getAddsArray($u_ad_count, 'user', $u_page,'Ogłoszenia studentów')
+            'ep' => $this->getAddsArray($e_ad_count, 'wmistaff', $e_page,'Ogłoszenia pracowników'),
+            'up' => $this->getAddsArray($u_ad_count, 'students', $u_page,'Ogłoszenia studentów')
         );
         $data['ep']['pages']=ceil($data['ep']['count']/$e_ad_count);
         $data['up']['pages']=ceil($data['up']['count']/$u_ad_count);
@@ -93,7 +93,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $e_page=1;
         if($this->getRequest()->getParam('page')!=null) $e_page = $this->getRequest()->getParam('page');
         $e_ad_count=25;
-        $data =  $this->getAddsArray($e_ad_count, 'employee', $e_page);
+        $data =  $this->getAddsArray($e_ad_count, 'wmistaff', $e_page);
         $data['pages']=ceil($data['count']/$e_ad_count);
         $this->view->ads = $data;
     }
@@ -103,7 +103,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $e_page=1;
         if($this->getRequest()->getParam('page')!=null) $e_page = $this->getRequest()->getParam('page');
         $e_ad_count=25;
-        $data =  $this->getAddsArray($e_ad_count, 'user', $e_page);
+        $data =  $this->getAddsArray($e_ad_count, 'students', $e_page);
         $data['pages']=ceil($data['count']/$e_ad_count);
         $this->view->ads = $data;
     }
@@ -333,7 +333,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         }
     }
 
-    function GetAdsFor($role="employee",$order='DESC', $range=null, $page = 1,$status=1,$user_id=false) {
+    function GetAdsFor($role="wmistaff",$order='DESC', $range=null, $page = 1,$status=1,$user_id=false) {
         $db = Zend_Db_Table::getDefaultAdapter();
         $ads = $db->select()
                 ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
@@ -346,7 +346,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         return $db->fetchAll($ads);
     }
 
-    function GetCount($role='employee',$status=1) {
+    function GetCount($role='wmistaff',$status=1) {
         $db = Zend_Db_Table::getDefaultAdapter();
         $str ="SELECT COUNT(*) AS count FROM ads JOIN users ON ads.author = users.user_id WHERE users.role = '$role'";
         if($status) $str.=" AND ads.status = $status";
