@@ -27,7 +27,6 @@ class AuthController extends Zend_Controller_Action //extends Application_My_Con
                 $config = new Zend_Config_Ini('../application/configs/config.ini','production');
                 $options = $config->ldap->toArray();
                 unset($options['ldap_path']);
-                echo var_dump($options);
                 $adapter = new Zend_Auth_Adapter_Ldap($options, $username, $password);
                 
 				$result = $auth->authenticate($adapter);
