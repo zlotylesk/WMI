@@ -8,6 +8,7 @@ $( document ).ready(function() {
         $(' + form',this).toggle();
     });
     $('.ogloszenie img').removeAttr('width').removeAttr('height');
+    $('.ogloszenie iframe').attr('width','100%').attr('height','80%');
     $('#exp').val($('#exp').val().substring(0, 10));
     
 });
