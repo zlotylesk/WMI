@@ -154,7 +154,7 @@ foreach ($this->ad_sections as $k => $data) { ?>
 <hr>
 <?php foreach($data['ads'] as $ad): ?>
 <?php if($ad['status'] != 0): ?>
-<div class="h250p w27 fl p-r mar3 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
+<div class="ogloszenie h250p w27 fl p-r mar3 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
     <a class="d-b w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
         <div class="padlr20p"><?php /* --- topic & content --- */ ?>
             <h4><?php echo $ad['topic'] ?></h4>

@@ -7,5 +7,7 @@ $( document ).ready(function() {
         e.preventDefault();
         $(' + form',this).toggle();
     });
-	$('#exp').val($('#exp').val().substring(0, 10));
+    $('.ogloszenie img').removeAttr('width').removeAttr('height');
+    $('#exp').val($('#exp').val().substring(0, 10));
+    
 });

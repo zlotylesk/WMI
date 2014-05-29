@@ -102,6 +102,12 @@
   right: 0;
   padding: 11px 27px;
 }
+
+.ogloszenie img{
+    max-width: 100% !important;
+    width: auto !important;
+}
+
 a.hov:hover {color: white; outline: 0; text-decoration: none;}
 .clearCSS *{margin: 0 !important; padding: 0 !important; border: 0 !important;}
 .clearDeco{text-decoration: none !important; color: inherit !important;}
