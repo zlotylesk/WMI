@@ -108,6 +108,21 @@
     width: auto !important;
 }
 
+.lead strong{
+    text-decoration: none !important;
+    font-size: 36px;
+    font-weight: normal !important;
+    padding-left: 40px;
+    padding-right: 70px;
+    padding-bottom: 5px;
+    border-width: 0 0 3px 0;
+    border-color: #d7df21;
+    border-style: solid;
+}
+.lead {
+    text-decoration: none !important;
+}
+
 a.hov:hover {color: white; outline: 0; text-decoration: none;}
 .clearCSS *{margin: 0 !important; padding: 0 !important; border: 0 !important;}
 .clearDeco{text-decoration: none !important; color: inherit !important;}
