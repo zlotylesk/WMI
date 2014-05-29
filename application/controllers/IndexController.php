@@ -259,6 +259,8 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
             $form = new Application_Form_Ads();
             if ($form->isValid($this->getRequest()->getPost())){
                 $data = $form->getValues();
+                $data['exp'] = substr(''.$form->getValue('exp'),0,-8).date('H:i:s');
+                $data['exp'] = $form->getValue('exp')." ".date('H:i:s');
                 $obj->setFromArray($data);
                 $obj->save();
                 //return $this->_helper->redirector('index');
