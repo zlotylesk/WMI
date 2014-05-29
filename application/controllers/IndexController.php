@@ -128,14 +128,13 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
 		
         if($identity)
         {
-            // To nic nie robi :S 
-//            $splitter = explode('\\', $identity);
-//            $user = $splitter[1];
-//            $users = new Application_Model_DbTable_Users();
-//            $row = $users->select()
-//                    ->from('users')
-//                    ->where('username = ?', $user);
-//            $fetch = $users->fetchRow($row);
+            $splitter = explode('\\', $identity);
+            $user = $splitter[1];
+            $users = new Application_Model_DbTable_Users();
+            $row = $users->select()
+                    ->from('users')
+                    ->where('username = ?', $user);
+            $fetch = $users->fetchRow($row);
             $ads = $db->select()
                     ->from(array('a' => 'ads'))
                     ->where('a.author = ?', $this->view->identity->user_id)
