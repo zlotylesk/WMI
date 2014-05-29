@@ -31,14 +31,14 @@
                 <div class="mar10p fr">
 
                     <?php if($this->identity): ?>
-                        <?php if($this->identity == $item['author'] || $this->identity == 'admin'): ?>
+                         <!-- <//?php  if($this->view->identity->username == $item['author'] || $this->identity == 'admin'): ?>-->
                             <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $item['ad_id'])) ?>">
                                 <button class="btn btn-success bg-g2">Edytuj</button>
                             </a>
                             <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $item['ad_id'])) ?>">
                                 <button class="btn btn-danger">Usuń</button>
                             </a>
-                        <?php endif; ?>
+                        <!--<//?php endif; ?>-->
                     <?php endif; ?>
                     </div>
                 <p class="padl40p">Autor: <?php echo $item['username'] ?></p>

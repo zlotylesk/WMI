@@ -117,7 +117,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
     }
 
     public function showuseradsAction()
-    {
+       {
         $db = Zend_Db_Table::getDefaultAdapter();
 
         $auth = Zend_Auth::getInstance();
@@ -125,16 +125,17 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
 		
         if($identity)
         {
-            $splitter = explode('\\', $identity);
-            $user = $splitter[1];
-            $users = new Application_Model_DbTable_Users();
-            $row = $users->select()
-                    ->from('users')
-                    ->where('username = ?', $user);
-            $fetch = $users->fetchRow($row);
+            // To nic nie robi :S 
+//            $splitter = explode('\\', $identity);
+//            $user = $splitter[1];
+//            $users = new Application_Model_DbTable_Users();
+//            $row = $users->select()
+//                    ->from('users')
+//                    ->where('username = ?', $user);
+//            $fetch = $users->fetchRow($row);
             $ads = $db->select()
                     ->from(array('a' => 'ads'))
-                    ->where('a.author = ?', $fetch->user_id)
+                    ->where('a.author = ?', $this->view->identity->user_id)
                     ->join(array('u' => 'users'), 'a.author = u.user_id')
                     ->group('a.ad_id')
                     ->order('a.datetime DESC');
