@@ -128,14 +128,13 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
 		
         if($identity)
         {
-            // To nic nie robi :S 
-//            $splitter = explode('\\', $identity);
-//            $user = $splitter[1];
-//            $users = new Application_Model_DbTable_Users();
-//            $row = $users->select()
-//                    ->from('users')
-//                    ->where('username = ?', $user);
-//            $fetch = $users->fetchRow($row);
+            $splitter = explode('\\', $identity);
+            $user = $splitter[1];
+            $users = new Application_Model_DbTable_Users();
+            $row = $users->select()
+                    ->from('users')
+                    ->where('username = ?', $user);
+            $fetch = $users->fetchRow($row);
             $ads = $db->select()
                     ->from(array('a' => 'ads'))
                     ->where('a.author = ?', $this->view->identity->user_id)
@@ -260,6 +259,8 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
             $form = new Application_Form_Ads();
             if ($form->isValid($this->getRequest()->getPost())){
                 $data = $form->getValues();
+                $data['exp'] = substr(''.$form->getValue('exp'),0,-8).date('H:i:s');
+                $data['exp'] = $form->getValue('exp')." ".date('H:i:s');
                 $obj->setFromArray($data);
                 $obj->save();
                 //return $this->_helper->redirector('index');

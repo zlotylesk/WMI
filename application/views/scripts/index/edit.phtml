@@ -2,11 +2,11 @@
 <?php if($this->object['status'] != 0): ?>
 <?php echo $this->form ?>
 <p>
-                            <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $item['ad_id'])) ?>">
-                                <button class="btn btn-danger w87p">Edytuj</button>
+                            <a href="<?php echo $this->url(array('action' => 'delete', 'id' => $this->object['ad_id'])) ?>">
+                                <button class="btn btn-danger w87p">Usuń</button>
                             </a>
 </p>
-</div>>
+</div>
 <?php else: ?>
     <p class="b-cont mar40p fs20p padl40p"><strong>Ogłoszenie wygasło</strong></p>
 <?php endif; ?>
