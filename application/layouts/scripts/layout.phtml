@@ -32,7 +32,7 @@
                         <p class="padlr20p ta-c">Moje ogłoszenia</p>
                         <p class="bg-0 pad0 lh0 miw200p h5p"><span class="d-ib w20p h5p bg-g1 vat"></span></p>
                     </a>
-					<span><b>Zalogowano:</b> <?php $username = explode('\\', $this->identity); echo $username[1]; ?></span>
+					<span><b>Zalogowano:</b> <?php echo $this->identity->username; ?></span>
                     <?php endif; ?>
                 </div>
             </div>	

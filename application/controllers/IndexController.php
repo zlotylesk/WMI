@@ -10,10 +10,13 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         if($auth->getIdentity()){
             $db = Zend_Db_Table::getDefaultAdapter();
             $query = $db->select()
-                    ->from(array('u' => 'users', array('user_id' => 'id')))
+                    ->from(array('u' => 'users'))
                     ->where('u.username = ?',substr(strrchr($auth->getIdentity(),'\\'),1));
             $o = new stdClass();
-            $o->user_id = $db->fetchOne($query);
+            $row = $db->fetchRow($query);
+            $o->user_id = $row['user_id'];
+            $o->username = $row['username'];
+            $o->role = $row['role'];
             $identity = $o;
         }
         if ($identity) {
