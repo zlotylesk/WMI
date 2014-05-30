@@ -287,8 +287,9 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
 
         $author = $db->select()
                ->from(array('a' => 'ads', array('*', 'user_id' => 'author')))
-               ->join(array('u' => 'users'), 'a.author = u.user_id');
-
+               ->join(array('u' => 'users'), 'a.author = u.user_id')
+			   ->where('ad_id = ?', $id);
+        
         $obj = $Ad->find($id)->current();
         if (!$obj){
             throw new Zend_Controller_Action_Exception('Błędny adres', 404);
