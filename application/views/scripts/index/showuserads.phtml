@@ -2,7 +2,14 @@
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
     <strong>Moje ogłoszenia</strong>
 </p> 
-
+<?php if(empty($this->ads['ads'])): ?>
+<br><br><br><br><br><br>
+<div style="margin-left: 400px; margin-right: 400px; margin-bottom: 100px;">
+    <img src="<?php echo $this->baseUrl('img/info.png'); ?>" style="float:left;"> 
+    <br>
+    <h4 style="float: left; margin-left: 30px;"><a href="<?php echo $this -> url(array('controller' => 'index', 'action' => 'index' ), null, true)?>"><b>Brak ogłoszeń</b></a></h4>
+</div>
+<?php endif; ?>
 <?php foreach ($this->ads as $item): ?>
 <?php if ($item['status'] != 0): ?>
 <div>
