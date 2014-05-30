@@ -16,6 +16,8 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
             $row = $db->fetchRow($query);
             $o->user_id = $row['user_id'];
             $o->username = $row['username'];
+            if(!($row['role']==='students'||$row['role']==='admin'))
+                $row['role']='wmistaff';
             $o->role = $row['role'];
             $identity = $o;
         }

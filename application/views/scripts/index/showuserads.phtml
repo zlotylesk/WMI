@@ -2,7 +2,7 @@
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
     <strong>Moje ogłoszenia</strong>
 </p> 
-<?php if(empty($this->ads['ads'])): ?>
+<?php if(!count($this->ads)): ?>
 <br><br><br><br><br><br>
 <div style="margin-left: 400px; margin-right: 400px; margin-bottom: 100px;">
     <img src="<?php echo $this->baseUrl('img/info.png'); ?>" style="float:left;"> 
