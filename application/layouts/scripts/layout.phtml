@@ -10,11 +10,11 @@
         ?>
     </head>
     
-        <body class="ta-c h100">
-            <div class="pad20p p-r w1140p mara ta-l minh100" style="padding-bottom: 0;">
-           
+        <body class="ta-c h100" style="padding-bottom: 40px;">
+            <div class="p-r w1140p mara ta-l minh100 h100"  style="padding-bottom: 40px;">
+                <div class="minh100">
             <!-- HEAD -->
-            <div class="clf ">
+            <div class="clf padt20p">
                 <!-- LOGO -->
                                 <a href="<?php echo $this->baseUrl(''); ?>" class="fl"><img src="<?php echo $this->baseUrl(''); ?>img/logo-panda.png" class="w190p h150p padlr20p bor0" title="WMI Koala" alt="WMI Koala"></a>
                 <!-- NAVIGATION -->
@@ -37,32 +37,13 @@
                 </div>
             </div>	
             <div class="clf"></div>
+                
             <!-- CONTENT -->
-            <!--
-            <div class="b-cont mar40p">
-            -->
-                <!-- POST TITLE -->
-                <!--
-                <h1 class="d-ib"><span class="d-b padr70p">{TYTUŁ WPISU}</span>
-                    <span class="d-b h3p bg-g2 marb4p"></span>
-                    <span class="d-b h3p bg-g1 marr25p marb4p"></span>
-                    <span class="d-b h3p bg-g2 marr50p marb4p"></span>
-                </h1>-->
-                <!-- POST CONTENT -->
-                <!--
-                <p class="">Shut the shizzle up its fo rizzle dolizzle sit amizzle, mammasay mammasa mamma oo sa adipiscing elizzle. Nullizzle fo shizzle my nizzle velizzle, nizzle volutpizzle, suscipizzle ma nizzle, fo shizzle my nizzle tellivizzle, arcu. Pellentesque for sure tortor. Sed ass. Rizzle izzle fizzle dapibizzle nizzle tempizzle ma nizzle. Mauris pellentesque shut the shizzle up phat turpizzle. The bizzle izzle gangster. Cool eleifend rhoncizzle we gonna chung. Yippiyo uhuh ... yih! habitasse platea dictumst. I saw beyonces tizzles and my pizzle went crizzle dapibizzle. Nizzle tellizzle urna, izzle boom shackalack, mattizzle ac, eleifend vitae, nunc. Fo suscipizzle. You son of a bizzle sempizzle shiznit sizzle break it down.
-
-Etiam yo urna fo shizzle nisl. Shut the shizzle up quizzle arcu. Yippiyo phat, ipsizzle malesuada malesuada sizzle, fo shizzle purizzle euismod that's the shizzle, izzle luctus my shizz nulla et yo. Vivamizzle ullamcorper, tortor izzle varius sizzle, nibh nunc ultricizzle mammasay mammasa mamma oo sa, izzle crackalackin leo elizzle check out this dolor. Maurizzle fo, orci vizzle volutpizzle consectetuer, sizzle augue luctus nisi, izzle crazy hizzle shiznit yo mamma boom shackalack. Nullam a velizzle ac orci eleifend dizzle. The bizzle nizzle daahng dawg. Curabitizzle nizzle pizzle vizzle pede sodales facilisis. Brizzle funky fresh hizzle, iaculis yo mamma, sizzle sed, away a, erizzle. Nulla vitae turpis quizzle nibh pizzle daahng dawg. Nizzle pulvinizzle consectetizzle my shizz. Aliquizzle erat volutpizzle. Nunc ut rizzle izzle my shizz crazy i saw beyonces tizzles and my pizzle went crizzle. Cras go to hizzle lacizzle sed dui condimentum ultricies. Ut nisl. Uhuh ... yih! izzle urna. Tellivizzle sure ipsizzle fo shizzle mah nizzle fo rizzle, mah home g-dizzle mi. Donizzle izzle bling bling.
-                </p>-->
-                
-                
-            <!--
-            </div>
-            -->
             <?php echo $this->layout()->content; ?> 
+            </div>
             <!-- FOOTER -->
-            <div class="p-r b0 l0 w100" id="f">
-                <p class="footertext bg-g2">TSI Projekt 2014 &copy; Wydziałowa tablica ogłoszeń</p>
+            <div class="p-r clf b0 l0 w100 h0" id="f">
+                <p class="footertext bg-g2 p-a h40p w100">TSI Projekt 2014 &copy; Wydziałowa tablica ogłoszeń</p>
             </div>
              <!-- USER MENU -->
             <div class="p-f b10p pad10p bg-f5 lh0 user-menu">
@@ -99,7 +80,7 @@ Etiam yo urna fo shizzle nisl. Shut the shizzle up quizzle arcu. Yippiyo phat, i
 			<div class="p-f fl l0 t10 fw-b bg-0 o2 clearDeco wnw">
 			    <a class="fl fs50p padlr30p fc-f c-a0" href="<?php echo $this->url(array('action' => 'createform'))?>">+</a>
 			    <a class="fc-f oh w0 d-ib h100 p-r" href="<?php echo $this->url(array('action' => 'createform'))?>">
-			        <span class="fl fs30p pad10p p-r wnw">Dodaj ogłoszenie</span>
+			        <span class="fl fs30p pad10p p-r wnw fc-f">Dodaj ogłoszenie</span>
 			    </a>
 			    <div class="d-n clf"></div>
 			</div>

@@ -2,7 +2,9 @@
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
     <strong>Ogłoszenia pracowników</strong>
 </p> 
-
+<?php if(!count($this->ads['ads'])){ ?>
+<h1 class="ta-c mar40p">Brak ogłoszeń</h1>
+<?php } ?>
 <?php foreach ($this->ads['ads'] as $item): ?>
 <?php if ($item['status'] != 0): ?>
 <div>

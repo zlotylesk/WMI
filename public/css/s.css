@@ -43,6 +43,7 @@ a{text-decoration: none;}
 .h5p{height: 5px;}
 .h25p{height: 25px;}
 .h35p{height: 35px;}
+.h40p{height: 40px;}
 .h25p{height: 25px;}
 .h100p{height: 100px;}
 .h150p{height: 150px;}
@@ -83,16 +84,16 @@ a{text-decoration: none;}
 .marr50p{margin-right: 50px;}
 .marb4p{margin-bottom: 4px;}
 .marb10p{margin-bottom: 10px;}
-.marl40p{margin-left: 40px}
+.marl40p{margin-left: 40px;}
 
 .pad0{padding: 0;}
 .pad10p{padding: 10px;}
 .padlr20p{padding-left: 20px; padding-right: 20px;}
-.padr40p{padding-right: 40px}
-.padr70p{padding-right: 70px}
-.padl40p{padding-left: 40px}
-.padl70p{padding-left: 70px}
-
+.padr40p{padding-right: 40px;}
+.padr70p{padding-right: 70px;}
+.padl40p{padding-left: 40px;}
+.padl70p{padding-left: 70px;}
+.padt20p{padding-top: 20px;}
 
 .bor0{border:0;}
 
@@ -135,3 +136,4 @@ a{text-decoration: none;}
 .ha:hover *{
     display: block;
 }
+html{height: 100% !important;}
