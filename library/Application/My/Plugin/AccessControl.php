@@ -6,21 +6,21 @@ class Application_My_Plugin_AccessControl extends Zend_Controller_Plugin_Abstrac
         /* Lista kontroli dostępu */    
         $control = new Zend_Acl();        
         $control->addRole(new Zend_Acl_Role('guest'));
-        $control->addRole(new Zend_Acl_Role('user'), 'guest');
-        $control->addRole(new Zend_Acl_Role('employee'), 'user');
+        $control->addRole(new Zend_Acl_Role('students'), 'guest');
+        $control->addRole(new Zend_Acl_Role('wmistaff'), 'students');
         $control->addRole(new Zend_Acl_Role('admin'));
         $control->add(new Zend_Acl_Resource('admin'));
         $control->add(new Zend_Acl_Resource('auth'));
         $control->add(new Zend_Acl_Resource('error'));
         $control->add(new Zend_Acl_Resource('index'));
                
-        $control->allow('user', 'auth');
-        $control->allow('user', 'index', 'create');
-        $control->allow('user', 'index', 'createform');
-        $control->allow('user', 'index', 'edit');
-        $control->allow('user', 'index', 'delete');
-        $control->allow('user', 'index', 'showuserads');
-        $control->allow('user', 'index', 'update');
+        $control->allow('students', 'auth');
+        $control->allow('students', 'index', 'create');
+        $control->allow('students', 'index', 'createform');
+        $control->allow('students', 'index', 'edit');
+        $control->allow('students', 'index', 'delete');
+        $control->allow('students', 'index', 'showuserads');
+        $control->allow('students', 'index', 'update');
 
         $control->allow('guest', 'auth', 'index');
         $control->allow('guest', 'auth', 'login');
@@ -38,12 +38,19 @@ class Application_My_Plugin_AccessControl extends Zend_Controller_Plugin_Abstrac
         if ($auth->hasIdentity()) {
             //$users = new Application_Model_DbTable_Users();
             
-            $user = $auth->getIdentity();
-            $username = $user->username;
-            $select = $users->select()
-                    ->where('username = ?', $username);
-            $data = $users->fetchRow($select);
-            $role = $data->role;
+            //$user = $auth->getIdentity();
+            //$username = $user->username;
+            //$select = $users->select()
+            //             ->where('username = ?', $username);
+            //$data = $users->fetchRow($select);
+            //$role = $data->role;
+            //$rolescore = $role;
+            $db = Zend_Db_Table::getDefaultAdapter();
+            $query = $db->select()
+                    ->from(array('u' => 'users'))
+                    ->where('u.username = ?',substr(strrchr($auth->getIdentity(),'\\'),1));
+            $row = $db->fetchRow($query);
+            $role = $row['role'];
             $rolescore = $role;
         } 
         else {

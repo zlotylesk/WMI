@@ -66,11 +66,13 @@ Etiam yo urna fo shizzle nisl. Shut the shizzle up quizzle arcu. Yippiyo phat, i
             </div>
              <!-- USER MENU -->
             <div class="p-f b10p pad10p bg-f5 lh0 user-menu">
-                <?php if($this->identity): ?>
+                <?php if($this->identity && $this->identity->role == 'admin'): ?>
 				<a href="<?php echo $this->url(array('action' => 'createaccount', 'controller' => 'admin')); ?>" class="d-ib ha">
                     <span class="b100 p-a bg-g1 pad fc-f l0 d-n"><b class="pad20p fc-f nw">Ustawienia kont</b></span>
                     <img src="<?php echo $this->baseUrl(''); ?>img/ustawienia.png" class="bor0 h25p w25p marlr5p" alt="Ustawienia" title="Ustawienia">
                 </a>
+                <?php endif; ?>
+                <?php if($this->identity): ?>
                 <a href="<?php echo $this->url(array('action' => 'logout', 'controller' => 'auth')); ?>" class="d-ib p-r ha">
                     <span class="b100 p-a bg-g1 pad fc-f l0 d-n"><b class="pad20p fc-f nw">Wyloguj <?php echo $this->identity->username ?></b></span>
                     <img src="<?php echo $this->baseUrl(''); ?>img/logowanie.png" class="bor0 h25p w25p marlr5p" alt="Wyloguj" title="Wyloguj">
