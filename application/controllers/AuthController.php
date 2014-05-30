@@ -28,37 +28,28 @@ class AuthController extends Zend_Controller_Action //extends Application_My_Con
                 $options = $config->ldap->toArray();
                 unset($options['ldap_path']);
                 $adapter = new Zend_Auth_Adapter_Ldap($options, $username, $password);
-                
-				$result = $auth->authenticate($adapter);
-
+                $result = $auth->authenticate($adapter);
                 if ($result->isValid()) {
-                    //$data = $adapter->getResultRowObject(null, array('password', 'salt'));
-                    //$auth->getStorage()->write($data);
                 $user = new Zend_Auth_Adapter_DbTable (null, 'users', 'username');
-
                 $user->setIdentity($username);
                 $users = new Application_Model_DbTable_Users();
+                $account = $adapter->getAccountObject();
                 $row = $users->select()
                         ->from('users')
                         ->where('username = ?', $username);
                 $fetch = $users->fetchRow($row);
                 if (!$fetch)
                 {
-                        $ldap = $adapter->getOptions();
-                        $baseDn = $ldap[server2][baseDn];
-                        $split = split(',', $baseDn);
-                        $group = split('=', $split[0]);
+                        $arr = explode('\\',$account->homedirectory);
                         $dane = array(
                                 'username'   => $username,
-                                'role'	=>	$group[1]
+                                'role'	=>	$arr[count($arr)-2]
                         );  
                         $obj = $users->createRow($dane);  
                         $obj->save();  		
                 }
-                //$identity = $auth->getIdentity();
-                //$splitter = explode('\\', $identity);
-                //$user = $splitter[1];
-
+                $adapter->setIdentity($fetch['user_id']);
+                $_SESSION['ldap_user_name'] = $account->displayname;
                 $this->_helper->redirector->goToSimple('index', 'index');
                 }
                 else {
@@ -117,6 +108,7 @@ class AuthController extends Zend_Controller_Action //extends Application_My_Con
         $auth = Zend_Auth::getInstance();
         
         $auth->clearIdentity();
+        Zend_Registry::_unsetInstance();
         $this->_helper->redirector->goToSimple('index', 'index');
     }
 
