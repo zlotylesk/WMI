@@ -48,7 +48,7 @@
                         <?php endif; ?>
                     <?php endif; ?>
                     </div>
-                <p class="padl40p">Autor: <?php echo $item['username'] ?></p>
+                <p class="padl40p">Autor: <?php echo strlen($item['displayname'])>1 ? $item['displayname'] : $item['username']; ?></p>
                 <p class="padl40p">Data dodania: <?php echo $item['datetime'] ?></p>
                 <p class="padl40p">Data wygaśnięcia: <?php echo $item['exp'] ?></p>
             </div>
