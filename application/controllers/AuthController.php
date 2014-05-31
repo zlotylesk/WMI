@@ -41,9 +41,14 @@ class AuthController extends Zend_Controller_Action //extends Application_My_Con
                 if (!$fetch)
                 {
                         $arr = explode('\\',$account->homedirectory);
+                        $role=$arr[count($arr)-2];
+                        if($role!=='students'){
+                            $role='wmistaff';
+                        }
                         $dane = array(
                                 'username'   => $username,
-                                'role'	=>	$arr[count($arr)-2]
+                                'role'	=>	$role,
+                                'displayname' => $account->displayname
                         );  
                         $obj = $users->createRow($dane);  
                         $obj->save();  		

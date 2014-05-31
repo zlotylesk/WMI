@@ -166,7 +166,7 @@ foreach ($this->ad_sections as $k => $data) { ?>
         </div>
     </a>
     <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
-        <span class="d-ib pad10p fl">Autor: <?php echo $ad['username'] ?></span>
+        <span class="d-ib pad10p fl">Autor: <?php echo strlen($item['displayname'])>1 ? $item['displayname'] : $item['username']; ?></span>
         <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
     <?php if($this->identity): ?>
         <?php if($this->identity->user_id == $ad['author'] || $this->identity->role == 'admin'): ?>
