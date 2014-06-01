@@ -25,6 +25,9 @@ a{text-decoration: none;}
     box-shadow: 10px 10px 25px rgba(0,0,0,.2);
 }
 
+.wwbw {word-wrap: break-word}
+.wbba {word-break: break-all;}
+
 .w10p{width: 10px;}
 .w20p{width: 20px;}
 .w25p{width: 25px;}
