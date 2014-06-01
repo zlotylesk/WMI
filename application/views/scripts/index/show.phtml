@@ -30,7 +30,7 @@
     <?php endif; ?>
 </div>
 
-                <p class="padl40p">Autor: <?php echo $this->author['username'] ?></p>
+                <p class="padl40p">Autor: <?php echo strlen($this->author['displayname'])>1 ? $this->author['displayname'] : $this->author['username'];?></p>
                 <p class="padl40p">Data dodania: <?php echo $this->object['datetime'] ?></p>
                 <p class="padl40p">Data wygaśnięcia: <?php echo $this->object['exp'] ?></p>
                 <div class="clf"></div>
