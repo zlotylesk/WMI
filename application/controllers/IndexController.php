@@ -188,6 +188,14 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                 return;
             }
             $this->view->form = $form;
+            // tinymce begin
+        $this->Add_Js(array('tinymce/tinymce.min','tinymce.init'));
+        $this->AddCSS("skin.min",'/lightgray');
+        // tinymce end
+        // datepicker begin
+        $this->Add_Js(array('jquery-ui-1.10.4.custom.min','exp'));
+        $this->AddCSS("jquery-ui-1.10.4.custom.min",'/smoothness');
+        // datepicker end
         }
         else {
             throw new Zend_Controller_Action_Exception('Błędny adres!', 404);
