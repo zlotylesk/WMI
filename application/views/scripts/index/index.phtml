@@ -161,16 +161,16 @@ foreach ($this->ad_sections as $k => $data) { ?>
 <div class="ogloszenie h250p w27 fl p-r mar3 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
     <a class="d-b wwbw w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
         <div class="padlr20p"><?php /* --- topic & content --- */ ?>
-            <h4><p><?php if (strlen($ad['topic']) <=25){
+            <h4><?php if (strlen($ad['topic']) <=25){
                    echo $ad['topic'];
                 }else {
                    echo $string2 = substr($ad['topic'], 0, 25);echo'(...)';
-                } ?></p></h4>
-            <p><?php if (strlen($ad['content']) <=300){
+                } ?></h4>
+            <?php if (strlen($ad['content']) <=300){
                    echo $ad['content'];
                 }else {
                    echo $string2 = substr($ad['content'], 0, 300);echo'(...)';
-                } ?></p>
+                } ?>
         </div>
     </a>
     <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">
