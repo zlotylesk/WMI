@@ -155,10 +155,16 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
             $ads = $db->select()
                     ->from(array('a' => 'ads'))
                     ->where('a.author = ?', $this->view->identity->user_id)
+                    ->where('a.status = ?', 1)
                     ->join(array('u' => 'users'), 'a.author = u.user_id')
                     ->group('a.ad_id')
                     ->order('a.datetime DESC');
-            $this->view->ads = $db->fetchAll($ads);
+            $data = $db->fetchAll($ads);
+           foreach($data['ads'] as $k2 =>$v){
+                     $data['ads'][$k2]['content']= $this->truncateHtml($v['content'], 300);
+                }
+            $this->view->ads = $data;
+            
         }
     }
 
