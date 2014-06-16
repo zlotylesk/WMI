@@ -32,8 +32,32 @@
                         <p class="padlr20p ta-c">Moje ogłoszenia</p>
                         <p class="bg-0 pad0 lh0 miw200p h5p"><span class="d-ib w20p h5p bg-g1 vat"></span></p>
                     </a>
-					<span><b>Zalogowano:</b> <?php echo $this->identity->username; ?></span>
+                       <div class="fr">	
+                          <div class="fr">          <!--<span><b>Zalogowano:</b> <?php echo $this->identity->username; ?></span>-->
+                    <a href="<?php echo $this->url(array('action' => 'logout', 'controller' => 'auth')); ?>" class="d-ib p-r fl">
+                        <span class="b100 bg-g1 fc-f fr h25p lh25p l0 vam"><b class="fc-f" style="padding:5px 20px;">Wyloguj <?php echo $this->identity->username ?></b></span>
+                        <img src="<?php echo $this->baseUrl(''); ?>img/logowanie.png" class="bor0 h25p w25p marlr5p" alt="Wyloguj" title="Wyloguj">
+                    </a>
+                    <?php else: ?>
+    <div class="fr"><div class="fr">
+                          <a href="<?php echo $this->url(array('action' => 'login', 'controller' => 'auth')); ?>" class="d-ib p-r">
+                            <span class="b100 bg-g1 fc-f fr h25p lh25p l0 vam"><b class="fc-f " style="padding:5px 20px;">Logowanie</b></span><img src="<?php echo $this->baseUrl(''); ?>img/logowanie.png" class="bor0 h25p w25p marlr5p fl" alt="Logowanie" title="Logowanie">
+                        </a>              
                     <?php endif; ?>
+            </div><div class="clf"></div>
+        <div class="fr martb10p">
+                    <!--<a href="" class="d-ib lh25p vat"><img src="<?php echo $this->baseUrl(''); ?>img/szukaj.png" class="bor0 h25p w25p marlr5p" alt="Szukaj" title="Szukaj"></a>-->
+                    <!-- SEARCH FORM -->
+                    <form class="d-ib" action="<?php echo $this->url(array('action' => 'search', 'controller' => 'index')); ?>" method="GET">            
+                        <input name="searchValue" class="marlr5p fl padl28p tam" type="search" placeholder="Wyszukaj..." style="background: url('<?php echo $this->baseUrl(''); ?>img/szukaj.png') no-repeat 3px center; background-size: 20px 20px; border:1px solid #000; valign:middle; line-height:21px;" />
+                        <select name="filter" class="fl" style="height:25px">
+                            <option value="topic" selected="selected">Temat</option>
+                            <option value="content">Treść</option>
+                            <option value="author">Autor</option>
+                        </select> 
+                    </form>
+        </div>
+    </div>
                 </div>
             </div>	
             <div class="clf"></div>

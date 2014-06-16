@@ -138,6 +138,7 @@ a.hov:hover {color: white; outline: 0; text-decoration: none;}
 .pad5p{padding: 5px;}
 .pad3p{padding: 3px;}
 .pad2p{padding: 2px;}
+.padl28p{padding-left: 28px;}
 .padlr20p{padding: 0 20px;}
 .padlr30p{padding: 0 30px;}
 .padlr6p{padding: 0 6px;}
@@ -180,6 +181,7 @@ a.hov:hover {color: white; outline: 0; text-decoration: none;}
 .fc-f{color: #fff;}
 .vam{vertical-align: middle;}
 .lhi{line-height: inherit;}
+.lh25p{line-height: 25px;}
 .oh{overflow: hidden;}
 .h100{height: 100%;}
 .h250p{height: 250px;}
