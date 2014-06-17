@@ -2,12 +2,40 @@
 <div id="view-content">
 	<p>View script for controller <b>Index</b> and script/action name <b>news</b></p>
 </div> */?>
-<?php foreach ($this->dane as $key => $value) {
+<?php //var_dump($this->dane);
+?>
+<?php foreach ($this->dane['ads'] as $key => $value) {
     ?>
+<div class="p-a slide">
+
+                <!-- POST TITLE -->
+            <div class="p-r h100 w100">
+                <h1 class="d-ib"><span class="d-b padl40p padr70p wbba"><?php echo $value['topic']; ?></span>
+                    <span class="d-b h3p bg-g2 marb4p"></span>
+                    <span class="d-b h3p bg-g1 marr25p marb4p"></span>
+                    <span class="d-b h3p bg-g2 marr50p marb4p"></span>
+                </h1>
+                <!-- POST CONTENT -->
+                <div class="padl40p content">
+
+                   <?php echo $value['content']; ?>
+
+                </div>
+                <div class="slide-info">
+                <span class="d-b h3p bg-g2 marb4p"></span>
+
+                <p class="padl40p fl">Autor: <?php echo strlen($value['displayname'])>1 ? $value['displayname'] : $value['username'];?></p>
+                <p class="padl40p fl">Data: <?php echo $value['datetime'] ?></p>
+                <div class="clf"></div>
+                </div>
+            </div>
+</div>        
+
+<?php /*
 <div class="p-a h100 mw100 w100 mh100 slide id_<?php echo $key; ?> bg-c<?php echo rand(0,9); ?> bgo">
     <div class="s1"><h1><?php echo $value['topic']; ?></h1></div>
     <p><?php echo $value['content']; ?></p>
     <p><b><?php echo "autor"; ?></b><span class="marlr1"><?php echo $value['datetime']; ?></span></p>
-</div>
+</div> */ ?>
 <?php
 }
