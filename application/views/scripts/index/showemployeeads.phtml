@@ -29,7 +29,8 @@
                 <!-- POST CONTENT -->
             
                 <div class="padl40p">
-                <?php echo $item['content']; ?>
+                <?php 
+                   echo $item['content']; ?>
                 </div>
                 <span class="d-b h3p bg-g2 marb4p"></span>
                 <div class="mar10p fr">
@@ -106,4 +107,15 @@ if($data['nr_per_page']<$data['count']){ ?>
     </p>
 </div>
 <hr>
-<?php } 
+<?php } /*
+<?php if($this->ads['pages']>1){ ?>
+
+<div class="clf ta-c">
+    <p class="padlr30p b3psr3 clearDeco d-ib bg-r3 fc-f fw-b">
+            <span class="fc-f padlr6p bg-r3">1</span>
+            <a class="fc-f marlr6p" href="/WMI/public/index/index/ep/2">2</a>
+            <a class="fc-f marlr6p" href="/WMI/public/index/index/ep/2" >&gt;&gt;</a>
+        </p>
+</div>
+<?php }
+echo var_dump($this->ads);

@@ -140,11 +140,3 @@ a{text-decoration: none;}
     display: block;
 }
 html{height: 100% !important;}
-
-
-.ogloszenie, .carusel-item {
-   overflow: hidden;
-  -o-text-overflow: ellipsis;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-}

@@ -175,6 +175,7 @@ a.hov:hover {color: white; outline: 0; text-decoration: none;}
 .bg-0{background-color: #000;}
 .bg-r3,
 .hbgr3:hover{background-color: #b2b2b2; background-color: rgba(0,0,0,.3);}
+.ogloszenie .bg-r3{background-color: #E8FFEF;}
 .bg-r6{background-color: rgba(0,0,0,.6);}
 .bs5{box-shadow: 1px 1px 5px #000;}
 .fs20p{font-size: 20px;}
@@ -208,6 +209,11 @@ a.hov:hover {color: white; outline: 0; text-decoration: none;}
     -webkit-animation:an0 5s;
 }
 .c-a0:hover + a{width: 100%;}
+.ogloszenie h4{
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: #8dc63f;
+}
 @keyframes an0
 {
 0% {width:0}
@@ -222,4 +228,8 @@ a.hov:hover {color: white; outline: 0; text-decoration: none;}
 1% {width:100%}
 99% {width:100%}
 100% {width:0}
+}
+
+.ogloszenie *:hover{
+    color:#000 !important;
 }

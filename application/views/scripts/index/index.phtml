@@ -1,8 +1,13 @@
 <?php $this->headTitle('Strona główna'); ?>
 <?php /* --- bootstrap banner carousel --- */ ?>
+<?php /*
 <div class="t-ac pad" style="padding-top: 20px">
 <div id="carousel-wmi-captions" class="carousel slide mara" data-ride="carousel" style="width: 900px; height: 165px">
-  <!-- Indicators --><?php /* --- kropeczki, których Leszek nie chce ;) ---*/
+  <!-- Indicators -->
+ */ ?>
+ <?php /* --- kropeczki, których Leszek nie chce ;) ---*/
+ 
+ 
   /*
   <ol class="carousel-indicators">
     <li data-target="#carousel-wmi-captions" data-slide-to="0" class="active"></li>
@@ -11,14 +16,21 @@
   </ol>
 */ 
   ?>
+  <?php /*
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
       <?php        foreach ($this->slideshow as $k => $s){ ?>
     <div class="item <?php if ($k==0) echo "active"; ?> bg-c<?php echo rand(1,6); ?>">
+   */ ?>
         <?php /* --- tło w postaci grafiki --- */ ?>
+        <?php /*
         <img class="" src="<?php echo $this->baseUrl(); ?>/img/overlay.png" alt="">
       <div class="carousel-caption t0">
-          <h1 class=" carusel-item mart47p"><a class="d-b w100 h100 p-a fc-f hov" href="<?php echo $this->url(array('action' => 'show', 'id' => $s['ad_id'])) ?>"><?php echo $s['topic']; ?></a></h1>
+          <h1 class="mart47p"><a class="d-b w100 h100 p-a fc-f hov" href="<?php echo $this->url(array('action' => 'show', 'id' => $s['ad_id'])) ?>"><?php if (strlen($s['topic']) <=31){
+                   echo $s['topic'];
+                }else {
+                   echo $string2 = substr($s['topic'], 0, 31);echo'(...)';
+                } ?></a></h1>
 
       </div>
     </div>
@@ -34,9 +46,11 @@
   </a>
 </div>
 </div>
+         *  */ ?>
+        
 <?php /* --- carousel stop --- */ ?>
 <?php /* --- layout indexu --- */ ?>
-<hr>
+<hr> 
 <?php /* --- przestarzałe ---
 <h3>Ogłoszenia pracowników</h3>
 <hr>
@@ -154,11 +168,13 @@ foreach ($this->ad_sections as $k => $data) { ?>
 <hr>
 <?php foreach($data['ads'] as $ad): ?>
 <?php if($ad['status'] != 0): ?>
-<div class="ogloszenie h250p w27 fl p-r mar3 bgo clearDeco oh fc-f bg-c<?php echo rand(1,6); ?>">
+<div class="ogloszenie h250p w27 fl p-r mar3 clearDeco oh fc-f">
     <a class="d-b wwbw w100 h100 p-a fc-f" href="<?php echo $this->url(array('action' => 'show', 'id' => $ad['ad_id'])) ?>">
         <div class="padlr20p"><?php /* --- topic & content --- */ ?>
-            <h4><?php echo $ad['topic']; ?></h4>
-            <?php echo $ad['content']; ?>
+            <h4><?php 
+                   echo $ad['topic']; ?></h4>
+            <?php 
+                   echo $ad['content']; ?>
         </div>
     </a>
     <div class="bg-r3 p-a b-100 fc-f w100 ad-panel an">

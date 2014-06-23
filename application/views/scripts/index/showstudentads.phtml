@@ -2,7 +2,7 @@
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
     <strong>Ogłoszenia studentów</strong>
 </p> 
-<?php if(!count($this->ads['ads'])):?>
+<?php if(!count($this->ads['ads'])): ?>
 <br><br><br><br><br><br>
 <div style="margin-left: 400px; margin-right: 400px; margin-bottom: 100px;">
     <img src="<?php echo $this->baseUrl('img/info.png'); ?>" style="float:left;"> 
@@ -29,7 +29,8 @@
                 <!-- POST CONTENT -->
             
                 <div class="padl40p">
-                <?php echo $item['content'];?>
+                <?php 
+                   echo $item['content']; ?>
                 </div>
                 <span class="d-b h3p bg-g2 marb4p"></span>
                 <div class="mar10p fr">
