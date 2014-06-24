@@ -82,7 +82,11 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                     ->order('a.ad_id ASC')
                     ->where('LOWER(topic) LIKE LOWER(?)', $query);
 
-            $this->view->search = $db->fetchAll($search);
+            $data = $db->fetchAll($search);
+            foreach($data as $k => $v){
+                     $data[$k]['content']= $this->truncateHtml($v['content'], 300);
+                }
+            $this->view->search = $data;
         }
 
         elseif ($_GET['filter'] == 'content')
@@ -94,7 +98,11 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                     ->order('a.ad_id ASC')
                     ->where('LOWER(content) LIKE LOWER(?)', $query);
 
-            $this->view->search = $db->fetchAll($search);
+            $data = $db->fetchAll($search);
+            foreach($data as $k => $v){
+                     $data[$k]['content']= $this->truncateHtml($v['content'], 300);
+                }
+            $this->view->search = $data;
         }
 
         else
@@ -105,8 +113,11 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                     ->group('a.ad_id')
                     ->order('a.ad_id ASC')
                     ->where('LOWER(u.username) LIKE LOWER(?)', $query);
-
-            $this->view->search = $db->fetchAll($search);
+            $data = $db->fetchAll($search);
+            foreach($data as $k => $v){
+                     $data[$k]['content']= $this->truncateHtml($v['content'], 300);
+                }
+            $this->view->search = $data;
         }
     }
 
@@ -159,7 +170,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                     ->group('a.ad_id')
                     ->order('a.datetime DESC');
             $data = $db->fetchAll($ads);
-           foreach($data['ads'] as $k2 =>$v){
+            foreach($data['ads'] as $k2 =>$v){
                      $data['ads'][$k2]['content']= $this->truncateHtml($v['content'], 300);
                 }
             $this->view->ads = $data;
