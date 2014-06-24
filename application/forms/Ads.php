@@ -21,6 +21,10 @@ class Application_Form_Ads extends Zend_Form
                         )
                  )
                 );
+        $this->topic->getValidator('StringLength')->setMessages(array(
+            Zend_Validate_StringLength::TOO_SHORT => 'Temat jest zbyt krótki',
+            Zend_Validate_StringLength::TOO_LONG => 'Temat jest zbyt długi',
+        ));
         /*$this->topic->getValidator('StringLength')->setMessages(array(
         Zend_Validate_StringLength::TOO_LONG => 'Temat za długi',
         Zend_Validate_StringLength::TOO_SHORT => 'Temat za krótki',
@@ -46,6 +50,9 @@ class Application_Form_Ads extends Zend_Form
                         array('Regex', true, array ('pattern' => '/[0-9a-zA-Z\s\'.;-]+/', 'messages '=> array('regexNotMatch' => 'Użyto niedozwolone znaki')))
                     )
                     ));
+        $this->content->getValidator('StringLength')->setMessages(array(
+            Zend_Validate_StringLength::TOO_SHORT => 'Treść jest zbyt krótka'
+        ));
         /*$this->content->getValidator('StringLength')->setMessages(array(
         Zend_Validate_StringLength::TOO_SHORT => 'Treść musi być dłuższa niź 4 znaki'
         ));
@@ -63,6 +70,7 @@ class Application_Form_Ads extends Zend_Form
                 'exp', 
                 array(
                     'label' => 'Data wygaśnięcia',
+                    'required' => true,
                     'filters' => array('StringTrim'),
                     'validators' => array(
                     array('NotEmpty', true),
@@ -75,6 +83,9 @@ class Application_Form_Ads extends Zend_Form
             ));
             $this->exp->getValidator('Between')->setMessages(array(
             Zend_Validate_Between::NOT_BETWEEN => 'Możliwe dodanie daty po 2014-01-01', 
+            ));
+            $this->exp->getValidator('NotEmpty')->setMessages(array(
+            Zend_Validate_NotEmpty::IS_EMPTY => 'Wybierz datę wygaśnięcia ogłoszenia',
             ));
         $this->addElement('submit', 'submit', array('label' => 'Zatwierdź', 'class'=>'btn btn-success bg-g2 h35p',));
     }

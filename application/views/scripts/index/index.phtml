@@ -182,8 +182,8 @@ foreach ($this->ad_sections as $k => $data) { ?>
         <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
     <?php if($this->identity): ?>
         <?php if($this->identity->user_id == $ad['author'] || $this->identity->role == 'admin'): ?>
-        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
-        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
+        <a class="fl b3psr3 padlr8p mar7p fc-b hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
+        <a class="fl b3psr3 padlr8p mar7p fc-b hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
         <?php endif; ?>
     <?php endif; ?>
     </div>

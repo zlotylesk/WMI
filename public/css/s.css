@@ -4,6 +4,12 @@
 */
 
 *{font-family: sans-serif; color: #231f20;}
+
+ul.errors li {
+    color: red;
+    list-style-type: none;
+}
+
 a{text-decoration: none;}
 
 .user-menu [type="search"],
