@@ -202,16 +202,24 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
             if ($form->isValid($this->getRequest()->getPost()))
             {
                 $data = $form->getValues(); 
-                $data['author'] = $this->view->identity->user_id;
-                $data['exp'] = substr(''.$form->getValue('exp'),0,-8).date('H:i:s');
-                $data['exp'] = $form->getValue('exp')." ".date('H:i:s');
-                $data['status'] = 1;
-                $Ad = new Application_Model_DbTable_Ads();
-                $id = $Ad->insert($data);
-                //return $this->_helper->redirector('index');
-                $this -> getHelper('viewRenderer') -> setNoRender(true);
-                echo $this -> view -> render('index/_createSuccess.phtml');
-                return;
+                if (strtotime($form->getValue('exp')) < time())
+                {
+                    $form->getElement('exp')->addError('Błędna data wygaśnięcia');
+                    $form->markAsError();
+                }
+                else
+                {
+                    $data['author'] = $this->view->identity->user_id; 
+                    $data['exp'] = substr(''.$form->getValue('exp'),0,-8).date('H:i:s');
+                    $data['exp'] = $form->getValue('exp')." ".date('H:i:s');
+                    $data['status'] = 1;
+                    $Ad = new Application_Model_DbTable_Ads();
+                    $id = $Ad->insert($data);
+                    //return $this->_helper->redirector('index');
+                    $this -> getHelper('viewRenderer') -> setNoRender(true);
+                    echo $this -> view -> render('index/_createSuccess.phtml');
+                    return;
+                }
             }
             $this->view->form = $form;
             // tinymce begin
