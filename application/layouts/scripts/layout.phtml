@@ -50,10 +50,11 @@
                     <!-- SEARCH FORM -->
                     <form class="d-ib" action="<?php echo $this->url(array('action' => 'search', 'controller' => 'index')); ?>" method="GET">            
                         <input name="searchValue" class="marlr5p fl padl28p tam" type="search" placeholder="Wyszukaj..." style="background: url('<?php echo $this->baseUrl(''); ?>img/szukaj.png') no-repeat 3px center; background-size: 20px 20px; border:1px solid #000; valign:middle; line-height:21px; padding-left:25px" />
+                        <?php $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; ?>
                         <select name="filter" class="fl" style="height:25px">
-                            <option value="topic" selected="selected">Temat</option>
-                            <option value="content">Treść</option>
-                            <option value="author">Autor</option>
+                            <option value="topic"<?php if (strpos($url, "filter=topic")) echo ' selected="selected"'; ?>>Temat</option>
+                            <option value="content"<?php if (strpos($url, "filter=content")) echo ' selected="selected"'; ?>>Treść</option>
+                            <option value="author"<?php if (strpos($url, "filter=author")) echo ' selected="selected"'; ?>>Autor</option>
                         </select> 
                     </form>
         </div>

@@ -112,7 +112,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                     ->join(array('u' => 'users'), 'a.author = u.user_id')
                     ->group('a.ad_id')
                     ->order('a.ad_id ASC')
-                    ->where('LOWER(u.username) LIKE LOWER(?)', $query);
+                    ->where('LOWER(u.displayname) LIKE LOWER(?)', $query);
             $data = $db->fetchAll($search);
             foreach($data as $k => $v){
                      $data[$k]['content']= $this->truncateHtml($v['content'], 300);
