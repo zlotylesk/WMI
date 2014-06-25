@@ -87,6 +87,9 @@ class Application_Form_Ads extends Zend_Form
             $this->exp->getValidator('NotEmpty')->setMessages(array(
             Zend_Validate_NotEmpty::IS_EMPTY => 'Wybierz datę wygaśnięcia ogłoszenia',
             ));
+            
+        $owl = Zend_Date::now()->addWeek('1')->toString('YYYY-MM-dd');
+        $this->exp->setValue($owl);
         $this->addElement('submit', 'submit', array('label' => 'Zatwierdź', 'class'=>'btn btn-success bg-g2 h35p',));
     }
 
