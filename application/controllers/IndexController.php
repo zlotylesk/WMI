@@ -82,7 +82,11 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                     ->order('a.ad_id ASC')
                     ->where('LOWER(topic) LIKE LOWER(?)', $query);
 
-            $this->view->search = $db->fetchAll($search);
+            $data = $db->fetchAll($search);
+            foreach($data as $k => $v){
+                     $data[$k]['content']= $this->truncateHtml($v['content'], 300);
+                }
+            $this->view->search = $data;
         }
 
         elseif ($_GET['filter'] == 'content')
@@ -94,7 +98,11 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                     ->order('a.ad_id ASC')
                     ->where('LOWER(content) LIKE LOWER(?)', $query);
 
-            $this->view->search = $db->fetchAll($search);
+            $data = $db->fetchAll($search);
+            foreach($data as $k => $v){
+                     $data[$k]['content']= $this->truncateHtml($v['content'], 300);
+                }
+            $this->view->search = $data;
         }
 
         else
@@ -104,9 +112,12 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                     ->join(array('u' => 'users'), 'a.author = u.user_id')
                     ->group('a.ad_id')
                     ->order('a.ad_id ASC')
-                    ->where('LOWER(u.username) LIKE LOWER(?)', $query);
-
-            $this->view->search = $db->fetchAll($search);
+                    ->where('LOWER(u.displayname) LIKE LOWER(?)', $query);
+            $data = $db->fetchAll($search);
+            foreach($data as $k => $v){
+                     $data[$k]['content']= $this->truncateHtml($v['content'], 300);
+                }
+            $this->view->search = $data;
         }
     }
 
@@ -159,7 +170,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                     ->group('a.ad_id')
                     ->order('a.datetime DESC');
             $data = $db->fetchAll($ads);
-           foreach($data['ads'] as $k2 =>$v){
+            foreach($data['ads'] as $k2 =>$v){
                      $data['ads'][$k2]['content']= $this->truncateHtml($v['content'], 300);
                 }
             $this->view->ads = $data;
@@ -191,16 +202,24 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
             if ($form->isValid($this->getRequest()->getPost()))
             {
                 $data = $form->getValues(); 
-                $data['author'] = $this->view->identity->user_id;
-                $data['exp'] = substr(''.$form->getValue('exp'),0,-8).date('H:i:s');
-                $data['exp'] = $form->getValue('exp')." ".date('H:i:s');
-                $data['status'] = 1;
-                $Ad = new Application_Model_DbTable_Ads();
-                $id = $Ad->insert($data);
-                //return $this->_helper->redirector('index');
-                $this -> getHelper('viewRenderer') -> setNoRender(true);
-                echo $this -> view -> render('index/_createSuccess.phtml');
-                return;
+                if (strtotime($form->getValue('exp')) < time())
+                {
+                    $form->getElement('exp')->addError('Błędna data wygaśnięcia');
+                    $form->markAsError();
+                }
+                else
+                {
+                    $data['author'] = $this->view->identity->user_id; 
+                    $data['exp'] = substr(''.$form->getValue('exp'),0,-8).date('H:i:s');
+                    $data['exp'] = $form->getValue('exp')." ".date('H:i:s');
+                    $data['status'] = 1;
+                    $Ad = new Application_Model_DbTable_Ads();
+                    $id = $Ad->insert($data);
+                    //return $this->_helper->redirector('index');
+                    $this -> getHelper('viewRenderer') -> setNoRender(true);
+                    echo $this -> view -> render('index/_createSuccess.phtml');
+                    return;
+                }
             }
             $this->view->form = $form;
             // tinymce begin

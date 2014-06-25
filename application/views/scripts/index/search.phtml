@@ -2,9 +2,19 @@
 <p class="lead" style="color: #3a87ad; text-decoration: underline">
     <strong>Wyniki wyszukiwania</strong>
 </p> 
-<?php if(empty($this->search)): ?>
+<?php 
+$i = 0;
+foreach ($this->search as $search) 
+{ 
+    if ($search['status'] == 0) 
+        $i++;
+    else
+        break;
+}
+?>
+<?php if ($i == count($this->search) || count($this->search) == 0): ?>
 <br><br><br><br><br><br>
-<div style="margin-left: 400px; margin-right: 400px; margin-bottom: 100px;">
+<div style="margin-left: 400px; margin-right: 400px; margin-bottom: 30px;">
     <img src="<?php echo $this->baseUrl('img/info.png'); ?>" style="float:left;"> 
     <br>
     <h4 style="float: left; margin-left: 30px;"><a href="<?php echo $this -> url(array('controller' => 'index', 'action' => 'index' ), null, true)?>"><b>Brak wyników</b></a></h4>
@@ -28,11 +38,7 @@
                     </a>
                 <!-- POST CONTENT -->
                 <div class="padl40p">
-                <?php if (strlen($item['content']) <=200){
-                   echo $item['content'];
-                }else {
-                   echo $string2 = substr($item['content'], 0, 200);echo'(...)';
-                } ?>
+                <?php echo $item['content'];?>
                 </div>
                 <span class="d-b h3p bg-g2 marb4p"></span>
                 <div class="mar10p fr">
