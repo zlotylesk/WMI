@@ -182,8 +182,8 @@ foreach ($this->ad_sections as $k => $data) { ?>
         <span class="d-ib pad10p fl"><?php echo $ad['datetime'] ?></span><?php /* --- date --- */ ?>
     <?php if($this->identity): ?>
         <?php if($this->identity->user_id == $ad['author'] || $this->identity->role == 'admin'): ?>
-        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" style="color:#000;" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
-        <a class="fl b3psr3 padlr8p mar7p fc-f hbgr3" style="color:#000;" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
+        <a class="fl b3psr3 padlr8p mar7p fc-b hbgr3" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ad['ad_id'])) ?>">Edytuj</a>
+        <a class="fl b3psr3 padlr8p mar7p fc-b hbgr3" href="<?php echo $this->url(array('action' => 'delete', 'id' => $ad['ad_id'])) ?>">Usuń</a>
         <?php endif; ?>
     <?php endif; ?>
     </div>
@@ -202,9 +202,7 @@ foreach ($this->ad_sections as $k => $data) { ?>
     for ($index = 1; $index <= $data['pages']; $index++) { 
         if($index==$data['page']){ ?>
         <span class="fc-f padlr6p bg-r3"><?php echo $index; ?></span>
-        <?php 
-        $current=$index;
-        }else{
+        <?php }else{
        $urls[$k]=$index;
         ?>
     <a class="fc-f marlr6p" href="<?php echo $this->url($urls); ?>"><?php echo $index; ?></a>
@@ -220,9 +218,7 @@ foreach ($this->ad_sections as $k => $data) { ?>
 <?php }else{ ?>
 <hr class="clf">
 <?php }?>
-<?php 
-$urls[$k]=$current;
-} ?>
+<?php } ?>
 <?php /*
  * ---- OLD SHIT IS OLD ---- stary layout indexu!!!! ----
 <p class="lead" style="color: #3a87ad; text-decoration: underline">

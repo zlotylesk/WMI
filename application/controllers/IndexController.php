@@ -359,13 +359,9 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
         $this->AddJs('news');
         $this->AddCSS("news");
         $a = $this->_getAllParams();
-        $uri = $this->getRequest()->getRequestUri();
-        $uri=substr( $uri, strrpos( $uri, 'news' )+5 );
-        $uri = strrpos($uri, '/')?substr($uri,0,  strrpos($uri, '/')):$uri;
-        $limit=$uri?is_numeric($uri)?intval($uri):false:false;
-        if(is_numeric($a['nr'])||$limit){
+        if(is_numeric($a['nr'])){
             //$this->view->dane = $this->GetAdsFor(null,'DESC',$a['nr']);
-            $this->view->dane = $this->getAddsArray($limit?$limit:$a['nr'], 'wmistaff', 1);
+            $this->view->dane = $this->getAddsArray($a['nr'], 'wmistaff', 1);
         }else{
             //$this->view->dane = $this->GetAdsFor(null,'DESC',10);
             $this->view->dane = $this->getAddsArray(10, 'wmistaff', 1);
