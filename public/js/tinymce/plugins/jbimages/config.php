@@ -38,7 +38,7 @@
 | -------------------------------------------------------------------*/
 
 	
-        $config['img_path'] = '/images';
+        $config['img_path'] = '/WMI/public/upload/images';
 	$config['upload_path'] = $_SERVER['DOCUMENT_ROOT'] . $config['img_path']; // Physical path. [Usually works fine like this]
 
 
