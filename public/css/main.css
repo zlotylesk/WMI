@@ -216,6 +216,9 @@ a.hov:hover {color: white; outline: 0; text-decoration: none;}
     border-style: solid;
     border-color: #8dc63f;
 }
+.shadow-1{
+    box-shadow: 2px 1px 4px rgba(0,0,0,.6)
+}
 @keyframes an0
 {
 0% {width:0}
