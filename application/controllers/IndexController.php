@@ -432,7 +432,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                 'count' => $this->GetCount($role,$status),
             );
     }
-function truncateHtml($text, $length = 100, $ending = '(...)', $exact = true, $considerHtml = true) {
+function truncateHtml($text, $length = 100, $ending = '(Czytaj więcej)', $exact = true, $considerHtml = true) {
 	if ($considerHtml) {
 		// if the plain text is shorter than the maximum length, return the whole text
 		if (strlen(preg_replace('/<.*?>/', '', $text)) <= $length) {
@@ -510,10 +510,10 @@ function truncateHtml($text, $length = 100, $ending = '(...)', $exact = true, $c
 			// ...and cut the text in this position
 			$truncate = substr($truncate, 0, $spacepos);
 		}
-	}
-	// add the defined ending to the text
-	$truncate .= $ending;
-	if($considerHtml) {
+	} 
+        // add the defined ending to the text
+        $truncate .= $ending;
+        if($considerHtml) {
 		// close all unclosed html-tags
 		foreach ($open_tags as $tag) {
 			$truncate .= '</' . $tag . '>';
