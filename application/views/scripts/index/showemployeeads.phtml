@@ -48,7 +48,12 @@
                     </div>
                 <p class="padl40p">Autor: <?php echo strlen($item['displayname'])>1 ? $item['displayname'] : $item['username']; ?></p>
                 <p class="padl40p">Data dodania: <?php echo $item['datetime'] ?></p>
-                <p class="padl40p">Data wygaśnięcia: <?php echo $item['exp'] ?></p>
+                <table border="0" width="100%" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td><p class="padl40p">Data wygaśnięcia: <?php echo $item['exp'] ?></p></td>
+                        <td align="right"><?php if (strlen($item['content']) > 300): ?><a href="<?php echo $this->url(array('action' => 'show', 'id' => $item['ad_id'])) ?>">Zobacz więcej...</a><?php endif; ?></td>
+                    </tr>
+                </table>
             </div>
 
         <?php 
@@ -107,7 +112,7 @@ if($data['nr_per_page']<$data['count']){ ?>
     </p>
 </div>
 <hr>
-<?php } /*
+<?php } ?> <?php /*
 <?php if($this->ads['pages']>1){ ?>
 
 <div class="clf ta-c">
@@ -118,4 +123,5 @@ if($data['nr_per_page']<$data['count']){ ?>
         </p>
 </div>
 <?php }
-echo var_dump($this->ads);
+echo var_dump($this->ads); */
+?>

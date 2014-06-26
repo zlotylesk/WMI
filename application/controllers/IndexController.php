@@ -432,7 +432,7 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                 'count' => $this->GetCount($role,$status),
             );
     }
-function truncateHtml($text, $length = 100, $ending = '(Czytaj więcej)', $exact = true, $considerHtml = true) {
+function truncateHtml($text, $length = 100, $ending = '(...)', $exact = true, $considerHtml = true) {
 	if ($considerHtml) {
 		// if the plain text is shorter than the maximum length, return the whole text
 		if (strlen(preg_replace('/<.*?>/', '', $text)) <= $length) {
