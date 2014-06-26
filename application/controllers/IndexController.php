@@ -170,8 +170,8 @@ class IndexController extends Zend_Controller_Action//extends Application_My_Con
                     ->group('a.ad_id')
                     ->order('a.datetime DESC');
             $data = $db->fetchAll($ads);
-            foreach($data['ads'] as $k2 =>$v){
-                     $data['ads'][$k2]['content']= $this->truncateHtml($v['content'], 300);
+            foreach($data as $k2 =>$v){
+                     $data[$k2]['content']= $this->truncateHtml($v['content'], 300);
                 }
             $this->view->ads = $data;
         }
